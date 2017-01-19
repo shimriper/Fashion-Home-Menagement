@@ -1,0 +1,25 @@
+		<!--<nav class="navbar-fluid navbar-default navbar-fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="#">F.H.M </a>
+				<p class="navbar-right navbar-text" ng-show="authenticated"><a href="#" ng-click="signout()">יציאה</a></p>
+				<p class="navbar-right navbar-text" ng-show="authenticated">שלום  {{current_user}}</p>
+			</div>
+		</nav>-->
+
+<div ng-controller="navController" ng-cloak dir="rtl">
+  <md-content class="md-padding">
+    <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+      
+      <md-nav-item md-nav-href="#main" name="page1">הודעות</md-nav-item>
+      <md-nav-item md-nav-href="#bride" name="page2">כלה</md-nav-item>
+      <md-nav-item md-nav-click="goto('page3')" name="page3">Page Three</md-nav-item>
+      <!-- these require actual routing with ui-router or ng-route, so they won't work in the demo
+      <md-nav-item md-nav-sref="app.page4" name="page4">Page Four</md-nav-item>
+      <md-nav-item md-nav-href="#page5" name="page5">Page Five</md-nav-item>
+      -->
+      <md-nav-item  md-nav-href="#" name="fhm" style="text-align: left">F.H.M</md-nav-item>
+    </md-nav-bar>
+    <!--<div class="ext-content">
+      External content for `<span>{{currentNavItem}}</span>
+    </div>-->
+  </md-content>

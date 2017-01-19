@@ -14,16 +14,43 @@ var userSchema = new mongoose.Schema({
 	created_at: {type: Date, default: Date.now}
 })
 
-// var brideSchema = new mongoose.Schema({
-// 	name: String,
-// 	last_name: String,
-// 	date_event: Date,
-// 	dress_type:{
-// 		size:Float32Array,
-// 		type_fabric:String
-// 	}
-// })
+var brideSchema = new mongoose.Schema({
+	created_by: String,	
+	created_at: {type: Date, default: Date.now},
+	first_name: {
+		type:String,
+		require: true
+		},
+	last_name: {
+		type:String,
+		require: true
+		},
+	email: {
+		type:String,
+		require: true
+		},
+	phone1: {
+		type:Number,
+		require: true
+		},
+	phone2: Number,
+	adress: String,
+
+	date_event: {
+		type:Date,
+		require: true
+		},
+	dress_type:{
+		type:String,
+		require: true
+		},
+	day_service:{
+		type:Boolean,
+		require: true
+		},
+		remark: String
+})
 
 mongoose.model('Post', postSchema);
 mongoose.model('User', userSchema);
-//mongoose.model('BrideSchema' , brideSchema);
+mongoose.model('Bride', brideSchema);

@@ -37,3 +37,43 @@ a {
 	padding: 5px;
 	margin: 0 auto;
 }
+
+/*style of navbar angular matrial*/
+.navBardemoBasicUsage md-content .ext-content {
+	padding: 50px;
+	margin: 20px;
+	background-color: #FFF2E0; 
+	color: blue;
+}
+.md-button.md-default-theme.md-accent, .md-button.md-accent {
+    color: rgb(78, 90, 175);
+}
+d-nav-bar.md-default-theme md-nav-ink-bar, md-nav-bar md-nav-ink-bar {
+    color: hsla(hue, saturation, lightness, alpha)(60, 44, 144);
+    background: rgb(64, 89, 136);
+}
+
+/*end of navbar*/
+
+/*bride style*/
+
+
+.inputdemoIcons {
+  /*
+.right-icon {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  left: auto;
+  margin-top: 0;
+}
+*/ }
+  .inputdemoIcons .inputIconDemo {
+    min-height: 48px; }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.email {
+    color: green; }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.name {
+    color: dodgerblue; }
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
+    color: red; }
