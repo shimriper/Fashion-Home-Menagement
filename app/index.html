@@ -1,4 +1,4 @@
-<html>
+<html lang="he" >
 	<head>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 		<meta http-equiv="Pragma" content="no-cache" />
@@ -14,6 +14,11 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.6.0/js/xeditable.min.js"></script>
+		<!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-mocks.js"></script>-->
+
+		
+
 
 		<!-- Angular Material requires Angular.js Libraries -->
 		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
@@ -21,8 +26,11 @@
 
 		<!-- Angular Material Library -->
 		<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+		<link href=" https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.6.0/css/xeditable.min.css"> </script>
+		<!-- fa fa-->
+		<script src="https://use.fontawesome.com/912fdda5bd.js"></script>
 
 		<script src="javascripts/mainApp.js"></script>
 		<script src="javascripts/navController.js"></script>
@@ -30,18 +38,18 @@
 		<script src="javascripts/authController.js"></script>
 		<script src="javascripts/mainController.js"></script>
 		<script src="javascripts/postService.js"></script>
+		<script src="javascripts/brideService.js"></script>
+		<script src="javascripts/brideInfoController.js"></script>
+		<script src="javascripts/allBrideController.js"></script>
 
 		<script src="directives/nav.js"></script>
 
 		<link rel="stylesheet" href="stylesheets/style.css">
 	
 	</head>
-	<body ng-app="mainApp">
-	<div class="col-md-offset-2 col-md-8">
+	<body ng-app="mainApp" dir="rtl">
 				<div ng-view>
-		
 				</div>
-			</div>
 	</body>
 	
 </html>

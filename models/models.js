@@ -15,8 +15,8 @@ var userSchema = new mongoose.Schema({
 })
 
 var brideSchema = new mongoose.Schema({
-	created_by: String,	
 	created_at: {type: Date, default: Date.now},
+	b_id: {type:Number,require: true},
 	first_name: {
 		type:String,
 		require: true
@@ -44,12 +44,15 @@ var brideSchema = new mongoose.Schema({
 		type:String,
 		require: true
 		},
+	dress_type2:String,
 	day_service:{
 		type:Boolean,
 		require: true
 		},
-		remark: String
+	price: {type:Number,require:true},
+	remark: String
 })
+
 
 mongoose.model('Post', postSchema);
 mongoose.model('User', userSchema);
