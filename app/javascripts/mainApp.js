@@ -32,7 +32,17 @@ app.config(function($routeProvider){
 		})
 		.when('/bride', {
 			templateUrl: 'bride.html',
-			//controller: 'load resize'
+			controller: 'brideController'
+		})
+		
+		.when('/brideInfo/:brideid', {
+			templateUrl: 'brideInfo.html',
+			controller: 'brideInfoController'
+		})
+	
+		.when('/allBrides', {
+			templateUrl: 'allBrides.html',
+			controller:  'allBrideController'
 		})
 		//the timeline display
 		.when('/main', {

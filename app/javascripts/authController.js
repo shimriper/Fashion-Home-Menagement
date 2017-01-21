@@ -9,7 +9,7 @@ app.controller('authController', function($scope , $rootScope ,$http, $location)
 		$http.post('/auth/login', $scope.user).success(function(data){
 			if(data.state == 'success'){
 				$rootScope.authenticated = true;
-				$rootScope.current_user = data.username;
+				$rootScope.current_user = data.user.username;
 				alert('עבודה נעימה');
 				$location.path('/home');
 			}
@@ -27,7 +27,7 @@ app.controller('authController', function($scope , $rootScope ,$http, $location)
 		$http.post('/auth/signup', $scope.user).success(function(data){
 			if(data.state == 'success'){
 				$rootScope.authenticated = true;
-				$rootScope.current_user = data.username;
+				$rootScope.current_user = data.user.username;
 				alert('ההרשמה הצליחה! ');
 				$location.path('/home');
 			}

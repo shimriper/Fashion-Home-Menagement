@@ -11,7 +11,7 @@ app.controller('mainController', function($rootScope ,$scope , postService){
 
 		postService.save($scope.newPost, function(){
 			$scope.posts = postService.query();
-			$scope.newPost = {created_by: '', text: '' , created_at: ' '};
+			$scope.newPost = {created_by: '', text: '' , created_at: ''};
 		});
 	};
 });

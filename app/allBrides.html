@@ -1,0 +1,62 @@
+   <navbar></navbar>
+
+     <div class="content"  dir="rtl">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">כל הכלות</h4>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                               
+                                 <!--<button ng-click="brideInfoRoute(brides[0]._id)">test</button> -->
+                                <table class="table table-hover table-striped" >
+                                    <thead style="text-align:center">
+                                        <!--<th>תעודת זהות</th>-->
+                                        <th>שם</th>
+                                    	<th>שם משפחה</th>
+                                    	<!--<th>הוכנס ב </th>-->
+                                    	<!--<th>איימיל</th>-->
+                                        <th>תאריך אירוע</th>
+                                        <!--<th>2פלאפון</th>-->
+                                        <!--<th>כתובת</th>-->
+                                        <th>פלאפון</th>
+                                        <th>דגם שמלה</th>
+                                        <th>דגם שמלה2</th>
+                                        <th> יום שירות</th>   
+                                        <!--<th> הערות</th>  -->
+                                    </thead>
+                                    <tbody style="text-align: center">
+                                   <!--<tr class="bride" ng-repeat="bride in brides track by $index | orderBy:'date_event':true" ng-class-odd="'odd'" ng-class-even="'even'">-->
+
+                                        <tr class="bride" ng-repeat="bride in brides track by $index" ng-click="brideInfoRoute(bride._id)">
+                                            <!--<td> <button ng-click="brideInfoRoute(bride._id)">test</button> </td>-->
+                                            
+                                          
+                                            <!--<td>{{bride.b_id}}</td>-->
+                                            <td>{{bride.first_name}}</td>
+                                            <td>{{bride.last_name}}</td>
+                                            <!--<td{{bride.created_at}}</td>-->
+                                            <!--<td>{{bride.email}}</td>-->
+                                            <td>{{bride.date_event | date:" MMM d, y"}}</td>
+                                            <td>{{bride.phone1}}</td>
+                                            <!--<td>{{bride.phone2}}</td>-->
+                                            <!--<td>{{bride.adress}}</td>-->
+                                            <td>{{bride.dress_type}}</td>
+                                             <td>{{bride.dress_type2}}</td>
+                                            <td>{{bride.day_service}}</td>
+                                            <!--<td>{{bride.remark}}</td>-->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            
+                             
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
