@@ -14,7 +14,7 @@ var userSchema = new mongoose.Schema({
 	created_at: {type: Date, default: Date.now}
 })
 
-var brideSchema = new mongoose.Schema({
+var brideSchema = new mongoose.Schema({	
 	created_at: {type: Date, default: Date.now},
 	b_id: {type:Number,require: true},
 	first_name: {
@@ -49,11 +49,19 @@ var brideSchema = new mongoose.Schema({
 		type:Boolean,
 		require: true
 		},
-	price: {type:Number,require:true},
+	price: Number,
 	remark: String
+})
+
+var paymentSchema = new mongoose.Schema({
+	pay: {type:Number},
+	date_pay: {type:Date},
+	done:Boolean,
 })
 
 
 mongoose.model('Post', postSchema);
 mongoose.model('User', userSchema);
 mongoose.model('Bride', brideSchema);
+mongoose.model('Payment', paymentSchema);
+

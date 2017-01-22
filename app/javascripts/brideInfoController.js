@@ -4,12 +4,6 @@
        getOneBride();
       //  setInfoBride();
      };
-     // set() update a single bride
-         setInfoBride = function(){ 
-              $scope.updateID = $route.current.params.brideid;
-              $scope.bride = brideService.put({id: $scope.updateID});
-              console.log($scope.bride); 
-          }; 
       // get() returns a single bride
      getOneBride = function(){ 
          $scope.tempid = $route.current.params.brideid;
@@ -17,14 +11,38 @@
          console.log($scope.bride ); 
      };
     init();
-    setInfoBride();
+    // setInfoBride();
   });
- app.run(function(editableOptions) {
-    editableOptions.theme = 'bs3';
 
+
+app.run(function(editableOptions) {
+  editableOptions.theme = 'bs3';
+});
+
+app.controller('editeBrideInfo', function($scope, brideService , $route) {
+  initBride = function(){
+    $scope.bride;
     
-  });
-  app.controller('editData', function($scope,brideService,$route) {
-          $scope.bride;  
-  });
+  };
+  
+  initBride();
+  // $scope.tempid = $route.current.params.brideid;
+  // $scope.bride = brideService.save({id: $scope.tempid});
 
+  console.log($scope.bride); 
+});
+
+app.controller('paymentController', function($rootScope ,$scope , paymentService, $http, $location) {
+    $scope.payment = function(){
+      $scope.newPayment;
+      paymentService.save($scope.newPayment, function(){
+            $scope.payments = paymentService.query();
+            $scope.newPayment = {
+                	  pay:'',
+                    date_pay:'',
+                    done:'',
+            };
+      });
+    };
+  });
+ 

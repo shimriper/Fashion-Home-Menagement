@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require( 'mongoose' );
 var Post = mongoose.model('Post');
 var Bride = mongoose.model('Bride');
-
+var Payment = mongoose.model('Payment');
 
 //Used for routes that must be authenticated.
 function isAuthenticated (req, res, next) {
@@ -173,6 +173,72 @@ router.route('/brides/:id')
 		return res.json("deleted :(");
 		});
 	});
+
+
+	// Payment
+router.use('/payments', isAuthenticated);
+router.route('/payments')
+	//creates a new payment
+	.post(function(req, res){
+		var payment = new Payment();
+		payment.pay = req.body.pay;
+		payment.date_pay= req.body.date_pay;
+		payment.done = req.body.done;
+	
+		payment.save(function(err, payment) {
+			if (err){
+				return res.send(500, err);
+			}
+			return res.json(payment);
+		});
+	})
+	//gets all posts
+	.get(function(req, res){
+		Payment.find(function(err, data){
+			if(err){
+				return res.send(500, err);
+			}
+			return res.send(200,data);
+		});
+	});
+
+//post-specific commands. likely won't be used
+router.route('/payments/:id')
+	//gets specified post
+	.get(function(req, res){
+		Payment.findById(req.params.id, function(err, payment){
+			if(err)
+				return res.send(err);
+			return res.json(payment);
+		});
+	}) 
+	//updates specified post
+	.put(function(req, res){
+		Payment.findById(req.params.id, function(err, payment){
+			if(err)
+				return res.send(err);
+		payment.pay = req.body.pay;
+		payment.done = req.body.done;
+
+			payment.save(function(err, payment){
+				if(err)
+					return res.send(err);
+
+				return res.json(payment);
+			});
+		});
+	})
+	//deletes the post
+	.delete(function(req, res) {
+		Payment.remove({
+			_id: req.params.id
+		}, function(err) {
+			if (err)
+				return res.send(err);
+			 return res.json("deleted :(");
+		});
+	});
+
 module.exports = router;
 
 
