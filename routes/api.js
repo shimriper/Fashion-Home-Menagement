@@ -30,7 +30,7 @@ router.route('/posts')
 	.post(function(req, res){
 		var post = new Post();
 		post.text = req.body.text;
-		post.username = req.body.created_by;
+		post.created_by = req.body.created_by;
 		post.save(function(err, post) {
 			if (err){
 				return res.send(500, err);
@@ -105,7 +105,7 @@ router.route('/brides')
 				bride.dress_type = req.body.dress_type;
 				bride.dress_type2 = req.body.dress_type2;
 				bride.day_service = req.body.day_service;
-				bride.price = req.body.price;
+			 	bride.price = req.body.price;
 				bride.remark = req.body.remark;
 		bride.save(function(err,bride) {
 			if (err){
@@ -123,7 +123,47 @@ router.route('/brides')
 			}
 			return res.send(200,data);
 		});
+	// var query = Bride.find({});
+	// 		query  
+	// 		.populate('payments')
+	// 		.run(function(err, docs){
+	// 		if(err){
+	// 			return	res.send(err);
+	// 		}
+	// 		return res.json(docs);
+	// 	});
+
 	});
+
+router.route('/payments/:bride_id/:payment_id')
+    .put(function(req , res){
+        Bride.findOneAndUpdate(  { _id: req.params.bride_id}  , {$push: {payments: req.params.payment_id }}, function(err, updatedBride){
+            if(err) {
+               return	res.send(err);
+            }else{
+                return res.json(updatedBride);
+            }
+        });
+        
+    });
+router.route('/brides/:bride_id')
+.get(function(req,res){
+	Bride.findById({_id:req.params.bride_id}).populate('payments').exec(function(err,data){
+		if(err)
+			return res.send(err);
+		return res.json(data);
+	});
+	// Bride.find({});
+	// 		query  
+	// 		.populate('payments')
+	// 		.run(function(err, docs){
+	// 		if(err){
+	// 			return	res.send(err);
+	// 		}
+	// 		return res.json(docs);
+	// 	});
+});
+
 router.route('/brides/:id')
 	//gets specified bride
 	.get(function(req, res){
@@ -133,6 +173,8 @@ router.route('/brides/:id')
 			}
 		return res.json(bride);
 		});
+
+
 	})
 	//updates specified bride
 	.put(function(req, res){
@@ -153,7 +195,7 @@ router.route('/brides/:id')
 				bride.dress_type = req.body.dress_type;
 				bride.dress_type2 = req.body.dress_type2;
 				bride.day_service = req.body.day_service;
-				bride.price = req.body.price;
+			 	bride.price = req.body.price;
 				bride.remark = req.body.remark;
 				bride.save(function(err, bride){
 						if(err)
@@ -176,15 +218,17 @@ router.route('/brides/:id')
 
 
 	// Payment
-router.use('/payments', isAuthenticated);
+//router.use('/payments', isAuthenticated);
+
 router.route('/payments')
 	//creates a new payment
 	.post(function(req, res){
 		var payment = new Payment();
+	//	payment.bride = req.body.bride;
+//payment.total_price = req.body.total_price;
 		payment.pay = req.body.pay;
 		payment.date_pay= req.body.date_pay;
 		payment.done = req.body.done;
-	
 		payment.save(function(err, payment) {
 			if (err){
 				return res.send(500, err);
@@ -194,7 +238,7 @@ router.route('/payments')
 	})
 	//gets all posts
 	.get(function(req, res){
-		Payment.find(function(err, data){
+		Bride.find({}).populate('bride').exec(function(err, data){
 			if(err){
 				return res.send(500, err);
 			}

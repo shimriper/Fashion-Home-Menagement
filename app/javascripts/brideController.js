@@ -19,13 +19,12 @@
             dress_type:'',
             dress_type2 :'',
             day_service :'',
-            price :'',
+            price:'',
             remark:''
         };
       });
     };
 
-  }
-  );
+  });
 
   

@@ -1,3 +1,4 @@
+
 <navbar></navbar>
  <div class="content">
   <div class="container-fluid">
@@ -71,39 +72,42 @@
                  </div>
                  <div class="col-md-6">
                     <div class="panel panel-default" >
-                        <div class="panel-heading">תשלומים</div>
-                        <div class="panel-body" ng-controller="paymentController">
-                             <table class="table table-bordered table-hover table-condensed" style="width:100% ; float: right">
-                                    <thead style="text-align:center" ng-Submit="payment()">
-                                        <th> סכום
-                                             <input type="number" required maxlength="6" ng-model="newPayment.pay"></input>
-                                        </th>
-                                    	<th>תאריך 
-                                         <input type="date" required  ng-model="newPayment.date_pay"></input>
-                                        </th>
-                                        <th>בוצע
-                                            <input type="checkbox" ng-model="newPayment.done"></input>
+                        <div class="panel-heading">  סה"כ לתשלום: {{bride.price}} <i class="fa fa-pencil" style="float: left"  ></i> </div>
+                        <div class="panel-body" >
+                            <table class="table table-bordered table-hover table-condensed"style="width:100%">       
+                                    <tr>
+                                        <th>
+                                            <input type="text"  ng-model="newPayment.pay" placeholder=" סכום תשלום " value="">
                                         </th>
                                         <th>
-                                            <input class="btn submit-btn pull-right" type="submit" value="שלח" />
-                                            <div class="clearfix"></div>
+                                            <input type="date"  ng-model="newPayment.date_pay">
                                         </th>
-                                    </thead>
-                                    <tbody style="text-align: center">
-                                        <tr class="bride" ng-repeat="payment in payments track by $index">
-                                            <td>{{payment.pay}}</td>
-                                            <td>{{payment.date_pay | date:" MMM d, y"}}</td>
-                                            <td>{{payment.done }}</td>
-                                        </tr>
-                                    </tbody>
-                                
-                                </table>
+                                        <th>
+                                            <input type="checkbox" ng-model="newPayment.date_pay"> בוצע 
+                                        </th>
+                                        
+                                        <th>
+                                            <button ng-click="addPayment(newPayment)"> הוסף תשלום </button>
+                                        </th>
+                                    </tr>
+                                    <tr class="brides" ng-repeat="bride in brides track by $index"  style="text-align: center">
+                                            
+                                            {{bride.payments}}
+                                            <td>{{bride.payments.pay}}</td>
+                                            <td>{{bride.payments.date_pay | date:" MMM d, yy"}}</td>
+                                            <td>{{bride.payments.done }}</td>
+                                    </tr>    
+                             </table>
                         </div>
                     </div>
-                </div>
+                 </div>    
             </div>
-        </div>
      </div>
- </div>
+  </div>
+</div>
+
+
+
+
 
 

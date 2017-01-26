@@ -1,0 +1,38 @@
+<navbar></navbar>
+         <div class="col-md-6">
+                    <div class="panel panel-default" >
+                        <div class="panel-heading"> תשלומים <i class="fa fa-pencil" style="float: left" ng-click="editForm()" ></i></div>
+                        <div class="panel-body" >
+                        <table class="table table-bordered table-hover table-condensed" ng-Submit="payment()" style="width:100% ; float: right">
+                                       <tr>
+                                            <th> סכום כולל
+                                             <input type="number" required maxlength="6" ng-model="newPayment.total_price"></input>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                        <th> סכום
+                                             <input type="number" required maxlength="6" ng-model="newPayment.pay"></input>
+                                        </th>
+                                        </tr>
+                                        <tr>
+                                    	<th>תאריך 
+                                         <input type="date" required  ng-model="newPayment.date_pay"></input>
+                                        </th></tr>
+                                        <tr>
+                                        <th>בוצע
+                                            <input type="checkbox" ng-model="newPayment.done"></input>
+                                        </th></tr>
+                                        <tr><th>
+                                            <input class="btn submit-btn pull-right" type="submit" value="שלח" />
+                                        </th>
+                                        </tr>
+                                       
+                                        <tr class="payment" ng-repeat="payment in payments track by $index"  style="text-align: center" ng-controller="paymentByIdOfBrideController">
+                                            <td>{{payment.total_price}}</td>
+                                            <td>{{payment.pay}}</td>
+                                            <td>{{payment.date_pay | date:" MMM d, yy"}}</td>
+                                            <td>{{payment.done }}</td>
+                                        </tr>
+                             </table>
+                        </div>
+                    </div>

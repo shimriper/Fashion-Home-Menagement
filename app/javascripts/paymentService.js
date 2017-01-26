@@ -1,5 +1,12 @@
 
 angular.module('mainApp');
-app.factory('paymentService', function($resource){
-  return $resource('/api/payments/:id');
+app.factory('paymentService', function($q , $http){
+
+    var factory = this;
+
+    factory.addPayment = function(payment){
+
+       
+    }
+  
 });

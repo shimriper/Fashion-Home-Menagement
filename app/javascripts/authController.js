@@ -33,6 +33,7 @@ app.controller('authController', function($scope , $rootScope ,$http, $location)
 			}
 			else 
 			{
+				console.log('faild');
 				$scope.error_message = data.massage;
 			}
 		});

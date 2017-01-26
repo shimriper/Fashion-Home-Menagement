@@ -1,3 +1,5 @@
+
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -50,13 +52,15 @@ var brideSchema = new mongoose.Schema({
 		require: true
 		},
 	price: Number,
-	remark: String
+	remark: String,
+	payments:[{type: Schema.Types.ObjectId, ref: 'Payment'}]
 })
 
 var paymentSchema = new mongoose.Schema({
-	pay: {type:Number},
+	bride:{type: Schema.Types.ObjectId, ref: 'Bride'},
+	pay:Number,
 	date_pay: {type:Date},
-	done:Boolean,
+	done:Boolean
 })
 
 

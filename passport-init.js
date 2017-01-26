@@ -50,17 +50,16 @@ module.exports = function(passport){
 			passReqToCallback : true // allows us to pass back the entire request to the callback
 		},
 		function(req, username, password, done) {
-
 			// find a user in mongo with provided username
 			User.findOne({ 'username' :  username }, function(err, user) {
 				// In case of any error, return using the done method
 				if (err){
-					console.log('Error in SignUp: '+err);
+					console.log('Error in SignUp: '+ err);
 					return done(err);
 				}
 				// already exists
 				if (user) {
-					console.log('User already exists with username: '+username);
+					console.log('User already exists with username: '+ username);
 					return done(null, false);
 				} else {
 					// if there is no user, create the user

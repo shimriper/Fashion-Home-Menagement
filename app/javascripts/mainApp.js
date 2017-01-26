@@ -26,6 +26,11 @@ app.config(function($routeProvider){
 			templateUrl: 'login.html',
 			controller: 'authController'
 		})
+		//the signup display
+		.when('/register', {
+			templateUrl: 'register.html',
+			controller: 'authController'
+		})
 		//the nav display
 		.when('/home', {
 			templateUrl: 'home.html',
@@ -50,11 +55,17 @@ app.config(function($routeProvider){
 			templateUrl: 'main.html',
 			controller: 'mainController'
 		})
-		//the signup display
-		.when('/register', {
-			templateUrl: 'register.html',
-			controller: 'authController'
+		//the timeline display
+		.when('/payment', {
+			templateUrl: 'payment.html',
+			controller: 'paymentController'
 		})
+		//the test display
+		.when('/test', {
+			templateUrl: 'test.html',
+			controller: 'testController'
+		})
+
 		.otherwise({ redirectTo: '/login' });;
 });
 // apps
