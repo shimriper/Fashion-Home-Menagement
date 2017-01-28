@@ -10,6 +10,10 @@
            // $scope.bride= $scope.bride;
           console.log(id);
           $location.path('brideInfo/' + id );
-  };
+    };
+      $scope.delOne = function(id){
+                   brideService.delete({id:id});
+                   getAllBrides();
+    };
   init();
   });

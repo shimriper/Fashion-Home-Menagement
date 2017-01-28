@@ -75,14 +75,13 @@ router.route('/posts/:id')
 			});
 		});
 	})
-	//deletes the post
 	.delete(function(req, res) {
 		Post.remove({
 			_id: req.params.id
 		}, function(err) {
 			if (err)
-				res.send(err);
-			res.json("deleted :(");
+			 return	res.send(err);
+		 return	res.json("deleted :(");
 		});
 	});
 
@@ -137,7 +136,7 @@ router.route('/brides')
 
 router.route('/payments/:bride_id/:payment_id')
     .put(function(req , res){
-        Bride.findOneAndUpdate(  { _id: req.params.bride_id}  , {$push: {payments: req.params.payment_id }}, function(err, updatedBride){
+        Bride.findOneAndUpdate({ _id: req.params.bride_id} , {$push: {payments: req.params.payment_id }}, function(err, updatedBride){
             if(err) {
                return	res.send(err);
             }else{
@@ -146,22 +145,23 @@ router.route('/payments/:bride_id/:payment_id')
         });
         
     });
-router.route('/brides/:bride_id')
+router.route('/brides/:bride_id/:payid')
 .get(function(req,res){
-	Bride.findById({_id:req.params.bride_id}).populate('payments').exec(function(err,data){
-		if(err)
-			return res.send(err);
-		return res.json(data);
-	});
-	// Bride.find({});
-	// 		query  
-	// 		.populate('payments')
-	// 		.run(function(err, docs){
-	// 		if(err){
-	// 			return	res.send(err);
-	// 		}
-	// 		return res.json(docs);
-	// 	});
+	// Bride.findById({_id:req.params.bride_id}).populate('payments').exec(function(err,data){
+	// 	if(err)
+	// 		return res.send(err);
+	// 		console.log('populate');
+	// 	return res.json(data);
+	// });
+	Bride.find({});
+			query  
+			.populate('payments')
+			.run(function(err, docs){
+			if(err){
+				return	res.send(err);
+			}
+			return res.json(docs);
+		});
 });
 
 router.route('/brides/:id')

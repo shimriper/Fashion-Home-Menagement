@@ -18,9 +18,11 @@
                                         <th>דגם שמלה</th>
                                         <th>דגם שמלה2</th>
                                         <th> יום שירות</th>   
-                                    </thead>
+                                        <th></th>
+                                        <th></th>
+                                        </thead>
                                     <tbody style="text-align: center">
-                                        <tr class="bride" ng-repeat="bride in brides track by $index" ng-click="brideInfoRoute(bride._id)">
+                                        <tr class="bride" ng-repeat="bride in brides track by $index">
                                             <td>{{bride.first_name}}</td>
                                             <td>{{bride.last_name}}</td>
                                             <td>{{bride.date_event | date:" MMM d, y"}}</td>
@@ -28,6 +30,9 @@
                                             <td>{{bride.dress_type}}</td>
                                             <td>{{bride.dress_type2}}</td>
                                             <td>{{bride.day_service}}</td>
+                                            <td><button  type="button" class=" btn btn-primary" ng-click="brideInfoRoute(bride._id)">פרטים</button></td>
+                                            <td><button type="button" class="btn btn-danger" ng-click="delOne(bride._id)">מחיקה</button
+</td>
                                         </tr>
                                     </tbody>
                                 </table>

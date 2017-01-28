@@ -9,62 +9,61 @@
                     <div class="panel panel-default" >
                         <div class="panel-heading"> פרטים אישיים <small>( נוצר ב {{bride.created_at | date:"HH:MM , MMM , d,yy"}} )</small><i class="fa fa-pencil" style="float: left" ng-click="editForm()" ></i></div>
                         <div class="panel-body" >
-                            <table class="table table-bordered table-hover table-condensed" style="width:100% ; float: right"  ng-controller="editeBrideInfo">
+                           <table class="table table-bordered table-hover table-condensed" style="width:100% ; float: right">
                                     <tr>
                                         <th>שם פרטי:   </th> 
-                                        <td> {{bride.first_name || 'empty'}}</td>
+                                        <td editable-firstname ="bride.first_name"> {{bride.first_name || 'empty'}}</td>
                                     </tr>
                                     <tr>
                                         <th>שם משפחה:   </th> 
-                                        <td >{{bride.last_name ||'empty'}}</td>
+                                        <td editable-lastname="bride.last_name">{{bride.last_name || 'empty'}}</td>
                                     </tr>
                                     <tr>
                                         <th>תעודת זהות:  </th> 
-                                        <td >{{bride.b_id ||'empty'}}</td>
+                                        <td  editable-bid="bride.b_id">{{bride.b_id ||'empty'}}</td>
                                     </tr>
                                     <tr>
                                         <th>דואר אלקטרוני:</th> 
-                                        <td >{{bride.email ||'empty'}}</td>
+                                        <td  editable-email="bride.email">{{bride.email ||'empty'}}</td>
                                     </tr>
                                     <tr>
                                         <th>פלאפון </th>
-                                        <td >{{bride.phone1 ||'empty'}}</td>
+                                        <td  editable-phone1="bride.phone1">{{bride.phone1 ||'empty'}}</td>
                                     </tr>
                                     <tr>
                                         <th> 2 פלאפון </th>
-                                        <td >{{bride.phone2 ||'empty'}}</td>
+                                        <td  editable-phone2="bride.phone2">{{bride.phone2 ||'empty'}}</td>
                                     </tr>
                                     <tr>
                                         <th> כתובת </th>
-                                        <td >{{bride.adress ||'empty'}}</td>
+                                        <td  editable-adress="bride.adress">{{bride.adress ||'empty'}}</td>
                                     </tr>
                                     <tr>
                                       <tr>
                                         <th> תאריך אירוע : </th> 
-                                        <td >{{bride.date_event ||'empty'}}</td>
+                                        <td  editable-dateevent="bride.date_event">{{bride.date_event ||'empty'}}</td>
                                     </tr>
                                     <tr>
                                         <th> דגם שמלה  : </th>
-                                        <td >{{bride.dress_type ||'empty'}}</td>
+                                        <td  editable="bride.dress_type">{{bride.dress_type ||'empty'}}</td>
                                     </tr>
                                       <tr>
                                         <th> 2 דגם שמלה  : </th> 
-                                        <td >{{bride.dress_type2 ||'empty'}}</td>
+                                        <td  editable="bride.dress_type2">{{bride.dress_type2 ||'empty'}}</td>
                                     </tr>
                                      <tr>
                                         <th> יום שירות :</th>
 
-                                        <td >{{bride.day_service ||'empty'}}</td>
+                                        <td  editable="bride.day_service">{{bride.day_service ||'empty'}}</td>
                                     </tr>
                                      <tr>
                                         <th> מחיר  :</th>
                               
-                                        <td>{{bride.price ||'empty'}}</td>
+                                        <td  editable="bride.price">{{bride.price ||'empty'}}</td>
                                     </tr>
                                     <tr>
                                         <th> הערות  :</th>
-                                    
-                                        <td >{{bride.remark ||'empty'}}</td>
+                                        <td  editable="bride.remark">{{bride.remark ||'empty'}}</td>
                                     </tr>
                              </table>
                         </div>
@@ -72,7 +71,7 @@
                  </div>
                  <div class="col-md-6">
                     <div class="panel panel-default" >
-                        <div class="panel-heading">  סה"כ לתשלום: {{bride.price}} <i class="fa fa-pencil" style="float: left"  ></i> </div>
+                        <div class="panel-heading">  סה"כ לתשלום: {{bride.price}} <i class="fa fa-pencil" style="float: left"></i> </div>
                         <div class="panel-body" >
                             <table class="table table-bordered table-hover table-condensed"style="width:100%">       
                                     <tr>
@@ -90,12 +89,11 @@
                                             <button ng-click="addPayment(newPayment)"> הוסף תשלום </button>
                                         </th>
                                     </tr>
-                                    <tr class="brides" ng-repeat="bride in brides track by $index"  style="text-align: center">
-                                            
-                                            {{bride.payments}}
-                                            <td>{{bride.payments.pay}}</td>
-                                            <td>{{bride.payments.date_pay | date:" MMM d, yy"}}</td>
-                                            <td>{{bride.payments.done }}</td>
+                                    <tr class="brides" ng-repeat="payment in payments track by $index"  style="text-align: center">
+
+                                            <td>{{payments.pay}}</td>
+                                            <td>{{payments.date_pay | date:" MMM d, yy"}}</td>
+                                            <td>{{payments.done }}</td>
                                     </tr>    
                              </table>
                         </div>

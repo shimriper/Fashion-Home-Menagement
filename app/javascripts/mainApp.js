@@ -6,7 +6,8 @@ var app = angular.module('mainApp', [
 	'xeditable'
 ]);
 
-app.run(function($http, $rootScope) {
+app.run(function($http, $rootScope, editableOptions) {
+	editableOptions.theme = 'bs3';
 	$rootScope.authenticated = false;
 	$rootScope.current_user = 'geust';
 
@@ -65,7 +66,6 @@ app.config(function($routeProvider){
 			templateUrl: 'test.html',
 			controller: 'testController'
 		})
-
 		.otherwise({ redirectTo: '/login' });;
 });
 // apps

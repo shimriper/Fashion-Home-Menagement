@@ -14,4 +14,9 @@ app.controller('mainController', function($rootScope ,$scope , postService){
 			$scope.newPost = {created_by: '', text: '' , created_at: ''};
 		});
 	};
+	$scope.delPost = function(id){
+		alert('del');
+                   postService.delete({id:id});
+                   $scope.posts = postService.query();
+    };
 });
