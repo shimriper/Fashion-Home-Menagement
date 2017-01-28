@@ -116,22 +116,12 @@ router.route('/brides')
 	})
 	//gets all brides
 	.get(function(req, res){
-		Bride.find(function(err, data){
+	Bride.find(function(err, data){
 			if(err){
 				return res.send(500, err);
 			}
 			return res.send(200,data);
 		});
-	// var query = Bride.find({});
-	// 		query  
-	// 		.populate('payments')
-	// 		.run(function(err, docs){
-	// 		if(err){
-	// 			return	res.send(err);
-	// 		}
-	// 		return res.json(docs);
-	// 	});
-
 	});
 
 router.route('/payments/:bride_id/:payment_id')
@@ -145,67 +135,30 @@ router.route('/payments/:bride_id/:payment_id')
         });
         
     });
-router.route('/brides/:bride_id/:payid')
-.get(function(req,res){
-	// Bride.findById({_id:req.params.bride_id}).populate('payments').exec(function(err,data){
-	// 	if(err)
-	// 		return res.send(err);
-	// 		console.log('populate');
-	// 	return res.json(data);
+	//Delete
+
+	// .delete(function(req , res){
+    //     Bride.findOneAndRemove({ _id: req.params.bride_id} , {$remove: {payments: req.params.payment_id }}, function(err, delPayment){
+    //         if(err) 
+    //            return	res.send(err);
+    //         console.log('succesfully')
+    //     });
 	// });
-	Bride.find({});
-			query  
-			.populate('payments')
-			.run(function(err, docs){
-			if(err){
-				return	res.send(err);
-			}
-			return res.json(docs);
-		});
-});
+
 
 router.route('/brides/:id')
 	//gets specified bride
 	.get(function(req, res){
-		Bride.findById(req.params.id, function(err, bride){
-			if(err){
-			 	return	res.send(err);
-			}
-		return res.json(bride);
-		});
+		Bride.findById({_id:req.params.id}).populate("payments").exec(function(err,data) {
+			res.json(data);
+			}, function(err) {
+				res.json(data);
+			});
 
-
+	
+	
 	})
-	//updates specified bride
-	.put(function(req, res){
-		Bride.findById(req.params.id, function(err, bride){
-			if(err){
-			 	return	res.send(err);
-			}
-			else{
-				bride.created_at = req.body.created_at;
-				bride.b_id = req.body.b_id;
-				bride.first_name = req.body.first_name;
-				bride.last_name = req.body.last_name;
-				bride.email = req.body.email;
-				bride.phone1 = req.body.phone1;
-				bride.phone2 = req.body.phone2;
-				bride.adress = req.body.adress;
-				bride.date_event = req.body.date_event;
-				bride.dress_type = req.body.dress_type;
-				bride.dress_type2 = req.body.dress_type2;
-				bride.day_service = req.body.day_service;
-			 	bride.price = req.body.price;
-				bride.remark = req.body.remark;
-				bride.save(function(err, bride){
-						if(err)
-							return	res.send(err);
-						return res.json(bride);
-						});
-			}
-		});
-	})
-	//deletes the bride	
+		//deletes the bride	
 	.delete(function(req, res) {
 		Bride.remove({
 			_id: req.params.id
@@ -216,16 +169,26 @@ router.route('/brides/:id')
 		});
 	});
 
+router.route('/bride/update')
+	
+	//updates specified bride
+	.put(function(req, res){
+		Bride.findOneAndUpdate( {_id:req.body.id} , req.body.updatedObj , function(err, doc){
+			if (err) return res.send(500, { error: err });
+			return res.send("succesfully saved");
+		});
+		
+	})
+	
+	
 
-	// Payment
-//router.use('/payments', isAuthenticated);
 
 router.route('/payments')
 	//creates a new payment
 	.post(function(req, res){
 		var payment = new Payment();
 	//	payment.bride = req.body.bride;
-//payment.total_price = req.body.total_price;
+	//payment.total_price = req.body.total_price;
 		payment.pay = req.body.pay;
 		payment.date_pay= req.body.date_pay;
 		payment.done = req.body.done;
@@ -234,15 +197,6 @@ router.route('/payments')
 				return res.send(500, err);
 			}
 			return res.json(payment);
-		});
-	})
-	//gets all posts
-	.get(function(req, res){
-		Bride.find({}).populate('bride').exec(function(err, data){
-			if(err){
-				return res.send(500, err);
-			}
-			return res.send(200,data);
 		});
 	});
 
@@ -272,14 +226,14 @@ router.route('/payments/:id')
 			});
 		});
 	})
-	//deletes the post
+	//deletes the payment
 	.delete(function(req, res) {
 		Payment.remove({
 			_id: req.params.id
 		}, function(err) {
 			if (err)
-				return res.send(err);
-			 return res.json("deleted :(");
+			 return	res.send(err);
+		 return	res.json("deleted :(");
 		});
 	});
 

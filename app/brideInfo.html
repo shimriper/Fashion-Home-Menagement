@@ -7,63 +7,79 @@
                 <h2> לקוחה :{{bride.first_name}}</h2>
                  <div class="col-md-6">
                     <div class="panel panel-default" >
-                        <div class="panel-heading"> פרטים אישיים <small>( נוצר ב {{bride.created_at | date:"HH:MM , MMM , d,yy"}} )</small><i class="fa fa-pencil" style="float: left" ng-click="editForm()" ></i></div>
+                        <div class="panel-heading"> פרטים אישיים <small>( נוצר ב {{bride.created_at | date:"HH:MM , MMM , d,yy"}} )</small>
+                            <i class="fa fa-save" style="float: left" ng-click="update(bride)" ng-click=""  ng-show="modifyField" > שמירה</i>
+                            <i class="fa fa-pencil" style="float: left" ng-click="modify(bride)"ng-hide="viewField"> עריכה</i>
+                        </div>
                         <div class="panel-body" >
                            <table class="table table-bordered table-hover table-condensed" style="width:100% ; float: right">
                                     <tr>
                                         <th>שם פרטי:   </th> 
-                                        <td editable-firstname ="bride.first_name"> {{bride.first_name || 'empty'}}</td>
+                                        <td ng-show="modifyField"><input type="text" ng-model="bride.first_name"/></td>
+                                        <td ng-hide="viewField">{{bride.first_name || ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>שם משפחה:   </th> 
-                                        <td editable-lastname="bride.last_name">{{bride.last_name || 'empty'}}</td>
+                                        <td ng-hide="viewField">{{bride.last_name || ''}}</td>
+                                        <td ng-show="modifyField"><input type="text" ng-model="bride.last_name"/></td>
                                     </tr>
                                     <tr>
                                         <th>תעודת זהות:  </th> 
-                                        <td  editable-bid="bride.b_id">{{bride.b_id ||'empty'}}</td>
+                                        <td ng-show="modifyField"> <input type="text" ng-model="bride.b_id"></td>
+                                           <td ng-hide="viewField">  {{bride.b_id ||''}}</td>
                                     </tr>
                                     <tr>
                                         <th>דואר אלקטרוני:</th> 
-                                        <td  editable-email="bride.email">{{bride.email ||'empty'}}</td>
+                                        <td  ng-show="modifyField"> <input type="text" ng-model="bride.email"></td>
+                                              <td ng-hide="viewField"> {{bride.email ||''}}</td>
                                     </tr>
                                     <tr>
                                         <th>פלאפון </th>
-                                        <td  editable-phone1="bride.phone1">{{bride.phone1 ||'empty'}}</td>
+                                        <td  ng-show="modifyField"> <input type="text" ng-model="bride.phone1"></td>
+                                          <td ng-hide="viewField">  {{bride.phone1 ||''}}</td>
                                     </tr>
                                     <tr>
                                         <th> 2 פלאפון </th>
-                                        <td  editable-phone2="bride.phone2">{{bride.phone2 ||'empty'}}</td>
+                                        <td ng-show="modifyField"> <input type="text" ng-model="bride.phone2"></td>
+                                            <td ng-hide="viewField">{{bride.phone2 ||''}}</td>
                                     </tr>
                                     <tr>
                                         <th> כתובת </th>
-                                        <td  editable-adress="bride.adress">{{bride.adress ||'empty'}}</td>
+                                        <td ng-show="modifyField"><input type="text" ng-model="bride.adress"></td>
+                                        <td ng-hide="viewField">{{bride.adress ||''}}</td>
                                     </tr>
                                     <tr>
                                       <tr>
                                         <th> תאריך אירוע : </th> 
-                                        <td  editable-dateevent="bride.date_event">{{bride.date_event ||'empty'}}</td>
+                                        <td ng-show="modifyField"> <input type="text" ng-model="bride.date_event"></td>
+                                       <td ng-hide="viewField"> {{bride.date_event ||''}}</td>
                                     </tr>
                                     <tr>
                                         <th> דגם שמלה  : </th>
-                                        <td  editable="bride.dress_type">{{bride.dress_type ||'empty'}}</td>
+                                        <td ng-show="modifyField"> <input type="text" ng-model="bride.dress_type"></td>
+                                        <td ng-hide="viewField">{{bride.dress_type ||''}}</td>
                                     </tr>
                                       <tr>
                                         <th> 2 דגם שמלה  : </th> 
-                                        <td  editable="bride.dress_type2">{{bride.dress_type2 ||'empty'}}</td>
+                                        <td  ng-show="modifyField"> <input type="text" ng-model="bride.dress_type2"></td>
+                                        <td ng-hide="viewField">{{bride.dress_type2 ||''}}</td>
                                     </tr>
                                      <tr>
                                         <th> יום שירות :</th>
 
-                                        <td  editable="bride.day_service">{{bride.day_service ||'empty'}}</td>
+                                        <td  ng-show="modifyField"> <input type="text" ng-model="bride.day_service"></td>
+                                        <td ng-hide="viewField">{{bride.day_service ||'empty'}}</td>
                                     </tr>
                                      <tr>
                                         <th> מחיר  :</th>
                               
-                                        <td  editable="bride.price">{{bride.price ||'empty'}}</td>
+                                        <td  ng-show="modifyField"> <input type="text" ng-model="bride.price"></td>
+                                        <td ng-hide="viewField">{{bride.price ||'empty'}}</td>
                                     </tr>
                                     <tr>
                                         <th> הערות  :</th>
-                                        <td  editable="bride.remark">{{bride.remark ||'empty'}}</td>
+                                        <td ng-show="modifyField"> <input type="text" ng-model="bride.remark"></td>
+                                        <td ng-hide="viewField">{{bride.remark ||'empty'}}</td>
                                     </tr>
                              </table>
                         </div>
@@ -86,15 +102,19 @@
                                         </th>
                                         
                                         <th>
-                                            <button ng-click="addPayment(newPayment)"> הוסף תשלום </button>
+                                            <button type="button" class="btn btn-success" ng-click="addPayment(newPayment)"> הוסף תשלום </button>
                                         </th>
                                     </tr>
-                                    <tr class="brides" ng-repeat="payment in payments track by $index"  style="text-align: center">
+                                    <tr class="brides" ng-repeat="payment in brideWithPayment.payments track by $index"  style="text-align: center">
+                                            <td>{{payment.pay}}</td>
+                                            <td>{{payment.date_pay | date:" MMM d, yy"}}</td>
+                                            <td>{{payment.done|| 'לא'}}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" ng-click="delPayment(payment._id)"> מחק </button>
+                                                <button type="button" class="btn btn-info" ng-click="editPayment(payment._id)"> ערוך </button>
 
-                                            <td>{{payments.pay}}</td>
-                                            <td>{{payments.date_pay | date:" MMM d, yy"}}</td>
-                                            <td>{{payments.done }}</td>
-                                    </tr>    
+                                            </td>
+                                    </tr>
                              </table>
                         </div>
                     </div>
