@@ -37,6 +37,11 @@
             }) 
 
      };
+    //  checkPayments = function(price,payment){
+    //     $scope.tPrice = price;
+    //     $scope.allPayments
+    //     if()  
+    //  };
       // get() returns a single bride
      getOneBride = function(){
          $scope.tempid = $route.current.params.brideid;
@@ -52,17 +57,12 @@
      };
 
      $scope.addPayment = function(Payment){
-       console.log('-----addPayment-----');
-       console.log(Payment);
-
         $http.post('/api/payments', $scope.newPayment ).then(function(res) {
-               console.log(res.data._id);
+              //  $scope.allPayments = $scope.newPayment.pay;
                $http.put('/api/payments/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
                         $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
-                            console.log(res);
                             $scope.brideWithPayment = res.data;
                           }, function(err) {
-                            console.log(err);
                         })
                     }, function(err) {
                       console.log(err);
@@ -72,22 +72,22 @@
             })
      };
      $scope.delPayment=function(id){
-		    alert('del');
-        paymentService.delete({id:id}).then(function(res) {
-                         console.log('success delete');
-                         //get payment 
-                         $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
-                            console.log(res);
+        $http.delete('/api/payments/'+ $scope.tempid +'/'+ id ).then(function(res) {
+          $http.delete('/api/payments/'+id ).then(function(res) {
+                      $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
                             $scope.brideWithPayment = res.data;
-                        },
-                        function(err) {
-                            console.log(err);
-                            })
-           
                           }, function(err) {
-                            console.log(err);
-                        });
-     }
+                      });
+                      }, function(err) {
+                        console.log(err);
+                    })
+              }, function(err) {
+                  console.log(err);
+              })
+
+    };
+
+  
 
 
     init();

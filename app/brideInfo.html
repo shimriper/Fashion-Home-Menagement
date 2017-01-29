@@ -89,7 +89,7 @@
                     <div class="panel panel-default" >
                         <div class="panel-heading">  סה"כ לתשלום: {{bride.price}} <i class="fa fa-pencil" style="float: left"></i> </div>
                         <div class="panel-body" >
-                            <table class="table table-bordered table-hover table-condensed"style="width:100%">       
+                            <table class="table table-bordered table-hover table-condensed" style="width:100%">       
                                     <tr>
                                         <th>
                                             <input type="text"  ng-model="newPayment.pay" placeholder=" סכום תשלום " value="">
@@ -98,7 +98,7 @@
                                             <input type="date"  ng-model="newPayment.date_pay">
                                         </th>
                                         <th>
-                                            <input type="checkbox" ng-model="newPayment.date_pay"> בוצע 
+                                            <input type="checkbox" ng-model="newPayment.done"> בוצע 
                                         </th>
                                         
                                         <th>
@@ -110,9 +110,8 @@
                                             <td>{{payment.date_pay | date:" MMM d, yy"}}</td>
                                             <td>{{payment.done|| 'לא'}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-danger" ng-click="delPayment(payment._id)"> מחק </button>
+                                                <button type="button" class="btn btn-danger" ng-click="delPayment(payment._id)">  <i class="fa fa-trash-o"></i>  מחק </button>
                                                 <button type="button" class="btn btn-info" ng-click="editPayment(payment._id)"> ערוך </button>
-
                                             </td>
                                     </tr>
                              </table>

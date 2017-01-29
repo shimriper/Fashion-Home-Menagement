@@ -134,16 +134,17 @@ router.route('/payments/:bride_id/:payment_id')
             }
         });
         
-    });
-	//Delete
-
-	// .delete(function(req , res){
-    //     Bride.findOneAndRemove({ _id: req.params.bride_id} , {$remove: {payments: req.params.payment_id }}, function(err, delPayment){
-    //         if(err) 
-    //            return	res.send(err);
-    //         console.log('succesfully')
-    //     });
-	// });
+    })
+	.delete(function(req , res){
+        Bride.findOneAndUpdate({ _id: req.params.bride_id} , {$pull: {payments: req.params.payment_id }}, function(err, deldBride){
+            if(err) {
+               return	res.send(err);
+            }else{
+                return res.json("deleted :(");
+            }
+        });
+        
+	});
 
 
 router.route('/brides/:id')
@@ -154,9 +155,6 @@ router.route('/brides/:id')
 			}, function(err) {
 				res.json(data);
 			});
-
-	
-	
 	})
 		//deletes the bride	
 	.delete(function(req, res) {
@@ -170,14 +168,12 @@ router.route('/brides/:id')
 	});
 
 router.route('/bride/update')
-	
 	//updates specified bride
 	.put(function(req, res){
 		Bride.findOneAndUpdate( {_id:req.body.id} , req.body.updatedObj , function(err, doc){
 			if (err) return res.send(500, { error: err });
 			return res.send("succesfully saved");
 		});
-		
 	})
 	
 	

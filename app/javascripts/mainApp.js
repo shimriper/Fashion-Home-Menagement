@@ -3,11 +3,9 @@ var app = angular.module('mainApp', [
 	'ngResource',
 	'ngMaterial',
 	'ngMessages',
-	'xeditable'
 ]);
 
-app.run(function($http, $rootScope, editableOptions) {
-	editableOptions.theme = 'bs3';
+app.run(function($http, $rootScope) {
 	$rootScope.authenticated = false;
 	$rootScope.current_user = 'geust';
 
@@ -20,7 +18,9 @@ app.run(function($http, $rootScope, editableOptions) {
 	};
 });
 
+
 app.config(function($routeProvider){
+
 	$routeProvider
 		//the login display
 		.when('/login', {

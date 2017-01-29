@@ -8,6 +8,9 @@
                             <div class="header">
                                 <h4 class="title">כל הכלות</h4>
                             </div>
+                            <div>
+                                <input ng-model="serchText" placeholder="חיפוש" >
+                            </div>
                             <div class="content table-responsive table-full-width">
                                <table class="table table-hover table-striped" >
                                     <thead style="text-align:center">
@@ -22,7 +25,7 @@
                                         <th></th>
                                         </thead>
                                     <tbody style="text-align: center">
-                                        <tr class="bride" ng-repeat="bride in brides track by $index">
+                                        <tr class="bride" ng-repeat="bride in brides | filter:serchText ">
                                             <td>{{bride.first_name}}</td>
                                             <td>{{bride.last_name}}</td>
                                             <td>{{bride.date_event | date:" MMM d, y"}}</td>
@@ -30,9 +33,10 @@
                                             <td>{{bride.dress_type}}</td>
                                             <td>{{bride.dress_type2}}</td>
                                             <td>{{bride.day_service}}</td>
-                                            <td><button  type="button" class=" btn btn-primary" ng-click="brideInfoRoute(bride._id)">פרטים</button></td>
-                                            <td><button type="button" class="btn btn-danger" ng-click="delOne(bride._id)">מחיקה</button
-</td>
+                                            <td>
+                                                <button  type="button" class=" btn btn-info" ng-click="brideInfoRoute(bride._id)">פרטים</button>
+                                                <button type="button" class="btn btn-danger" ng-click="delOne(bride._id)"><i class="fa fa-trash-o" aria-hidden="true"></i> מחיקה </button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

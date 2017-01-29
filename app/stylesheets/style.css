@@ -77,3 +77,7 @@ d-nav-bar.md-default-theme md-nav-ink-bar, md-nav-bar md-nav-ink-bar {
   .inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
   .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
     color: red; }
+.progressCirculardemoBasicUsage body {
+  padding: 20px; }
+
+    
