@@ -4,7 +4,7 @@ var mongoose = require( 'mongoose' );
 var Post = mongoose.model('Post');
 var Bride = mongoose.model('Bride');
 var Payment = mongoose.model('Payment');
-
+var Size = mongoose.model('Size');
 //Used for routes that must be authenticated.
 function isAuthenticated (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
@@ -166,7 +166,25 @@ router.route('/brides/:id')
 		return res.json("deleted :(");
 		});
 	});
-
+router.route('/bridesizes/:id')
+	//gets specified bride with size
+	.get(function(req, res){
+		Bride.findById({_id:req.params.id}).populate("sizes").exec(function(err,data) {
+			res.json(data);
+			}, function(err) {
+				res.json(data);
+			});
+	})
+		//deletes the bride	
+	.delete(function(req, res) {
+		Bride.remove({
+			_id: req.params.id
+		}, function(err) {
+			if (err)
+			 return	res.send(err);
+		return res.json("deleted :(");
+		});
+	});
 router.route('/bride/update')
 	//updates specified bride
 	.put(function(req, res){
@@ -175,10 +193,6 @@ router.route('/bride/update')
 			return res.send("succesfully saved");
 		});
 	})
-	
-	
-
-
 router.route('/payments')
 	//creates a new payment
 	.post(function(req, res){
@@ -195,6 +209,131 @@ router.route('/payments')
 			return res.json(payment);
 		});
 	});
+
+	// Size ---------------------------------
+router.route('/sizes/update')
+	//updates specified bride
+	.put(function(req, res){
+		Size.findOneAndUpdate( {_id:req.body.id} , req.body.updatedObj , function(err, doc){
+			if (err) return res.send(500, { error: err });
+			return res.send("succesfully saved");
+		});
+	});
+router.route('/sizes')
+	//creates a new size
+	.post(function(req, res){
+		var size = new Size();
+		//all var in size
+				size.last_update =req.body.last_update;
+				size.chest = req.body.chest;
+				size.waist = req.body.waist;
+				size.hips = req.body.hips;
+				size.upChest = req.body.upChest;
+				size.downChest = req.body.downChest;
+				size.breast_seam = req.body.breast_seam;
+				size.stitch_back = req.body.stitch_back;
+				size.front_width = req.body.front_width;
+				size.back_width = req.body.back_width;
+				size.chest_weidh = req.body.chest_weidh;
+				size.hip_lenght = req.body.hip_lenght;
+				size.side_lenght = req.body.side_lenght;
+				size.shoulder = req.body.shoulder;
+			 	size.sleeve_length = req.body.sleeve_length;
+				size.dress_lenght = req.body.dress_lenght;
+				size.top_lenght = req.body.top_lenght;
+
+		size.save(function(err,size) {
+			if (err){
+				return res.send(500,err);
+			}
+			return res.json(size);
+		});
+
+	});
+	
+	router.route('/sizes/:bride_id/:size_id')
+    .put(function(req , res){
+        Bride.findOneAndUpdate({ _id: req.params.bride_id} , {$push: {sizes: req.params.size_id }}, function(err, updatedSize){
+            if(err) {
+               return	res.send(err);
+            }else{
+                return res.json(updatedSize);
+            }
+        });
+        
+    })
+	.delete(function(req , res){
+        Bride.findOneAndUpdate({ _id: req.params.bride_id} , {$pull: {sizes: req.params.size_id }}, function(err, delSize){
+            if(err) {
+               return	res.send(err);
+            }else{
+                return res.json("deleted :(");
+            }
+        });
+        
+	});
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	//post-specific commands. likely won't be used
+router.route('/sizes/:id')
+	//gets specified post
+	.get(function(req, res){
+		Size.findById(req.params.id, function(err, size){
+			if(err)
+				return res.send(err);
+			return res.json(size);
+		});
+	}) 
+	//updates specified size
+	.put(function(req, res){
+		Size.findById(req.params.id, function(err, size){
+			if(err)
+				return res.send(err);
+			size.last_update =req.body.last_update;
+			size.chest = req.body.chest;
+			size.waist = req.body.waist;
+			size.hips = req.body.hips;
+			size.upChest = req.body.upChest;
+			size.downChest = req.body.downChest;
+			size.breast_seam = req.body.breast_seam;
+			size.stitch_back = req.body.stitch_back;
+			size.front_width = req.body.front_width;
+			size.back_width = req.body.back_width;
+			size.chest_weidh = req.body.chest_weidh;
+			size.hip_lenght = req.body.hip_lenght;
+			size.side_lenght = req.body.side_lenght;
+			size.shoulder = req.body.shoulder;
+			size.sleeve_length = req.body.sleeve_length;
+			size.dress_lenght = req.body.dress_lenght;
+			size.top_lenght = req.body.top_lenght;
+
+			size.save(function(err, size){
+				if(err)
+					return res.send(err);
+				return res.json(size);
+			});
+		});
+	})
+	//deletes the payment
+	.delete(function(req, res) {
+		Size.remove({
+			_id: req.params.id
+		}, function(err) {
+			if (err)
+			 return	res.send(err);
+		 return	res.json("deleted :(");
+		});
+	});
+	// ===============================================================================
+	//gets all sizes
+	// .get(function(req, res){
+	// Bride.find(function(err, data){
+	// 		if(err){
+	// 			return res.send(500, err);
+	// 		}
+	// 		return res.send(200,data);
+	// 	});
+	// });
 
 //post-specific commands. likely won't be used
 router.route('/payments/:id')

@@ -53,7 +53,9 @@ var brideSchema = new mongoose.Schema({
 		},
 	price: Number,
 	remark: String,
-	payments:[{type: Schema.Types.ObjectId, ref: 'Payment'}]
+	payments:[{type: Schema.Types.ObjectId, ref: 'Payment'}],
+	allPayments: Number,
+	sizes:[{type:Schema.Types.ObjectId,ref:'Size'}]
 })
 
 var paymentSchema = new mongoose.Schema({
@@ -63,9 +65,30 @@ var paymentSchema = new mongoose.Schema({
 	done:Boolean
 })
 
+var sizeSchema = new mongoose.Schema({
+	last_update:{type: Date, default: Date.now},
+	chest:Number,
+	waist:Number,
+	hips:Number,
+	upChest:Number,
+	downChest:Number,
+	breast_seam:Number,
+	stitch_back:Number,
+	front_width:Number,
+	back_width:Number,
+	chest_weidh:Number,
+	hip_lenght:Number,
+	side_lenght:Number,
+	shoulder:Number,
+	sleeve_length:Number,
+	dress_lenght:Number,
+	top_lenght:Number
+})
+
 
 mongoose.model('Post', postSchema);
 mongoose.model('User', userSchema);
 mongoose.model('Bride', brideSchema);
 mongoose.model('Payment', paymentSchema);
+mongoose.model('Size', sizeSchema);
 
