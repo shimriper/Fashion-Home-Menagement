@@ -58,16 +58,15 @@ d-nav-bar.md-default-theme md-nav-ink-bar, md-nav-bar md-nav-ink-bar {
 /*bride style*/
 
 
-.inputdemoIcons {
-  /*
+.inputdemoIcons
+
 .right-icon {
   position: absolute;
   top: 4px;
   right: 2px;
   left: auto;
   margin-top: 0;
-}
-*/ }
+  }
   .inputdemoIcons .inputIconDemo {
     min-height: 48px; }
   .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.email {
@@ -79,5 +78,3 @@ d-nav-bar.md-default-theme md-nav-ink-bar, md-nav-bar md-nav-ink-bar {
     color: red; }
 .progressCirculardemoBasicUsage body {
   padding: 20px; }
-
-    

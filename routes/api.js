@@ -5,6 +5,7 @@ var Post = mongoose.model('Post');
 var Bride = mongoose.model('Bride');
 var Payment = mongoose.model('Payment');
 var Size = mongoose.model('Size');
+var Dress = mongoose.model('Dress');
 //Used for routes that must be authenticated.
 function isAuthenticated (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
@@ -85,7 +86,7 @@ router.route('/posts/:id')
 		});
 	});
 
-
+//-------------------------------------------brides -------------------------------------------------------------------
 router.use('/brides', isAuthenticated);
 router.route('/brides')
 	//creates a new bride
@@ -101,11 +102,10 @@ router.route('/brides')
 				bride.phone2 = req.body.phone2;
 				bride.adress = req.body.adress;
 				bride.date_event = req.body.date_event;
-				bride.dress_type = req.body.dress_type;
-				bride.dress_type2 = req.body.dress_type2;
 				bride.day_service = req.body.day_service;
 			 	bride.price = req.body.price;
 				bride.remark = req.body.remark;
+				bride.status = req.body.status;
 		bride.save(function(err,bride) {
 			if (err){
 				return res.send(500,err);
@@ -121,6 +121,25 @@ router.route('/brides')
 				return res.send(500, err);
 			}
 			return res.send(200,data);
+		});
+	});
+	router.route('/brides/:id')
+	//gets specified bride
+	.get(function(req, res){
+		Bride.findById({_id:req.params.id}).populate("payments").exec(function(err,data) {
+			res.json(data);
+			}, function(err) {
+				res.json(data);
+			});
+	})
+		//deletes the bride	
+	.delete(function(req, res) {
+		Bride.remove({
+			_id: req.params.id
+		}, function(err) {
+			if (err)
+			 return	res.send(err);
+		return res.json("deleted :(");
 		});
 	});
 
@@ -147,25 +166,7 @@ router.route('/payments/:bride_id/:payment_id')
 	});
 
 
-router.route('/brides/:id')
-	//gets specified bride
-	.get(function(req, res){
-		Bride.findById({_id:req.params.id}).populate("payments").exec(function(err,data) {
-			res.json(data);
-			}, function(err) {
-				res.json(data);
-			});
-	})
-		//deletes the bride	
-	.delete(function(req, res) {
-		Bride.remove({
-			_id: req.params.id
-		}, function(err) {
-			if (err)
-			 return	res.send(err);
-		return res.json("deleted :(");
-		});
-	});
+
 router.route('/bridesizes/:id')
 	//gets specified bride with size
 	.get(function(req, res){
@@ -207,6 +208,16 @@ router.route('/payments')
 				return res.send(500, err);
 			}
 			return res.json(payment);
+		});
+	});
+
+		// Size ---------------------------------
+router.route('/payments/update')
+	//updates specified payments
+	.put(function(req, res){
+		Payment.findOneAndUpdate( {_id:req.body.id} , req.body.updatedObj , function(err, doc){
+			if (err) return res.send(500, { error: err });
+			return res.send("succesfully saved");
 		});
 	});
 
@@ -324,17 +335,6 @@ router.route('/sizes/:id')
 		 return	res.json("deleted :(");
 		});
 	});
-	// ===============================================================================
-	//gets all sizes
-	// .get(function(req, res){
-	// Bride.find(function(err, data){
-	// 		if(err){
-	// 			return res.send(500, err);
-	// 		}
-	// 		return res.send(200,data);
-	// 	});
-	// });
-
 //post-specific commands. likely won't be used
 router.route('/payments/:id')
 	//gets specified post
@@ -371,6 +371,101 @@ router.route('/payments/:id')
 		 return	res.json("deleted :(");
 		});
 	});
+router.route('/dresses')
+	//creates a new dress
+	.post(function(req, res){
+		var dress = new Dress();
+		//all var in dress
+			dress.price_dress = req.body.price_dress;
+			dress.last_update =req.body.last_update;
+			dress.t_dress =req.body.t_dress;
+			dress.model = req.body.model;
+			dress.color = req.body.color;
+			dress.t_cloth = req.body.t_cloth;
+			dress.t_lace = req.body.t_lace;
+			dress.cleavage_detailes = req.body.cleavage_detailes;
+			dress.cleft_place = req.body.cleft_place;
+			dress.sleeve = req.body.sleeve;
+			dress.another_skirt = req.body.another_skirt;
+			dress.remark = req.body.remark;
+		dress.save(function(err,dress) {
+			if (err){
+				return res.send(500,err);
+			}
+			return res.json(dress);
+		});
+
+	});
+	router.route('/dresses/update')
+	//updates specified dresses
+	.put(function(req, res){
+		Dress.findOneAndUpdate( {_id:req.body.id} , req.body.updatedObj , function(err, doc){
+			if (err) return res.send(500, { error: err });
+			return res.send("succesfully saved");
+		});
+	});
+	router.route('/bridedresses/:id')
+	//gets specified bride with size
+	.get(function(req, res){
+		Bride.findById({_id:req.params.id}).populate("dresses").exec(function(err,data) {
+			res.json(data);
+			}, function(err) {
+				res.json(data);
+			});
+	})
+		//deletes the Dress	
+	.delete(function(req, res) {
+		Bride.remove({
+			_id: req.params.id
+		}, function(err) {
+			if (err)
+			 return	res.send(err);
+		return res.json("deleted :(");
+		});
+	});
+
+router.route('/dresses/:bride_id/:dress_id')
+    .put(function(req , res){
+        Bride.findOneAndUpdate({ _id: req.params.bride_id} , {$push: {dresses: req.params.dress_id }}, function(err, updatedDress){
+            if(err) {
+               return	res.send(err);
+            }else{
+                return res.json(updatedDress);
+            }
+        });
+        
+    })
+	.delete(function(req , res){
+        Bride.findOneAndUpdate({ _id: req.params.bride_id} , {$pull: {dresses: req.params.dress_id }}, function(err, delDress){
+            if(err) {
+               return	res.send(err);
+            }else{
+                return res.json("deleted :(");
+            }
+        });
+        
+	});
+	router.route('/dresses/:id')
+	//gets specified dresses
+	.get(function(req, res){
+		Dress.findById(req.params.id, function(err, dress){
+			if(err)
+				return res.send(err);
+			return res.json(dress);
+		});
+	}) 
+	//delete the dresse
+	.delete(function(req, res) {
+		Dress.remove({
+			_id: req.params.id
+		}, function(err) {
+			if (err)
+			 return	res.send(err);
+		 return	res.json("deleted :(");
+		});
+	});
+	
+	
 
 module.exports = router;
 

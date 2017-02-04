@@ -2,7 +2,7 @@ var app = angular.module('mainApp', [
 	'ngRoute',
 	'ngResource',
 	'ngMaterial',
-	'ngMessages',
+	'ngMessages'
 ]);
 
 app.run(function($http, $rootScope) {
@@ -62,10 +62,11 @@ app.config(function($routeProvider){
 			controller: 'paymentController'
 		})
 		//the test display
-		.when('/test', {
-			templateUrl: 'test.html',
-			controller: 'testController'
+		.when('/dressInfo/:brideid/:dressid', {
+			templateUrl: 'dressInfo.html',
+			controller: 'dressInfoController'
 		})
-		.otherwise({ redirectTo: '/login' });;
+		
+		.otherwise({ redirectTo: '/login' });
 });
 // apps

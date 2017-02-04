@@ -1,114 +1,100 @@
 <navbar></navbar>
-     <div class="content" dir="rtl">
+     <div class="content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
+                  <div class="row">
+                         <div class="col-md-12">
                             <div class="header">
-                                <h4 class="title">מזל טוב !לקוחה חדשה</h4>
+                                <h4 class="title">לקוחה חדשה</h4>
                             </div>
-                            <div class="content">
-                                <form ng-Submit="bride()">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>שם משפחה </label>
-                                                <input type="text" class="form-control" ng-model="newBride.last_name" placeholder="" value="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div calss = "col-md-12">
+                                    <form> 
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>שם פרטי</label>
+                                                    <input type="text" class="form-control" ng-model="newBride.first_name" placeholder="" value="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>שם משפחה </label>
+                                                    <input type="text" class="form-control" ng-model="newBride.last_name" placeholder="" value="">
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>תעודת זהות </label>
+                                                    <input type="number" class="form-control" ng-model="newBride.b_id" placeholder="" value="">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>שם פרטי</label>
-                                                <input type="text" class="form-control" ng-model="newBride.first_name" placeholder="" value="">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>פלאפון </label>
+                                                    <input type="number" class="form-control" ng-model="newBride.phone1" placeholder="" value="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label> פלאפון נוסף</label>
+                                                    <input type="number" class="form-control" ng-model="newBride.phone2" placeholder="" value="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">כתובות איימיל</label>
+                                                    <input type="email" class="form-control" placeholder="Email" ng-model="newBride.email">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>תעודת זהות </label>
-                                                <input type="number" class="form-control" ng-model="newBride.b_id" placeholder="" value="">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>כתובות</label>
+                                                    <input type="text" class="form-control" ng-model="newBride.adress">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>תאריך הכנסה</label>
-                                                <input type="datetime" class="form-control"ng-model="newBride.created_at" disabled placeholder="" value="">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>יום שירות </label>
+                                                    <input type="checkbox" class="form-control" ng-model="newBride.day_service" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>תאריך אירוע</label>
+                                                    <input type="date" class="form-control" ng-model="newBride.date_event" placeholder="" value="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>מחיר</label>
+                                                    <input type="number" class="form-control" ng-model="newBride.price" placeholder="" value="">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label> פלאפון נוסף</label>
-                                                <input type="number" class="form-control" ng-model="newBride.phone2" placeholder="" value="">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>הערות</label>
+                                                    <textarea rows="5" class="form-control" ng-model="newBride.remark" placeholder="כאן אפשר לרשום פרטים נוספים" value=""></textarea>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>פלאפון </label>
-                                                <input type="number" class="form-control" ng-model="newBride.phone1" placeholder="" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">כתובות איימיל</label>
-                                                <input type="email" class="form-control" placeholder="Email" ng-model="newBride.email">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>כתובות</label>
-                                                <input type="text" class="form-control" ng-model="newBride.adress" placeholder="" value="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>יום שירות </label>
-                                                <input type="checkbox" class="form-control" ng-model="newBride.day_service" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                             <div class="form-group">
-                                                <label>תאריך אירוע</label>
-                                                <input type="date" class="form-control" ng-model="newBride.date_event" placeholder="" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>  דגם נוסף</label>
-                                                <input type="text" class="form-control" ng-model="newBride.dress_type2" placeholder="" value="">
-                                            </div>
-                                        </div>
-                                         <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>דגם</label>
-                                                <input type="text" class="form-control" ng-model="newBride.dress_type" placeholder="" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>מחיר</label>
-                                                <input type="number" class="form-control" ng-model="newBride.price" placeholder="" value="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>הערות</label>
-                                                <textarea rows="5" class="form-control" ng-model="newBride.remark" placeholder="כאן אפשר לרשום פרטים נוספים" value=""></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input class="btn submit-btn pull-right" type="submit" value="שלח"/>
-                                    <div class="clearfix"></div>
-                                </form>
-                            </div>
+                                        <input class="btn submit-btn pull-right" type="submit" ng-click="addBride(mewBride)" value="שלח" />
+                                        <div class="clearfix"></div>
+                                    </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+     </div>
+
+

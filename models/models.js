@@ -42,11 +42,7 @@ var brideSchema = new mongoose.Schema({
 		type:Date,
 		require: true
 		},
-	dress_type:{
-		type:String,
-		require: true
-		},
-	dress_type2:String,
+	dresses:[{type: Schema.Types.ObjectId, ref: 'Dress'}],
 	day_service:{
 		type:Boolean,
 		require: true
@@ -55,7 +51,8 @@ var brideSchema = new mongoose.Schema({
 	remark: String,
 	payments:[{type: Schema.Types.ObjectId, ref: 'Payment'}],
 	allPayments: Number,
-	sizes:[{type:Schema.Types.ObjectId,ref:'Size'}]
+	sizes:[{type:Schema.Types.ObjectId,ref:'Size'}],
+	status:String
 })
 
 var paymentSchema = new mongoose.Schema({
@@ -85,10 +82,27 @@ var sizeSchema = new mongoose.Schema({
 	top_lenght:Number
 })
 
+var dressSchema = new mongoose.Schema({
+	totalPrice:{type: Number},
+	last_update:{type: Date, default: Date.now},
+	price_dress:Number,
+	t_dress:String,
+	model:String,
+	color:String,
+	t_cloth:String,
+	t_lace:String,
+	cleavage_detailes:String,
+	cleft_place:String,
+	sleeve:String,
+	another_skirt:String,
+	remark:String
+})
+
 
 mongoose.model('Post', postSchema);
 mongoose.model('User', userSchema);
 mongoose.model('Bride', brideSchema);
 mongoose.model('Payment', paymentSchema);
 mongoose.model('Size', sizeSchema);
+mongoose.model('Dress', dressSchema);
 
