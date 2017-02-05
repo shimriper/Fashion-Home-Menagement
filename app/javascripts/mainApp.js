@@ -5,6 +5,7 @@ var app = angular.module('mainApp', [
 	'ngMessages'
 ]);
 
+
 app.run(function($http, $rootScope) {
 	$rootScope.authenticated = false;
 	$rootScope.current_user = 'geust';

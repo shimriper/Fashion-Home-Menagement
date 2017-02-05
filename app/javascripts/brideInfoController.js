@@ -73,6 +73,7 @@
           $http.get('/api/bridedresses/'+ $scope.tempid).then(function(res) {
                 $scope.brideWithDress = res.data;   
                 $scope.getTotalPrice = function(){
+                      priceBride=0;
                       var total = 0;
                       for(var i=0; i < $scope.brideWithDress.dresses.length; i++){
                           var dress = $scope.brideWithDress.dresses[i];
@@ -177,13 +178,16 @@
               })
      };
      $scope.upDress = function(dress , id,bride){
+            priceBride =0;
             $scope.upDress = {};
-             alert('dress.price_dress' +dress.price_dress);
             upDress = {
-                t_dress : dress.t_dress,
-                 price_dress:dress.price_dress,
+                 t_dress: dress.t_dress,
+                 price_dress: dress.price_dress,
             };  
+           
+            alert('priceBride' + priceBride);
                 $http.put('/api/dresses/update' , {id:id , updatedObj:upDress}).then(function(res){
+                    getOneBride();
                      $scope.upBride = {}; 
                      upBride = {
                         price:  priceBride ,

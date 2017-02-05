@@ -1,5 +1,5 @@
   angular.module('mainApp');
-   app.controller('dressInfoController', function($scope , brideService ,$route , $http , $q , $location) {
+   app.controller('dressInfoController', function($scope ,$rootScope, brideService ,$route , $http , $q , $location) {
 
      init = function(){
           getOneDress($scope.dressid); 
