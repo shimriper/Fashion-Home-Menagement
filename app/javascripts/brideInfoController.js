@@ -1,10 +1,12 @@
   angular.module('mainApp');
-   app.controller('brideInfoController', function($scope ,$rootScope, brideService ,$route , $http , $q ,$location) {
+   app.controller('brideInfoController', function($scope ,$rootScope, brideService ,$route , $http , $q ,$location,$window) {
      init = function(){
+        $scope.names = ["כלה", "ערב"];
         var sizeIsEmpty;
         var priceBride;
          $rootScope.sizeid;
           getOneBride(); 
+
      };
      	$scope.modify = function(bride){
 				$scope.modifyField = true;
@@ -32,6 +34,7 @@
             $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
               	$scope.modifyField = false;
 			        	$scope.viewField = false;
+                  $window.location.reload();
               console.log(res);
             },function(err){
               console.log(err);
@@ -42,8 +45,7 @@
      getOneBride = function(){
          $scope.tempid = $route.current.params.brideid;
          $scope.bride = brideService.get({id: $scope.tempid});
-         
-      
+
          //get payment 
          $http.get('/api/brides/'+ $scope.tempid).then(function(res) {
                             $scope.brideWithPayment = res.data;
@@ -73,7 +75,6 @@
           $http.get('/api/bridedresses/'+ $scope.tempid).then(function(res) {
                 $scope.brideWithDress = res.data;   
                 $scope.getTotalPrice = function(){
-                      priceBride=0;
                       var total = 0;
                       for(var i=0; i < $scope.brideWithDress.dresses.length; i++){
                           var dress = $scope.brideWithDress.dresses[i];
@@ -86,12 +87,14 @@
          }, function(err) {
             console.log(err);
          });
-
     };
     $scope.addDress = function(Dress , bridePrice){
+      var t_dress = $scope.names;
+      alert('t_dress' + t_dress);
         $http.post('/api/dresses', $scope.newDress ).then(function(res) {
                                       $scope.upBride = {};
                                       upBride = {
+                                          t_dress:t_dress,
                                           price: res.data.price_dress + priceBride,
                                           };
                                           $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
@@ -152,6 +155,7 @@
                             $scope.brideWithPayment = res.data;
                               console.log('brideWithPayment');
                               console.log( $scope.brideWithPayment);
+                                       $window.location.reload();
                           }, function(err) {
                         })
                     }, function(err) {
@@ -178,29 +182,37 @@
               })
      };
      $scope.upDress = function(dress , id,bride){
-            priceBride =0;
             $scope.upDress = {};
             upDress = {
                  t_dress: dress.t_dress,
                  price_dress: dress.price_dress,
             };  
-           
-            alert('priceBride' + priceBride);
                 $http.put('/api/dresses/update' , {id:id , updatedObj:upDress}).then(function(res){
-                    getOneBride();
-                     $scope.upBride = {}; 
-                     upBride = {
-                        price:  priceBride ,
-                        };
-                        $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
-                                  $scope.dressModifyField = false;
-                                  $scope.dressViewField = false;
-                                
-                          console.log(res);
-                        },function(err){
-                          console.log(err);
-                        }) 
+                          //get dress
+                          $http.get('/api/bridedresses/'+ $scope.tempid).then(function(res) {
+                                $scope.brideWithDress = res.data;   
+                                $scope.getTotalPrice = function(){
+                                      var total = 0;
+                                      for(var i=0; i < $scope.brideWithDress.dresses.length; i++){
+                                          var dress = $scope.brideWithDress.dresses[i];
+                                              total += dress.price_dress;
+                                      }
+                                            $scope.upBride = {}; 
+                                            upBride = {
+                                                price:  total ,
+                                                };
+                                                $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
+                                                          $scope.dressModifyField = false;
+                                                          $scope.dressViewField = false;
+                                                  console.log(res);
+                                                },function(err){
+                                                  console.log(err);
+                                                }) 
+                                    };  
+                                    $window.location.reload();
+                        })
                   console.log(res);
+                  getOneBride();
                 },function(err){
                   console.log(err);
                 }) ;
@@ -218,10 +230,12 @@
                     $scope.paymentViewField = false;
 
                   console.log(res);
-                },function(err){
+                    $window.location.reload();
+                }
+                ,function(err){
                   console.log(err);
                 }) ;
-   
+                
      };
 
      $scope.paymentModify = function(newPayment){
@@ -272,7 +286,6 @@
       $scope.dressModify = function(newDress){
 				$scope.dressModifyField = true;
 				$scope.dressViewField = true;
-         getOneBride();
 			};
 
     //  $scope.upDress =function (dress, id){
@@ -305,7 +318,6 @@
       $scope.dressInfoRoute = function(id){  
           $scope.brideid = $route.current.params.brideid;
           console.log(id);
-
           $location.path('dressInfo/' + $scope.brideid + '/' + id );
       };
     init();

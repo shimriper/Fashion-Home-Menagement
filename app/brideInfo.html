@@ -7,40 +7,56 @@
                     <h2> לקוחה :{{bride.first_name}} <small> (מצב : {{bride.status}})</small></h2>
                     <div class="col-md-4">
                         <div class="panel panel-info" >
-                            <div class="panel-heading"> פרטים אישיים <small>( נוצר ב {{bride.created_at | date:"HH:MM , MMM , d,yy"}} )</small>
+                            <div class="panel-heading"> פרטים אישיים <small>( נוצר ב {{bride.created_at | date:"HH:MM , dd/MM/yy"}} )</small>
                                 <i class="fa fa-save" style="float: left" ng-click="update(bride)"  ng-show="modifyField" > שמירה</i>
                                 <i class="fa fa-pencil" style="float: left" ng-click="modify(bride)"ng-hide="viewField"> עריכה</i>
                             </div>
                             <div class="panel-body" >
                             <table class="table table-bordered table-hover table-condensed" style="width:100%" id="tStyle">
+                                <form mame="brideFrom">
                                         <tr style="text-align: center">
                                             <th  id="thStyle">שם פרטי:   </th> 
-                                            <td ng-show="modifyField"><input type="text" ng-model="bride.first_name"/></td>
+                                            <td ng-show="modifyField"><input type="text" ng-model="bride.first_name"  name="first_name" required />
+                                                <div ng-messages="brideForm.first_name.$error  && brideForm.first_name.$dirty" >
+                                               </div>
+                                            </td>
                                             <td ng-hide="viewField">{{bride.first_name || ''}}</td>
                                         </tr>
                                         <tr>
                                             <th  id="thStyle">שם משפחה:   </th> 
                                             <td ng-hide="viewField">{{bride.last_name || ''}}</td>
-                                            <td ng-show="modifyField"><input type="text" ng-model="bride.last_name"/></td>
+                                            <td ng-show="modifyField"><input type="text" ng-model="bride.last_name" name="last_name" required/>
+                                            <div ng-messages="brideForm.last_name.$error  && brideForm.last_name.$dirty" >
+                                                <div ng-message="required">הכנס משפחה </div>
+                                               </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th  id="thStyle">תעודת זהות:  </th> 
-                                            <td ng-show="modifyField"> <input type="text" ng-model="bride.b_id"></td>
+                                            <td ng-show="modifyField"> <input type="number" ng-model="bride.b_id"  name="b_id" required>
+                                              <div ng-messages="brideForm.b_id.$error  && brideForm.b_id.$dirty" >
+                                                <div ng-message="required">הכנס ת"ז </div>
+                                               </div>
+                                               </td>
                                             <td ng-hide="viewField">  {{bride.b_id ||''}}</td>
                                         </tr>
                                         <tr>
                                             <th  id="thStyle">דואר אלקטרוני:</th> 
-                                            <td  ng-show="modifyField"> <input type="text" ng-model="bride.email"></td>
+                                            <td  ng-show="modifyField"> <input type="email" ng-model="bride.email"></td>
                                                 <td ng-hide="viewField"> {{bride.email ||''}}</td>
                                         </tr>
                                         <tr>
                                             <th  id="thStyle">פלאפון </th>
-                                            <td  ng-show="modifyField"> <input type="text" ng-model="bride.phone1"></td>
+                                            <td  ng-show="modifyField"> <input type="tel" ng-model="bride.phone1" name="phone1"  ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required>
+                                                <div ng-messages="brideForm.phone1.$error  && brideForm.phone1.$dirty" >
+                                                <div ng-message="required">הכנס פלאפון </div>
+                                               </div>
+                                            </td>
                                             <td ng-hide="viewField">  {{bride.phone1 ||''}}</td>
                                         </tr>
                                         <tr>
                                             <th  id="thStyle"> 2 פלאפון </th>
-                                            <td ng-show="modifyField"> <input type="text" ng-model="bride.phone2"></td>
+                                            <td ng-show="modifyField"> <input type="tel" ng-model="bride.phone2"></td>
                                                 <td ng-hide="viewField">{{bride.phone2 ||''}}</td>
                                         </tr>
                                         <tr>
@@ -51,24 +67,35 @@
                                         <tr>
                                         <tr>
                                             <th  id="thStyle"> תאריך אירוע : </th> 
-                                            <td ng-show="modifyField"> <input type="text" ng-model="bride.date_event"></td>
-                                        <td ng-hide="viewField"> {{bride.date_event ||''}}</td>
+                                            <td ng-show="modifyField"> <input type="date" ng-model="bride.date_event" name="date_event"ng-chenge="checkErr" required>
+                                               <div ng-messages="brideForm.date_event.$error  && brideForm.date_event.$dirty" >
+                                                <div ng-message="required">הכנס פלאפון </div>
+                                                <span>{{errMessage}}</span>
+                                               </div>
+                                            </td>
+                                        <td ng-hide="viewField"> {{bride.date_event | date:"shortDate"}}</td>
                                         </tr>
                                         <tr>
                                             <th  id="thStyle"> יום שירות :</th>
-                                            <td  ng-show="modifyField"> <input type="text" ng-model="bride.day_service"></td>
-                                            <td ng-hide="viewField">{{bride.day_service ||'empty'}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th  id="thStyle"> מחיר  :</th>
-                                
-                                            <td  ng-show="modifyField"> <input type="text" ng-model="bride.price"></td>
-                                            <td ng-hide="viewField">{{bride.price ||'empty'}}</td>
+                                                <td  ng-show="modifyField">
+                                                    <div class="radio">
+                                                    <label>
+                                                    <input type="radio" value="כן" ng-model="bride.day_service" name="day_service" />
+                                                    </label>כן
+                                                    </div>
+                                                    <div class="radio">
+                                                    <label>
+                                                        
+                                                        <input type="radio" value="לא" ng-model="bride.day_service" name="day_service" > 
+                                                    </label>לא
+                                                    </div>
+                                                 </td>
+                                            <td ng-hide="viewField">{{bride.day_service ||''}}</td>
                                         </tr>
                                         <tr>
                                             <th  id="thStyle"> הערות  :</th>
                                             <td ng-show="modifyField"> <input type="text" ng-model="bride.remark"></td>
-                                            <td ng-hide="viewField">{{bride.remark ||'empty'}}</td>
+                                            <td ng-hide="viewField">{{bride.remark ||''}}</td>
                                         </tr>
                                 </table>
                             </div>
@@ -100,7 +127,7 @@
                                                 <td ng-hide="paymentViewField">{{payment.pay}}</td>
 
                                                 <td ng-show="paymentModifyField"><input type="date" ng-model="payment.date_pay"/></td>
-                                                <td ng-hide="paymentViewField">{{payment.date_pay | date:" MMM d, yy"}}</td>
+                                                <td ng-hide="paymentViewField">{{payment.date_pay | date:"shortDate"}}</td>
 
                                                 <td ng-show="paymentModifyField"><input type="checkbox" ng-model="payment.done"/></td>
                                                  <td ng-hide="paymentViewField">{{payment.done || " לא שולם"}}</td>
@@ -138,9 +165,17 @@
                                     <div class="panel-body">
                                             <table class="table table-bordered table-hover table-condensed" style="width:100%">       
                                                 <tr>
-                                                    <th>
-                                                        <input type="text"  ng-model="newDress.t_dress" placeholder=" סוג שמלה " value="">
-                                                    </th>
+                                                        <th>		
+                                                        <select  ng-model="newDress.t_dress" placeholder=" סוג שמלה " value="סוג שמלה" >
+                                                            <option>כלה</option>
+                                                            <option>ערב</option>
+                                                        </select>
+                                                        </th>
+
+                                                    <!--<th><select>
+                                                        <input type="option" ng-model="selectedName" ng-repeat="x in names"  ng-model="newDress.t_dress" placeholder=" סוג שמלה " value=""> {{x}}</option>
+                                                        </select>
+                                                    </th>-->
                                                      <th>
                                                         <input type="text"  ng-model="newDress.price_dress" placeholder=" מחיר שמלה " value="">
                                                     </th>
@@ -155,9 +190,9 @@
                                                         <td ng-show="dressModifyField"><input type="text" ng-model="dress.price_dress"/></td>
                                                         <td ng-hide="dressViewField">{{dress.price_dress}}</td>
                                                         <td>
-                                                            <button type="button" class="btn btn-info btn-sm" ng-click="dressModify(dress ,dress._id)" ng-hide="dressViewField">  <i class="fa fa-pencil"></i> </button>
+                                                            <button type="button" class="btn btn-primary btn-sm" ng-click="dressModify(dress ,dress._id)" ng-hide="dressViewField">  <i class="fa fa-pencil"></i> </button>
                                                             <button type="button" class="btn btn-success btn-sm" ng-click="upDress(dress ,dress._id ,bride)"  ng-show="dressModifyField">  <i class="fa fa-save"></i> </button>
-                                                            <button type="button" class="btn btn-primary btn-sm" ng-click="dressInfoRoute(dress._id)"><i class="fa fa-database" aria-hidden="true"></i></button>
+                                                            <button type="button" class="btn btn-info btn-sm" ng-click="dressInfoRoute(dress._id)"><i class="fa fa-folder-open" aria-hidden="true"></i></button>
                                                             <button type="button" class="btn btn-danger btn-sm" ng-click="delDress(dress._id, dress.price_dress)">  <i class="fa fa-trash-o"></i> </button>
 
                                                         </td>

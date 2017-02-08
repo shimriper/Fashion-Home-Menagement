@@ -44,8 +44,7 @@ var brideSchema = new mongoose.Schema({
 		},
 	dresses:[{type: Schema.Types.ObjectId, ref: 'Dress'}],
 	day_service:{
-		type:Boolean,
-		require: true
+		type:String
 		},
 	price: Number,
 	remark: String,

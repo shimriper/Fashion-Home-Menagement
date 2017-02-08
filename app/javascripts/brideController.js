@@ -14,6 +14,24 @@
             });
     };
 
+     $scope.checkErr = function(eventDate) {
+       alert('we r checkErr');
+       alert('eventDate' + eventDate);
+        $scope.errMessage = '';
+        var curDate = new Date();
+        alert('eventDate' + curDate);
+        if(new Date(curDate) >= new Date(eventDate)){
+          $scope.errMessage = 'תאריך אירוע עבר/שווה להיום';
+         
+          return false;
+        }
+        else
+        {
+           $scope.errMessage = 'תאריך אירוע תקין';
+          return true;
+        }
+    };
+
    brideInfoRoute = function(id){
           console.log(id);
           $location.path('brideInfo/' + id );

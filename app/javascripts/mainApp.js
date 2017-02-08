@@ -16,8 +16,10 @@ app.run(function($http, $rootScope) {
 		$rootScope.current_user = 'geust';
 		alert('נתראה בפעם הבאה');
 		//$location.path('/login');
+
 	};
 });
+
 
 
 app.config(function($routeProvider){

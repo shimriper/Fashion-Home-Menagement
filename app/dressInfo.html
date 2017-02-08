@@ -9,7 +9,7 @@
             </div>
             <div class="row">
                 <div calss="col-md-12">
-                        <div class="col-md-4">               
+                        <div class="col-md-6">               
                             <div class="panel panel-default" ng-repeat="size in brideWithSize.sizes" > 
                                 <div class="panel-heading"> מידות <small>עודכן ב: {{size.last_update | date:"HH:MM , MMM , d,yy"}} </small>
                                     <i class="fa fa-save" style="float: left" ng-click="upSize(size, size._id)"  ng-show="sizeModifyField" > שמירה</i>
@@ -18,86 +18,86 @@
                                 <div class="panel-body"  >   
                                     <table class="table table-bordered table-hover table-condensed"  style="width:100% ; float: right">
                                             <tr>
-                                                <th>חזה:   </th> 
+                                                <th id="thStyle">חזה:   </th> 
                                                 <td ng-show="sizeModifyField"><input type="text" ng-model="size.chest "/></td>
                                                 <td ng-hide="sizeViewField">{{size.chest|| ''}}</td>
                                             </tr>
                                             </tr>
                                             <tr>
-                                                <th>מותן:   </th> 
+                                                <th id="thStyle"> מותן:   </th> 
                                                 <td ng-hide="sizeViewField">{{size.waist|| ''}}</td>
                                                 <td ng-show="sizeModifyField"><input type="text" ng-model="size.waist"/></td>
                                             </tr>
                                             <tr>
-                                                <th>ירכיים:  </th> 
+                                                <th id="thStyle">ירכיים:  </th> 
                                                 <td ng-show="sizeModifyField"> <input type="text" ng-model="size.hips "></td>
                                                 <td ng-hide="sizeViewField">  {{size.hips ||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th>מעל החזה:</th> 
+                                                <th id="thStyle">מעל החזה:</th> 
                                                 <td  ng-show="sizeModifyField"> <input type="text" ng-model="size.upChest"></td>
                                                     <td ng-hide="sizeViewField"> {{size.upChest ||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th>מתחת לחזה </th>
+                                                <th id="thStyle">מתחת לחזה </th>
                                                 <td  ng-show="sizeModifyField"> <input type="text" ng-model="size.downChest "></td>
                                                 <td ng-hide="sizeViewField">  {{size.downChest ||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th> מתפר חזה </th>
+                                                <th id="thStyle"> מתפר חזה </th>
                                                 <td ng-show="sizeModifyField"> <input type="text" ng-model="size.breast_seam"></td>
                                                     <td ng-hide="sizeViewField">{{size.breast_seam||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th> מתפר גב </th>
+                                                <th id="thStyle"> מתפר גב </th>
                                                 <td ng-show="sizeModifyField"><input type="text" ng-model="size.stitch_back"></td>
                                                 <td ng-hide="sizeViewField">{{size.stitch_back ||''}}</td>
                                             </tr>
                                             <tr>
                                             <tr>
-                                                <th> רוחב קדמי: </th> 
+                                                <th id="thStyle"> רוחב קדמי: </th> 
                                                 <td ng-show="sizeModifyField"> <input type="text" ng-model="size.front_width"></td>
                                             <td ng-hide="sizeViewField"> {{size.front_width||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th>רוחב גב  : </th>
+                                                <th id="thStyle">רוחב גב  : </th>
                                                 <td ng-show="sizeModifyField"> <input type="text" ng-model="size.back_weidth"></td>
                                                 <td ng-hide="sizeViewField">{{size.back_weidth||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th>רוחב חזה  : </th>
+                                                <th id="thStyle">רוחב חזה  : </th>
                                                 <td ng-show="sizeModifyField"> <input type="text" ng-model="size.chest_weidth"></td>
                                                 <td ng-hide="sizeViewField">{{size.chest_weidth||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th> אורך מהמותן : </th> 
+                                                <th id="thStyle"> אורך מהמותן : </th> 
                                                 <td  ng-show="sizeModifyField"> <input type="text" ng-model="size.hip_lenght"></td>
                                                 <td ng-hide="sizeViewField">{{size.hip_lenght||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th> אורך צד :</th>
+                                                <th id="thStyle"> אורך צד :</th>
 
                                                 <td  ng-show="sizeModifyField"> <input type="text" ng-model="size.side_lenght"></td>
                                                 <td ng-hide="sizeViewField">{{size.side_lenght||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th> כתפיים  :</th>
+                                                <th id="thStyle"> כתפיים  :</th>
                                     
                                                 <td  ng-show="sizeModifyField"> <input type="text" ng-model="size.shoulder "></td>
                                                 <td ng-hide="sizeViewField">{{size.shoulder||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th> אורך שרוול  :</th>
+                                                <th id="thStyle"> אורך שרוול  :</th>
                                                 <td ng-show="sizeModifyField"> <input type="text" ng-model="size.sleeve_length"></td>
                                                 <td ng-hide="sizeViewField">{{size.sleeve_length||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th>אורך שמלה  :</th>
+                                                <th id="thStyle">אורך שמלה  :</th>
                                                 <td ng-show="sizeModifyField"> <input type="text" ng-model="size.dress_lenght "></td>
                                                 <td ng-hide="sizeViewField">{{size.dress_lenght||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th> אורך חלק עליון  :</th>
+                                                <th > אורך חלק עליון  :</th>
                                                 <td ng-show="sizeModifyField"> <input type="text" ng-model="size.top_lenght"></td>
                                                 <td ng-hide="sizeViewField">{{size.top_lenght||''}}</td>
                                             </tr>
@@ -106,7 +106,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             
                             <div class="panel panel-default"  >
                                 <div class="panel-heading"> תיאור שמלה <small>עודכן ב: {{dress.last_update | date:"HH:MM , MMM , d,yy"}} </small>
@@ -116,53 +116,53 @@
                                  <div class="panel-body">   
                                       <table class="table table-bordered table-hover table-condensed"  style="width:100% ; float: right">
                                             <tr>
-                                                <th>סוג שמלה:   </th> 
+                                                <th id="thStyle">סוג שמלה:   </th> 
                                                 <td ng-show="dressModifyField"><input type="text" ng-model="dress.t_dress "/></td>
                                                 <td ng-hide="dressViewField">{{dress.t_dress|| ''}}</td>
                                             </tr>
                                             <tr>
-                                                <th>דגם:   </th> 
+                                                <th id="thStyle">דגם:   </th> 
                                                 <td ng-hide="dressViewField">{{dress.model|| ''}}</td>
                                                 <td ng-show="dressModifyField"><input type="text" ng-model="dress.model"/></td>
                                             </tr>
                                             <tr>
-                                                <th>צבע:  </th> 
+                                                <th id="thStyle">צבע:  </th> 
                                                 <td ng-show="dressModifyField"> <input type="text" ng-model="dress.color "></td>
                                                 <td ng-hide="dressViewField">  {{dress.color ||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th>סוג בד:</th> 
+                                                <th id="thStyle">סוג בד:</th> 
                                                 <td  ng-show="dressModifyField"> <input type="text" ng-model="dress.t_cloth"></td>
                                                     <td ng-hide="dressViewField"> {{dress.t_cloth ||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th>סוג תחרה </th>
+                                                <th id="thStyle">סוג תחרה </th>
                                                 <td  ng-show="dressModifyField"> <input type="text" ng-model="dress.t_lace "></td>
                                                 <td ng-hide="dressViewField">  {{dress.t_lace ||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th> תיאור מחשוף </th>
+                                                <th id="thStyle"> תיאור מחשוף </th>
                                                 <td ng-show="dressModifyField"> <input type="text" ng-model="dress.cleavage_detailes"></td>
                                                     <td ng-hide="dressViewField">{{dress.cleavage_detailes||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th> מיקום שסע </th>
+                                                <th id="thStyle"> מיקום שסע </th>
                                                 <td ng-show="dressModifyField"><input type="text" ng-model="dress.cleft_place"></td>
                                                 <td ng-hide="dressViewField">{{dress.cleft_place ||''}}</td>
-                                            </tr>
+                                            </tr >
                                             <tr>
                                             <tr>
-                                                <th> שרוול: </th> 
+                                                <th id="thStyle"> שרוול: </th> 
                                                 <td ng-show="dressModifyField"> <input type="text" ng-model="dress.sleeve"></td>
                                             <td ng-hide="dressViewField"> {{dress.sleeve||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th>חצאית נוספת   : </th>
+                                                <th id="thStyle">חצאית נוספת   : </th>
                                                 <td ng-show="dressModifyField"> <input type="text" ng-model="dress.another_skirt"></td>
                                                 <td ng-hide="dressViewField">{{dress.another_skirt||''}}</td>
                                             </tr>
                                             <tr>
-                                                <th>הערות : </th>
+                                                <th id="thStyle">הערות : </th>
                                                 <td ng-show="dressModifyField"> <input type="text" ng-model="dress.remark"></td>
                                                 <td ng-hide="dressViewField">{{dress.remark||''}}</td>
                                             </tr>		

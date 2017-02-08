@@ -1,5 +1,5 @@
   angular.module('mainApp');
-   app.controller('dressInfoController', function($scope ,$rootScope, brideService ,$route , $http , $q , $location) {
+   app.controller('dressInfoController', function($scope ,$rootScope, brideService ,$route , $http , $q , $location ,$window) {
 
      init = function(){
           getOneDress($scope.dressid); 
@@ -12,7 +12,6 @@
         getOneDress = function(){
             $scope.tempid = $route.current.params.brideid;
             $scope.dressid = $route.current.params.dressid;
-
             $scope.bride = brideService.get({id: $scope.tempid});
             
 
@@ -81,6 +80,7 @@
                 }) ;                    
                     $scope.dressModifyField = false;
                     $scope.dressViewField = false;
+                    $window.location.reload();
       };
 
          $scope.dressModify = function(newDress){
@@ -124,6 +124,7 @@
                   
                     $scope.sizeModifyField = false;
                     $scope.sizeViewField = false;
+                    $window.location.reload();
                   console.log(res);
                 },function(err){
                   console.log(err);
