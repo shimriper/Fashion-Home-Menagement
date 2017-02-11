@@ -25,7 +25,7 @@ function isAuthenticated (req, res, next) {
 };
 
 //Register the authentication middleware
-router.use('/posts', isAuthenticated);
+// router.use('/posts', isAuthenticated);
 router.route('/posts')
 	//creates a new post
 	.post(function(req, res){
@@ -87,7 +87,7 @@ router.route('/posts/:id')
 	});
 
 //-------------------------------------------brides -------------------------------------------------------------------
-router.use('/brides', isAuthenticated);
+// router.use('/brides', isAuthenticated);
 router.route('/brides')
 	//creates a new bride
 	.post(function(req, res){

@@ -15,8 +15,8 @@ app.controller('mainController', function($rootScope ,$scope , postService){
 		});
 	};
 	$scope.delPost = function(id){
-		alert('del');
                    postService.delete({id:id});
                    $scope.posts = postService.query();
+				   alert('ההודעה נמחקה');
     };
 });

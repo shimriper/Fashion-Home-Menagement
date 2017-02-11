@@ -15,11 +15,11 @@
     };
 
      $scope.checkErr = function(eventDate) {
-       alert('we r checkErr');
-       alert('eventDate' + eventDate);
+      //  alert('we r checkErr');
+      //  alert('eventDate' + eventDate);
         $scope.errMessage = '';
         var curDate = new Date();
-        alert('eventDate' + curDate);
+        // alert('eventDate' + curDate);
         if(new Date(curDate) >= new Date(eventDate)){
           $scope.errMessage = 'תאריך אירוע עבר/שווה להיום';
          

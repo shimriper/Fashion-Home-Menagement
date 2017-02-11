@@ -14,6 +14,7 @@
       $scope.delOne = function(id){
                    brideService.delete({id:id});
                    getAllBrides();
+                   alert('הכלה נמחקה');
     };
   init();
   });

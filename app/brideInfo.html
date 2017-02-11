@@ -113,8 +113,9 @@
                                             <th>
                                                 <input type="date"  ng-model="newPayment.date_pay">
                                             </th>
+                                            
                                             <th>
-                                                <input type="checkbox" ng-model="newPayment.done"> בוצע 
+                                                <input type="checkbox" value="כן" ng-model="newPayment.done"> בוצע 
                                             </th>
                                             
                                             <th>
@@ -129,7 +130,7 @@
                                                 <td ng-show="paymentModifyField"><input type="date" ng-model="payment.date_pay"/></td>
                                                 <td ng-hide="paymentViewField">{{payment.date_pay | date:"shortDate"}}</td>
 
-                                                <td ng-show="paymentModifyField"><input type="checkbox" ng-model="payment.done"/></td>
+                                                <td ng-show="paymentModifyField"><input type="checkbox" value="כן" ng-model="payment.done"/></td>
                                                  <td ng-hide="paymentViewField">{{payment.done || " לא שולם"}}</td>
                                                 <td>
 
