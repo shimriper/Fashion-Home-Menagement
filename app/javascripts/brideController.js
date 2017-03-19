@@ -8,6 +8,7 @@
         $scope.newBride.status = 'פעיל';
       $http.post('/api/brides',$scope.newBride).then(function(res){
           alert('ההרשמה הצליחה');
+          
           brideInfoRoute(res.data._id);
       }, function(err) {
                 console.log(err);

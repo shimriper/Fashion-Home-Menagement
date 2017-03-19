@@ -243,77 +243,10 @@
 				$scope.paymentViewField = true;
 			};
 
-      // $scope.sizeModify = function(newSize){
-			// 	$scope.sizeModifyField = true;
-			// 	$scope.sizeViewField = true;
-			// };
-
-      // $scope.upSize =function (size, id){
-      //       console.log('deleting user with id='+size+' at index='+id);
-      //        $scope.upSize = {};
-      //       console.log('----updateSize----');
-      //       upSize = {
-      //         	last_update: Date.now(),
-      //           chest : size.chest,
-      //           waist :size.waist,
-      //           hips : size.hips,
-      //           upChest :size.upChest,
-      //           downChest :size.downChest,
-      //           breast_seam : size.breast_seam,
-      //           stitch_back : size.stitch_back,
-      //           front_width: size.front_width,
-      //           back_width : size.back_width,
-      //           chest_weidh: size.chest_weidh,
-      //           hip_lenght :size.hip_lenght,
-      //           side_lenght : size.side_lenght,
-      //           shoulder: size.shoulder,
-      //           sleeve_length:size.sleeve_length,
-      //           dress_lenght: size.dress_lenght,
-      //           top_lenght:size.top_lenght
-      //       };
-            
-      //           $http.put('/api/sizes/update' , {id:id , updatedObj:upSize}).then(function(res){
-                  
-      //               $scope.sizeModifyField = false;
-      //               $scope.sizeViewField = false;
-      //             console.log(res);
-      //           },function(err){
-      //             console.log(err);
-      //           }) ;
-
-      // };
-
       $scope.dressModify = function(newDress){
 				$scope.dressModifyField = true;
 				$scope.dressViewField = true;
 			};
-
-    //  $scope.upDress =function (dress, id){
-    //         $scope.upDress = {};
-    //         upDress = {
-    //           	last_update: Date.now(),
-    //             t_dress : dress.t_dress,
-    //             model :dress.model,
-    //             color : dress.color,
-    //             t_cloth :dress.t_cloth,
-    //             t_lace :dress.t_lace,
-    //             cleavage_detailes : dress.cleavage_detailes,
-    //             stitch_back : dress.stitch_back,
-    //             cleft_place: dress.cleft_place,
-    //             sleeve : dress.sleeve,
-    //             another_skirt: dress.another_skirt,
-    //             remark: dress.remark,
-        
-    //         };
-    //             $http.put('/api/dresses/update' , {id:id , updatedObj:upDress}).then(function(res){
-    //                 $scope.dressModifyField = false;
-    //                 $scope.dressViewField = false;
-    //               console.log(res);
-    //             },function(err){
-    //               console.log(err);
-    //             }) ;
-
-    //   };
 
       $scope.dressInfoRoute = function(id){  
           $scope.brideid = $route.current.params.brideid;

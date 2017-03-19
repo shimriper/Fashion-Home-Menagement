@@ -11,7 +11,7 @@ app.controller('authController', function($scope , $rootScope ,$http, $location)
 				$rootScope.authenticated = true;
 				$rootScope.current_user = data.user.username;
 				alert('עבודה נעימה');
-				$location.path('/home');
+				$location.path('/main');
 			}
 			else
 			{
@@ -29,7 +29,7 @@ app.controller('authController', function($scope , $rootScope ,$http, $location)
 				$rootScope.authenticated = true;
 				$rootScope.current_user = data.user.username;
 				alert('ההרשמה הצליחה! ');
-				$location.path('/home');
+				$location.path('/main');
 			}
 			else 
 			{

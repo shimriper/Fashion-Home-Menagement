@@ -1,26 +1,42 @@
 		<!--<nav class="navbar-fluid navbar-default navbar-fixed-top">
 			<div class="container">
 				<a class="navbar-brand" href="#">F.H.M </a>
-				<p class="navbar-right navbar-text" ng-show="authenticated"><a href="#" ng-click="signout()">יציאה</a></p>
-				<p class="navbar-right navbar-text" ng-show="authenticated">שלום  {{current_user}}</p>
+        <p class="navbar-right navbar-text" ng-hide="authenticated"><a href="#/login">התחבר</a> / <a href="#/register">הירשם</a></p>
+				<p class="navbar-left navbar-text" ng-show="authenticated"><a href="#" ng-click="logout()">יציאה</a></p>
+				<p class="navbar-left navbar-text" ng-show="authenticated">שלום  {{current_user}}</p>
+        <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#main">הודעות</a></p>
+				<p class="navbar-right navbar-text" ng-show="authenticated"><a href="#bride">לקוחה חדשה</a></p>
+        <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#allBrides">כל הלקוחות</a></p>
+        <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#adminDash"> Admin</a></p>
+        <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#stage"> תהליך השמלה</a></p>
 			</div>
 		</nav>-->
-
-<div ng-controller="navController" ng-cloak dir="rtl">
-  <md-content class="md-padding">
-    <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-      
-      <md-nav-item md-nav-href="#main" name="page1">הודעות</md-nav-item>
-      <md-nav-item md-nav-href="#bride" name="page2"> לקוחה חדשה</md-nav-item>
-      <md-nav-item md-nav-href="#allBrides" name="page3">כל הלקוחות</md-nav-item> 
-      <!-- these require actual routing with ui-router or ng-route, so they won't work in the demo
-      <md-nav-item md-nav-sref="app.page4" name="page4">Page Four</md-nav-item>
-      <md-nav-item md-nav-href="#page5" name="page5">Page Five</md-nav-item>
-      -->
-      <md-nav-item  md-nav-href="#" name="fhm" style="text-align: left">F.H.M</md-nav-item>
-    </md-nav-bar>
-    <!--<div class="ext-content">
-      External content for `<span>{{currentNavItem}}</span>
-    </div>-->
-  </md-content>
-</div>
+    <nav role="navigation" class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">F.H.M</a>
+        </div>
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                 <li class="active" ng-hide="authenticated"><a href="#/login">התחבר</a> </li>
+                <li class="active" ng-hide="authenticated"> <a href="#/register">הירשם</a> </li>
+                <li class="active" ng-show="authenticated"><a href="#" ng-click="logout()">יציאה</a> </li>  
+                <li class="active" ng-show="authenticated"><a href="#" ng-click="logout()"> שלום  {{current_user}}</a> </li>  
+            </ul>
+  
+            <ul class="nav navbar-nav navbar-right">
+               <li class="navbar-right navbar-text" ng-show="authenticated"><a href="#main">הודעות</a></li>
+                <li class="navbar-right navbar-text" ng-show="authenticated"><a href="#bride">לקוחה חדשה</a></li>
+                <li class="navbar-right navbar-text" ng-show="authenticated"><a href="#allBrides">כל הלקוחות</a></li>
+                <li class="navbar-right navbar-text" ng-show="authenticated"><a href="#adminDash"> Admin</a></li>
+                <li class="navbar-right navbar-text" ng-show="authenticated"><a href="#stage"> תהליך השמלה</a></li>
+           </ul>
+        </div>
+    </nav>

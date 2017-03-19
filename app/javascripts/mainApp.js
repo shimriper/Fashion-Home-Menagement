@@ -64,10 +64,20 @@ app.config(function($routeProvider){
 			templateUrl: 'payment.html',
 			controller: 'paymentController'
 		})
-		//the test display
+		//the dressInfo display
 		.when('/dressInfo/:brideid/:dressid', {
 			templateUrl: 'dressInfo.html',
 			controller: 'dressInfoController'
+		})
+		//the adminDash display
+		.when('/adminDash', {
+			templateUrl: 'adminDash.html',
+			controller: 'adminDashController'
+		})
+		//the stage display
+		.when('/stage/:brideid', {
+			templateUrl: 'stage.html',
+			controller: 'stageController'
 		})
 		
 		.otherwise({ redirectTo: '/login' });
