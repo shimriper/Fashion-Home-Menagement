@@ -2,25 +2,12 @@ var app = angular.module('mainApp', [
 	'ngRoute',
 	'ngResource',
 	'ngMaterial',
-	'ngMessages'
+	'ngMessages',
+	'LocalStorageModule'
 ]);
 
 
-app.run(function($http, $rootScope) {
-	$rootScope.authenticated = false;
-	$rootScope.current_user = 'geust';
-
-	$rootScope.logout = function(){
-		$http.get('/auth/signout');
-		$rootScope.authenticated = false;
-		$rootScope.current_user = 'geust';
-		alert('נתראה בפעם הבאה');
-		//$location.path('/login');
-
-	};
-});
-
-
+ 
 
 app.config(function($routeProvider){
 
@@ -42,44 +29,87 @@ app.config(function($routeProvider){
 		})
 		.when('/bride', {
 			templateUrl: 'bride.html',
-			controller: 'brideController'
+			controller: 'brideController',
+			secure: true
 		})
 		
 		.when('/brideInfo/:brideid', {
 			templateUrl: 'brideInfo.html',
-			controller: 'brideInfoController'
+			controller: 'brideInfoController',
+			secure: true
 		})
 	
 		.when('/allBrides', {
 			templateUrl: 'allBrides.html',
-			controller:  'allBrideController'
+			controller:  'allBrideController',
+			secure: true
 		})
 		//the timeline display
 		.when('/main', {
 			templateUrl: 'main.html',
-			controller: 'mainController'
+			controller: 'mainController',
+			secure: true
 		})
 		//the timeline display
 		.when('/payment', {
 			templateUrl: 'payment.html',
-			controller: 'paymentController'
+			controller: 'paymentController',
+			secure: true
+
 		})
 		//the dressInfo display
 		.when('/dressInfo/:brideid/:dressid', {
 			templateUrl: 'dressInfo.html',
-			controller: 'dressInfoController'
+			controller: 'dressInfoController',
+			secure: true
 		})
 		//the adminDash display
 		.when('/adminDash', {
 			templateUrl: 'adminDash.html',
-			controller: 'adminDashController'
+			controller: 'adminDashController',
+			secure: true
 		})
 		//the stage display
 		.when('/stage/:brideid', {
 			templateUrl: 'stage.html',
-			controller: 'stageController'
+			controller: 'stageController',
+			secure: true
 		})
 		
 		.otherwise({ redirectTo: '/login' });
+
+
+
 });
+
+ app.run(['$rootScope', '$location', '$timeout', '$window','localStorageService',
+   function ($rootScope, $location, $timeout, $window ,localStorageService) {
+
+       //own security as well since client-based security is easily hacked
+       $rootScope.$on("$routeChangeStart", function (event, next, current) {
+
+			var user = localStorageService.get("user");
+			console.log(user);
+           if (next && next.$$route && next.$$route.secure) {
+
+               if (user == null) {
+
+
+
+                   $location.path('login');
+
+               }else{
+
+				   $rootScope.user = user;
+			   }
+
+           }else{
+				 $location.path('login');
+		   }
+
+
+
+       });
+
+   }]);
 // apps

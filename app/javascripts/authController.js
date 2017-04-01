@@ -1,17 +1,29 @@
 
 angular.module('mainApp');
 
-app.controller('authController', function($scope , $rootScope ,$http, $location){
-	$scope.user = {username: '', password: ''};
+app.controller('authController', function($scope , $rootScope ,$timeout ,$http, $location ,localStorageService ){
+	$scope.user = {username: '', password: '' ,role:null};
 	$scope.error_message = '';
 
 	$scope.login = function(){
 		$http.post('/auth/login', $scope.user).success(function(data){
 			if(data.state == 'success'){
-				$rootScope.authenticated = true;
-				$rootScope.current_user = data.user.username;
-				alert('עבודה נעימה');
-				$location.path('/main');
+				$http.get('/auth/success').success(function(data){
+				})
+				.error(function(err){
+					console.log(err);
+				})
+				
+				
+				
+				
+				//$rootScope.authenticated = true;
+				//$rootScope.current_user = data.user.username;
+				localStorageService.set("user", {name:data.user.username , role:'admin'});  
+				$timeout(function(){
+					$location.path('/main');
+				},10)
+				
 			}
 			else
 			{

@@ -73,14 +73,25 @@
                 remark: dress.remark,
         
             };
+
+               
+
                 $http.put('/api/dresses/update' , {id:id , updatedObj:upDress}).then(function(res){
+
+                  if(res.data.message == 'success'){
+                    // check this 
+                       getOneDress();
+                       $scope.dressModifyField = false;
+                       $scope.dressViewField = false;
+
+                       
+                  }
                   console.log(res);
                 },function(err){
                   console.log(err);
                 }) ;                    
-                    $scope.dressModifyField = false;
-                    $scope.dressViewField = false;
-                    $window.location.reload();
+                 
+                    // $window.location.reload();
       };
 
          $scope.dressModify = function(newDress){
@@ -124,18 +135,13 @@
                   
                     $scope.sizeModifyField = false;
                     $scope.sizeViewField = false;
-                    $window.location.reload();
+                    // $window.location.reload();
                   console.log(res);
                 },function(err){
                   console.log(err);
                 }) ;
 
       };
-
-
-    
-
-
     init();
    });
       
