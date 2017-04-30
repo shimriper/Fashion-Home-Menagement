@@ -7,7 +7,24 @@
             $scope.dressid = $route.current.params.dressid;
      };
 
+      $scope.finishStage = function(){
+             //post Stage
+              $http.post('/api/stages',$scope.newStage).then(function(res) {
+                $http.put('/api/stages/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
+                  
+                    $rootScope.stageid = res.data._id;
+                  
+                    console.log( $rootScope.stageid);
+                }, function(err) {
+                  console.log(err);
+                });  
+          
+                console.log(res);
+                }, function(err) {
+                  console.log(err);
+                });
 
+      }
       // get() returns a single bride
         getOneDress = function(){
             $scope.tempid = $route.current.params.brideid;
@@ -44,6 +61,7 @@
                                   }, function(err) {
                                     console.log(err);
                                   });
+                   
                             }
                             else
                             {
@@ -91,10 +109,10 @@
                   console.log(err);
                 }) ;                    
                  
-                    // $window.location.reload();
+              // $window.location.reload();
       };
 
-         $scope.dressModify = function(newDress){
+        $scope.dressModify = function(newDress){
 				$scope.dressModifyField = true;
 				$scope.dressViewField = true;
                 getOneDress();

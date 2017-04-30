@@ -221,6 +221,8 @@ router.route('/payments/update')
 		});
 	});
 
+
+
 	// Size ---------------------------------
 router.route('/sizes/update')
 	//updates specified bride
@@ -465,8 +467,109 @@ router.route('/dresses/:bride_id/:dress_id')
 		 return	res.json("deleted :(");
 		});
 	});
+	// stage
+	//post-specific commands. likely won't be used
+router.route('/stages/:id')
+	//gets specified post
+	.get(function(req, res){
+		Stage.findById(req.params.id, function(err, stage){
+			if(err)
+				return res.send(err);
+			return res.json(stage);
+		});
+	}) 
+	//updates specified Stage
+	.put(function(req, res){
+		Stage.findById(req.params.id, function(err, stage){
+			if(err)
+				return res.send(err);
+			stage.s1 =req.body.s1;
+			stage.s2 =req.body.s2;
+			stage.s3 =req.body.s3;
+			stage.s4 =req.body.s4;
+
+
+			stage.save(function(err, stage){
+				if(err)
+					return res.send(err);
+				return res.json(stage);
+			});
+		});
+	})
+	//deletes the payment
+	.delete(function(req, res) {
+		Stage.remove({
+			_id: req.params.id
+		}, function(err) {
+			if (err)
+			 return	res.send(err);
+		 return	res.json("deleted :(");
+		});
+	});
+
+
+	router.route('/stages/update')
+	//updates specified bride
+	.put(function(req, res){
+		Stage.findOneAndUpdate( {_id:req.body.id} , req.body.updatedObj , function(err, doc){
+			if (err) return res.send(500, { error: err });
+			return res.send("succesfully saved");
+		});
+	});
 	
+	// stagggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+
+
+		// Size ---------------------------------
+router.route('/stages/update')
+	//updates specified bride
+	.put(function(req, res){
+		Stage.findOneAndUpdate( {_id:req.body.id} , req.body.updatedObj , function(err, doc){
+			if (err) return res.send(500, { error: err });
+			return res.send("succesfully saved");
+		});
+	});
+	router.route('/stages')
+	//creates a new stage
+	.post(function(req, res){
+		var stage = new Stage();
+		//all var in stage
+			stage.s1 = req.body.s1;
+			stage.s2 =req.body.s2;
+			stage.s3 =req.body.s3;
+			stage.s4 = req.body.s4;
+			
+
+		stage.save(function(err,stage) {
+			if (err){
+				return res.send(500,err);
+			}
+			return res.json(stage);
+		});
+
+	});
 	
+	router.route('/stages/:bride_id/:stage_id')
+    .put(function(req , res){
+        Stage.findOneAndUpdate({ _id: req.params.bride_id} , {$push: {stages: req.params.stage_id }}, function(err, updatedStage){
+            if(err) {
+               return	res.send(err);
+            }else{
+                return res.json(updatedStage);
+            }
+        });
+        
+    })
+	.delete(function(req , res){
+        Bride.findOneAndUpdate({ _id: req.params.bride_id} , {$pull: {stages: req.params.stage_id }}, function(err, delStage){
+            if(err) {
+               return	res.send(err);
+            }else{
+                return res.json("deleted :(");
+            }
+        });
+        
+	});
 
 module.exports = router;
 

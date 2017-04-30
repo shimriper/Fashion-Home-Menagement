@@ -31,6 +31,7 @@
                         <thead>
                         <tr>
                             <th class="col-check"><input type="checkbox" id="checkall" onclick="test()"/></th>
+                            <th class="col-text"  style="text-align: center"> סטאטוס</th>
                             <th class="col-text"  style="text-align: center"> שם</th>
                             <th class="col-text"  style="text-align: center"> משפחה</th>
                             <th class="col-text"  style="text-align: center"> פלאפון</th>
@@ -49,6 +50,7 @@
                         <tbody>
                             <tr class="bride" ng-repeat="bride in brides | filter:serchText ">
                                 <td align="center"><input type="checkbox" class="checkthis"/></td>
+                                <td align="center">{{bride.status}}</td>
                                 <td align="center">{{bride.first_name}}</td>
                                 <td align="center">{{bride.last_name}}</td>
                                 <td align="center">{{bride.phone1}}</td>

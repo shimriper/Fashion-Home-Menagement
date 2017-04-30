@@ -1,7 +1,7 @@
   angular.module('mainApp');
    app.controller('brideInfoController', function($scope ,$rootScope, brideService ,$route , $http , $q ,$location,$window) {
      init = function(){
-        $scope.names = ["כלה", "ערב"];
+        $scope.names = ["כלה" , "ערב"];
         var sizeIsEmpty;
         var priceBride;
          $rootScope.sizeid;
@@ -39,7 +39,6 @@
             },function(err){
               console.log(err);
             }) 
-
      };
       // get() returns a single bride
      getOneBride = function(){
@@ -67,7 +66,6 @@
                                             }
                                             return total;
                                     }
-                 
                           }, function(err) {
                         })
 
@@ -91,7 +89,7 @@
     $scope.addDress = function(Dress , bridePrice){
       var t_dress = $scope.names;
       alert('נוספה שמלה בהצלחה');
-        $http.post('/api/dresses', $scope.newDress ).then(function(res) {
+              $http.post('/api/dresses', $scope.newDress ).then(function(res) {
                                       $scope.upBride = {};
                                       upBride = {
                                           t_dress:t_dress,
@@ -107,6 +105,13 @@
                $http.put('/api/dresses/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
                         $http.get('/api/bridedresses/'+ $scope.tempid ).then(function(res) {
                             $scope.brideWithDress = res.data;
+            $scope.upBride.status = 'פעיל';
+        
+            $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
+              console.log(res);
+            },function(err){
+              console.log(err);
+            }) 
                             getOneBride();
                           }, function(err) {
                         })
@@ -155,7 +160,6 @@
                             $scope.brideWithPayment = res.data;
                               console.log('brideWithPayment');
                               console.log( $scope.brideWithPayment);
-                                       $window.location.reload();
                           }, function(err) {
                         })
                     }, function(err) {

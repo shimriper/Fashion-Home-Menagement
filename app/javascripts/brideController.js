@@ -5,7 +5,7 @@
   app.controller('brideController', function($rootScope ,$scope , brideService, $http, $location) {
     $scope.addBride = function(Bride){
         $scope.newBride.created_at = Date.now();
-        $scope.newBride.status = 'פעיל';
+        $scope.newBride.status = 'ממתין';
       $http.post('/api/brides',$scope.newBride).then(function(res){
           alert('ההרשמה הצליחה');
           

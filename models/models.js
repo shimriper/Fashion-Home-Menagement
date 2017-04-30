@@ -16,6 +16,7 @@ var userSchema = new mongoose.Schema({
 	created_at: {type: Date, default: Date.now}
 })
 
+
 var brideSchema = new mongoose.Schema({	
 	created_at: {type: Date, default: Date.now},
 	b_id: {type:Number,require: true},
@@ -51,6 +52,7 @@ var brideSchema = new mongoose.Schema({
 	payments:[{type: Schema.Types.ObjectId, ref: 'Payment'}],
 	allPayments: Number,
 	sizes:[{type:Schema.Types.ObjectId,ref:'Size'}],
+	stages:[{type:Schema.Types.ObjectId,ref: 'Stage'}],
 	status:String
 })
 
@@ -80,6 +82,13 @@ var sizeSchema = new mongoose.Schema({
 	dress_lenght:Number,
 	top_lenght:Number
 })
+var stageSchema = new mongoose.Schema({
+	s1: String,
+	s2: String,
+	s3: String,
+	s4: String,
+	last_update: {type: Date, default: Date.now}
+})
 
 var dressSchema = new mongoose.Schema({
 	totalPrice:{type: Number},
@@ -104,4 +113,5 @@ mongoose.model('Bride', brideSchema);
 mongoose.model('Payment', paymentSchema);
 mongoose.model('Size', sizeSchema);
 mongoose.model('Dress', dressSchema);
+mongoose.model('Stage', stageSchema);
 
