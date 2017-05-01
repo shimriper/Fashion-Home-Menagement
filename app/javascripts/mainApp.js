@@ -3,7 +3,11 @@ var app = angular.module('mainApp', [
 	'ngResource',
 	'ngMaterial',
 	'ngMessages',
+<<<<<<< HEAD
 	'LocalStorageModule',
+=======
+	'LocalStorageModule'
+>>>>>>> a4fd48b4aaa23ba1211851015a014e2a11c61839
 ]);
 
 

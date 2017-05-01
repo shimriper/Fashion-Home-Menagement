@@ -1,7 +1,10 @@
   angular.module('mainApp');
    app.controller('brideInfoController', function($scope ,$rootScope, brideService ,$route , $http , $q ,$location,$window) {
      init = function(){
+<<<<<<< HEAD
        var status;
+=======
+>>>>>>> a4fd48b4aaa23ba1211851015a014e2a11c61839
         $scope.names = ["כלה" , "ערב"];
         var sizeIsEmpty;
         var priceBride;
@@ -35,6 +38,7 @@
             $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
               	$scope.modifyField = false;
 			        	$scope.viewField = false;
+                  $window.location.reload();
               console.log(res);
             },function(err){
               console.log(err);
@@ -44,7 +48,11 @@
      getOneBride = function(){
          $scope.tempid = $route.current.params.brideid;
          $scope.bride = brideService.get({id: $scope.tempid});
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> a4fd48b4aaa23ba1211851015a014e2a11c61839
          //get payment 
          $http.get('/api/brides/'+ $scope.tempid).then(function(res) {
                             $scope.brideWithPayment = res.data;
@@ -104,8 +112,20 @@
                                           }) 
                $http.put('/api/dresses/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
                         $http.get('/api/bridedresses/'+ $scope.tempid ).then(function(res) {
+<<<<<<< HEAD
                               updateStatus();       
                               getOneBride();
+=======
+                            $scope.brideWithDress = res.data;
+            $scope.upBride.status = 'פעיל';
+        
+            $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
+              console.log(res);
+            },function(err){
+              console.log(err);
+            }) 
+                            getOneBride();
+>>>>>>> a4fd48b4aaa23ba1211851015a014e2a11c61839
                           }, function(err) {
                         })
                     }, function(err) {
