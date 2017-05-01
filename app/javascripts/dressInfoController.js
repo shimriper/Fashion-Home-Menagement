@@ -1,5 +1,5 @@
   angular.module('mainApp');
-   app.controller('dressInfoController', function($scope ,$rootScope, brideService ,$route , $http , $q , $location) {
+   app.controller('dressInfoController', function($scope ,$rootScope, brideService ,$route , $http , $q , $location ,$window) {
 
      init = function(){
           getOneDress($scope.dressid); 
@@ -7,12 +7,28 @@
             $scope.dressid = $route.current.params.dressid;
      };
 
+      $scope.finishStage = function(){
+             //post Stage
+              $http.post('/api/stages',$scope.newStage).then(function(res) {
+                $http.put('/api/stages/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
+                  
+                    $rootScope.stageid = res.data._id;
+                  
+                    console.log( $rootScope.stageid);
+                }, function(err) {
+                  console.log(err);
+                });  
+          
+                console.log(res);
+                }, function(err) {
+                  console.log(err);
+                });
 
+      }
       // get() returns a single bride
         getOneDress = function(){
             $scope.tempid = $route.current.params.brideid;
             $scope.dressid = $route.current.params.dressid;
-
             $scope.bride = brideService.get({id: $scope.tempid});
             
 
@@ -45,6 +61,7 @@
                                   }, function(err) {
                                     console.log(err);
                                   });
+                   
                             }
                             else
                             {
@@ -74,16 +91,28 @@
                 remark: dress.remark,
         
             };
+
+               
+
                 $http.put('/api/dresses/update' , {id:id , updatedObj:upDress}).then(function(res){
+
+                  if(res.data.message == 'success'){
+                    // check this 
+                       getOneDress();
+                       $scope.dressModifyField = false;
+                       $scope.dressViewField = false;
+
+                       
+                  }
                   console.log(res);
                 },function(err){
                   console.log(err);
                 }) ;                    
-                    $scope.dressModifyField = false;
-                    $scope.dressViewField = false;
+                 
+              // $window.location.reload();
       };
 
-         $scope.dressModify = function(newDress){
+        $scope.dressModify = function(newDress){
 				$scope.dressModifyField = true;
 				$scope.dressViewField = true;
                 getOneDress();
@@ -124,17 +153,13 @@
                   
                     $scope.sizeModifyField = false;
                     $scope.sizeViewField = false;
+                    // $window.location.reload();
                   console.log(res);
                 },function(err){
                   console.log(err);
                 }) ;
 
       };
-
-
-    
-
-
     init();
    });
       
