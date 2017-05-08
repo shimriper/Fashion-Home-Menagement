@@ -2,7 +2,7 @@
 <div class="col-md-offset-2 col-md-8">
 <div class="clearfix" dir="rtl">
 	<form ng-Submit="post()"  class="row">
-		<h4> {{current_user}}:  אומר </h4>
+		<h4> {{user.current_user}}:  אומר </h4>
 		<!--<input required type="text" class="form-control" placeholder="Your name" ng-model="newPost.created_by" /> -->
 		<textarea required class="form-control" maxlength="200" rows="3" placeholder="" ng-model="newPost.text"></textarea>
 		<input class="btn submit-btn pull-right" type="submit" value="שלח" />

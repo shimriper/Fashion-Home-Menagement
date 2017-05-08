@@ -3,11 +3,8 @@
     init = function(){
       getAllBrides();
     }
-<<<<<<< HEAD
 
 
-=======
->>>>>>> a4fd48b4aaa23ba1211851015a014e2a11c61839
      getAllBrides = function(){ 
        $scope.brides = brideService.query();
      }

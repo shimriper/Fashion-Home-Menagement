@@ -9,20 +9,7 @@
 
       $scope.finishStage = function(){
              //post Stage
-              $http.post('/api/stages',$scope.newStage).then(function(res) {
-                $http.put('/api/stages/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
-                  
-                    $rootScope.stageid = res.data._id;
-                  
-                    console.log( $rootScope.stageid);
-                }, function(err) {
-                  console.log(err);
-                });  
-          
-                console.log(res);
-                }, function(err) {
-                  console.log(err);
-                });
+     
 
       }
       // get() returns a single bride
@@ -61,7 +48,6 @@
                                   }, function(err) {
                                     console.log(err);
                                   });
-                   
                             }
                             else
                             {

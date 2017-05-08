@@ -10,7 +10,7 @@ var postSchema = new mongoose.Schema({
 })
 
 var userSchema = new mongoose.Schema({
-	role: String,
+	role: {type:Number,require: true},
 	username: String,
 	password: String, //hash created from password
 	created_at: {type: Date, default: Date.now}
@@ -56,6 +56,69 @@ var brideSchema = new mongoose.Schema({
 	status:String
 })
 
+
+// var meetingSchema = new mongoose.Schema({	
+// 	created_at: {type: Date, default: Date.now},
+// 	meet_id: {type:Number,require: true},
+// 	first_name: {
+// 		type:String,
+// 		require: true
+// 		},
+// 	last_name: {
+// 		type:String,
+// 		require: true
+// 		},
+// 	arrival_date: {
+// 		type:Date,
+// 		require: true
+// 		},
+// 	phone1: {
+// 		type:Number,
+// 		require: true
+// 		},
+// 	date_event: {
+// 		type:Date,
+// 		require: true
+// 		},
+// 	arrived:{
+// 		type:String,
+// 		require: true
+// 		},
+// 	living_area:{
+// 		type:String,
+// 		require: true
+// 		},
+//     dress_type:{
+// 		type:String,
+// 		require: true
+// 		},
+//     dress_model:{
+// 		type:String,
+// 		require: true
+// 		},
+//     price_offered:{
+// 		type:Number,
+// 		require: true
+// 		},
+//     service_day:{
+// 		type:Boolean,
+// 		require: true
+// 		},
+//     close_deal:{
+// 		type:Boolean,
+// 		require: true
+// 		},
+//     final_price:{
+// 		type:Number,
+// 		require: true
+// 		},
+// 	price:{
+// 		type: mongoose.Schema.Types.ObjectId,
+//         ref: 'Payment'
+// 	},
+// 	remark: String
+// })
+
 var paymentSchema = new mongoose.Schema({
 	bride:{type: Schema.Types.ObjectId, ref: 'Bride'},
 	pay:Number,
@@ -83,10 +146,7 @@ var sizeSchema = new mongoose.Schema({
 	top_lenght:Number
 })
 var stageSchema = new mongoose.Schema({
-	s1: String,
-	s2: String,
-	s3: String,
-	s4: String,
+	s: String,
 	last_update: {type: Date, default: Date.now}
 })
 

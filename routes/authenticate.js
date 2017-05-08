@@ -5,6 +5,10 @@ module.exports = function(passport){
 
 	//sends successful login state back to angular
 	router.get('/success', function(req, res){
+
+		//console.log('----success-----')
+		//console.log(req)
+
 		res.send({state: 'success', user: req.user ? req.user : null});
 	});
 

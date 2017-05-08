@@ -51,6 +51,9 @@ module.exports = function(passport){
 		},
 		function(req, username, password, done) {
 			// find a user in mongo with provided username
+
+			console.log(req.body.role);
+
 			User.findOne({ 'username' :  username }, function(err, user) {
 				// In case of any error, return using the done method
 				if (err){
@@ -67,6 +70,7 @@ module.exports = function(passport){
 
 					// set the user's local credentials
 					newUser.username = username;
+					newUser.role = req.body.role;
 					newUser.password = createHash(password);
 
 					// save the user

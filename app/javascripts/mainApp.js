@@ -3,11 +3,8 @@ var app = angular.module('mainApp', [
 	'ngResource',
 	'ngMaterial',
 	'ngMessages',
-<<<<<<< HEAD
 	'LocalStorageModule',
-=======
-	'LocalStorageModule'
->>>>>>> a4fd48b4aaa23ba1211851015a014e2a11c61839
+	'ngStorage'
 ]);
 
 
@@ -19,18 +16,15 @@ app.config(function($routeProvider){
 		//the login display
 		.when('/login', {
 			templateUrl: 'login.html',
-			controller: 'authController'
+			controller: 'loginController'
 		})
 		//the signup display
 		.when('/register', {
 			templateUrl: 'register.html',
-			controller: 'authController'
+			controller: 'registerController'
+
 		})
-		//the nav display
-		.when('/home', {
-			templateUrl: 'home.html',
-			//controller: 'load resize'
-		})
+		
 		.when('/bride', {
 			templateUrl: 'bride.html',
 			controller: 'brideController',
@@ -86,33 +80,34 @@ app.config(function($routeProvider){
 
 });
 
- app.run(['$rootScope', '$location', '$timeout', '$window','localStorageService',
-   function ($rootScope, $location, $timeout, $window ,localStorageService) {
+ app.run(['$rootScope', '$location', '$timeout', '$window','$localStorage',
+   function ($rootScope, $location, $timeout, $window , $localStorage) {
 
        //own security as well since client-based security is easily hacked
        $rootScope.$on("$routeChangeStart", function (event, next, current) {
 
-			var user = localStorageService.get("user");
-			console.log(user);
-           if (next && next.$$route && next.$$route.secure) {
+			var user = $localStorage.user;
 
-               if (user == null) {
+			//console.log(user);
+           if (next && next.$$route) {
 
+			   if(next.$$route.secure){
+				   
+					if (user == null) {
+						console.log(user);
+						console.log('secure route change failed');
+						$location.path('login');
+					}
 
+					console.log('secure route change success');
+               }
 
-                   $location.path('login');
-
-               }else{
-
-				   $rootScope.user = user;
-			   }
-
+		
+					   
            }else{
-				 $location.path('login');
-		   }
-
-
-
+				console.log(' route change failed');
+				$location.path('login');
+		   }  
        });
 
    }]);

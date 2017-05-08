@@ -3,10 +3,12 @@
 
 
 <form class="form-auth" ng-submit="register()"style="text-align: right">
-	<h2>הרשמה</h2>
+	<h2>רישום משתמש למערכת</h2>
 	<p class="text-warning">{{error_message}}</p>
 	<input type="username" ng-model="user.username" placeholder="שם משתמש" class="form-control"style="text-align: right"><br>
-	<input type="password" ng-model="user.password" placeholder="סיסמה" class="form-control" style="text-align: right"><br>
+	<input type="number" ng-model="user.role" placeholder="סוג משתמש" class="form-control" style="text-align: right"><br>		
+	<input type="password" ng-model="user.password" placeholder="סיסמא" class="form-control"style="text-align: right"><br>
+
 	<input type="submit" value="הירשם" class="btn btn-primary form-control" />
 </form>
 </div>
