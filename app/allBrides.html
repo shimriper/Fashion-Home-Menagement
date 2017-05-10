@@ -53,9 +53,9 @@
                                 <td align="center">{{bride.day_service}}</td>
                      
                                 <td align="center">
-                                    <button type="button" class="btn btn-primary" ng-click="stageRoute(bride._id)" ng-show=" user.role == 1 || user.role == 2"><i class="fa fa-sitemap" aria-hidden="true"></i>  </button>
+                                    <button type="button" class="btn btn-primary" ng-click="stageRoute(bride._id)" ng-show= "user_role == 1 || user_role == 2"><i class="fa fa-sitemap" aria-hidden="true"></i>  </button>
                                     <button  type="button" class=" btn btn-info" ng-click="brideInfoRoute(bride._id)"><i class="fa fa-folder-open" aria-hidden="true"></i></button>
-                                    <button type="button" class="btn btn-danger" ng-click="delOne(bride._id)" ng-show=" user.role == 1 || user.role == 2" ><i class="fa fa-trash-o" aria-hidden="true"></i>  </button>
+                                    <button type="button" class="btn btn-danger" ng-click="delOne(bride._id)" ng-show=" user_role == 1 || user_role == 2" ><i class="fa fa-trash-o" aria-hidden="true"></i>  </button>
                                 </td>
                             </tr>
     

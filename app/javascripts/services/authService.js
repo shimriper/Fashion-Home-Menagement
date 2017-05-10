@@ -17,13 +17,7 @@
          factory.register = function (user) {  
           return $http.post('/auth/signup', user).success(function(data){
                 if(data.state == 'success'){
-
                   return data;
-
-                    //$rootScope.authenticated = true;
-                    //$rootScope.current_user = data.user.username;
-                    //alert('ההרשמה הצליחה! ');
-                    //$location.path('/main');
                 }
                 else 
                 {
@@ -31,24 +25,22 @@
                 }
 		    });
         };
-          //  $scope.logout = function(){
-
-          //   //$http.get('/auth/signout');
-            
-          //   localStorageService.remove("user");
-          //   $rootScope.user = null; 
-           
-          //  $location.path('login');
-
-          // };
-         factory.logout = function (username , password) {
-           
-            //$http.get('/auth/signout');
+         factory.logout = function (username , password) {         
             $localStorage.user = null;
             $location.path('login');
         };
 
-        
+        factory.getUser = function(){
+            if($localStorage.user == null){
+                return null;
+            }else{
+                return $localStorage.user.role;
+            }
+               
+            
+        };
+
+
 
 
         return factory;
