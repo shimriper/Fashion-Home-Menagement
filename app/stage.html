@@ -15,16 +15,32 @@
                                         שלב :
                                     </div>
                                     <div class="panel-body" style="text-align: center">
-                                            <div class="panel panel-default" class="col-md-4"  ng-click="checkStage(stage.s1)">
-                                               <div class="panel-heading">
-                                                  שלב 1
-                                               </div>
-                                           </div>
-                                           <div class="panel panel-default" class="col-md-4" ng-click="checkStage(stage.s2)">
+                                        <div ng-if="checkStage()">
+                                                   <div class="panel panel-default" style="border-color: green"  class="col-md-4">
+                                                        <div class="panel-heading" style="color: green; text-shadow: 2px">
+                                                        <p>  בוצע שלב 1</p>
+                                                        </div>
+                                                    </div>
+                                         </div>
+                                          <div ng-if="!checkStage()">
+                                                      <div class="panel panel-default"  class="col-md-4"  ng-click="forwordStage()">
+                                                        <div class="panel-heading">
+                                                            שלב 1
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                         
+                                           <div class="panel panel-default" class="col-md-4">
                                                <div class="panel-heading" >
                                                   שלב 2
                                                </div>
+                                               <div class="panel panel-body"class="col-md-4" >
+                                                    <form>
+                                                        <input class="ceckbox"> שמלה מחדש
+                                                    </form>
+                                               </div>
                                            </div>
+                                         
                                            <div class="panel panel-default" class="col-md-4" ng-click="checkStage(stage.s3)"
                                                <div class="panel-heading">
                                                   שלב 3

@@ -9,7 +9,7 @@
                 }
                 else
                 {
-                    
+                    $location.path('login');
                    return null;
                 }
 		});

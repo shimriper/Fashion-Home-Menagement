@@ -21,21 +21,21 @@
                                                     <div class="col-md-6" style="float: right">
                                                         <div class="form-group" >
                                                             <label>תעודת זהות </label>
-                                                            <input type="text" class="form-control" ng-model="newBride.b_id" name="b_id" ng-minlength="9" ng-maxlength="9" required>
+                                                            <input type="text" class="form-control" ng-model="newBride.b_id" name="b_id" minlength="9" maxlength="9" required>
                                                             <div ng-messages="brideForm.b_id.$error && brideForm.b_id.$dirty">
                                                                 <div ng-message="required">הכנס תעודת זהות</div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group" name="brideForm" >
                                                             <label>שם פרטי</label>
-                                                            <input type="text" class="form-control" ng-model="newBride.first_name" name="first_name" required>
+                                                            <input type="text" class="form-control" minlength="1" maxlength="10"  ng-model="newBride.first_name" name="first_name" required>
                                                             <div ng-messages="brideForm.first_name.$error  && brideForm.first_name.$dirty" >
                                                                 <div ng-message="required">הכנס שם </div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group" name="brideForm">
                                                             <label>שם משפחה </label>
-                                                            <input type="text" class="form-control" ng-model="newBride.last_name" name="last_name" required>
+                                                            <input type="text" class="form-control" minlength="1" maxlength="10" ng-model="newBride.last_name" name="last_name" required>
                                                             <div ng-messages="brideForm.last_name.$error  && brideForm.last_name.$dirty">
                                                                 <div ng-message="required"> הכנס שם משפחה </div>
                                                             </div>
@@ -44,7 +44,7 @@
                                                     <div class="col-md-6" style="float: right">
                                                             <div class="form-group" name="brideForm">
                                                                 <label>פלאפון </label>
-                                                                <input type="tel" class="form-control" ng-model="newBride.phone1" name="phone1"  ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required/>
+                                                                <input type="tel" class="form-control" ng-model="newBride.phone1" name="phone1" minlength="10" maxlength="10"  ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required/>
                                                                 <div ng-messages="brideForm.phone1.$error && brideForm.phone1.$dirty">
                                                                     <div ng-message="required"> הכנס פלאפון </div>
                                                                     <div ng-message="pattern">פלאפון צריך להיות 10 ספרות</div>
@@ -52,7 +52,7 @@
                                                             </div>
                                                             <div class="form-group" name="brideForm">
                                                                 <label> פלאפון נוסף</label>
-                                                                <input type="tel" class="form-control" ng-model="newBride.phone2" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/"/>
+                                                                <input type="tel" class="form-control" ng-model="newBride.phone2" minlength="10" maxlength="10"  ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/"/>
                                                             </div>
                                                             <div class="form-group" name="brideForm">
                                                                 <label for="exampleInputEmail1">כתובות איימיל</label>
@@ -67,7 +67,7 @@
                                                         <div class="col-md-6" style="float: right">
                                                             <div class="form-group" name="brideForm">
                                                                     <label>כתובות</label>
-                                                                    <input type="text" class="form-control" ng-model="newBride.adress">
+                                                                    <input type="text" class="form-control" minlength="10" maxlength="50"  ng-model="newBride.adress">
                                                             </div>
                                                             <div class="form-group" name="brideForm">
                                                                          <label>יום שירות</label>
@@ -105,7 +105,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group" name="brideForm">
                                                                 <label>הערות</label>
-                                                                <textarea rows="9" class="form-control" ng-model="newBride.remark" placeholder="כאן אפשר לרשום פרטים נוספים" value=""></textarea>
+                                                                <textarea rows="9" class="form-control" ng-model="newBride.remark" maxlength="70"  placeholder="כאן אפשר לרשום פרטים נוספים" value=""></textarea>
                                                             </div>
                                                         </div>
                                                 </div>

@@ -1,22 +1,15 @@
  angular.module('mainApp');
   app.controller('adminDashController', function($rootScope ,$scope , brideService, $http, $location) {
     init = function(){
-      getAllBrides();
+      $scope.getBrideDona = function(){
+
+       $scope.brides = brideService.query();
+      
+        $scope.labels = ["כלה", "שמלות ערב"];
+        $scope.data = [300, 500];
+    }
     }
 
-
-     getAllBrides = function(){ 
-       $scope.brides = brideService.query();
-     }
-    $scope.brideInfoRoute = function(id){
-           // $scope.bride= $scope.bride;
-          console.log(id);
-          $location.path('brideInfo/' + id );
-    };
-      $scope.delOne = function(id){
-                   brideService.delete({id:id});
-                   getAllBrides();
-                   alert('הכלה נמחקה');
-    };
   init();
-  });
+});
+

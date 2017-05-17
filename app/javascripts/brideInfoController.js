@@ -88,7 +88,7 @@
     };
     $scope.addDress = function(Dress , bridePrice){
       var t_dress = $scope.names;
-      alert('נוספה שמלה בהצלחה');
+     
               $http.post('/api/dresses', $scope.newDress ).then(function(res) {
                                       $scope.upBride = {};
                                       upBride = {
@@ -106,6 +106,7 @@
                         $http.get('/api/bridedresses/'+ $scope.tempid ).then(function(res) {
                               updateStatus();       
                               getOneBride();
+                               alert('נוספה שמלה בהצלחה');
                           }, function(err) {
                         })
                     }, function(err) {

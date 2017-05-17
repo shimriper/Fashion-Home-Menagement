@@ -1,17 +1,41 @@
   angular.module('mainApp');
-   app.controller('dressInfoController', function($scope ,$rootScope, brideService ,$route , $http , $q , $location ,$window) {
-
+   app.controller('dressInfoController', function($scope ,$rootScope, brideService, stageService ,$route , $http , $q , $location ,$window) {
+    var stageid;
      init = function(){
+          $scope.s1 = checkStage();
+          
+
+
           getOneDress($scope.dressid); 
             $scope.tempid = $route.current.params.brideid;
             $scope.dressid = $route.current.params.dressid;
      };
 
-      $scope.finishStage = function(){
-             //post Stage
-     
 
-      }
+     
+      $scope.finishStage = function(){
+          
+      $scope.tempid = $route.current.params.brideid;
+
+      var stage = {s: '',last_update:'' };
+        stage.s = 'שלב 1';
+        stage.last_update = Date.now();
+
+        $http.post('/api/stages', stage ).then(function(res) {
+               $http.put('/api/stages/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
+                        $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
+                            $scope.brideWithStage = res.data;
+                                      // $scope.bride= $scope.bride;
+                           $location.path('stage/' + $scope.tempid );           
+                          }, function(err) {
+                        })
+                    }, function(err) {
+                      console.log(err);
+                  })
+            }, function(err) {
+                console.log(err);
+            })
+      };
       // get() returns a single bride
         getOneDress = function(){
             $scope.tempid = $route.current.params.brideid;
@@ -26,10 +50,10 @@
             }, function(err) {
                 console.log(err);
             });
+           
 
                  //get sizes 
          $http.get('/api/bridesizes/'+ $scope.tempid).then(function(res) {
-                            console.log(res);
                             if(res.data.sizes[0] == null)
                             {
                               //post size
@@ -54,6 +78,25 @@
                                  $scope.brideWithSize = res.data;        
                             }
                    
+         }, function(err) {
+            console.log(err);
+           });
+     };
+     checkStage = function(){
+         $scope.tempid = $route.current.params.brideid;
+         $http.get('/api/bridestages/'+ $scope.tempid).then(function(res) {
+                   stageid =  res.data.stages[0];
+                  if(stageid._id != null ){
+
+                    console.log('true' + stageid._id);
+                    return true;
+                  }
+                  else
+                  if( stageid._id === 'undefined'){
+                   console.log(stageid._id);
+                  return false;
+                  }
+                 
          }, function(err) {
             console.log(err);
            });

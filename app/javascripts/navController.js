@@ -2,7 +2,7 @@
   angular.module('mainApp');
   app.controller('navController',function($scope , $rootScope , $localStorage ,$location , authService) {
           
-
+        
           function role(){
               var role = authService.getUser();
               if( role == null)
@@ -17,8 +17,10 @@
            $scope.isLoggedIn = function(){
               
               if($localStorage.user == null){
+                  $location.path('login');
                   return false;
               }else{
+                $scope.name = $localStorage.user.username;
                 role();
                 return true;
               }
@@ -101,8 +103,7 @@ lbd = {
             $sidebar = $('.sidebar');
             sidebar_color = $sidebar.data('color');
             
-            $logo = $sidebar.find('.logo').first();
-            logo_content = $logo[0].outerHTML;
+     
                     
             ul_content = '';
              
@@ -119,8 +120,6 @@ lbd = {
             });
              
             ul_content = '<ul class="nav navbar-nav">' + ul_content + '</ul>';
-            
-            navbar_content = logo_content + ul_content;
             
             // $navbar.html(navbar_content);
              

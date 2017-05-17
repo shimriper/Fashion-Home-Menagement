@@ -1,13 +1,64 @@
 
-<div
-donut-chart
-donut-data='[
-    {label: "Download Sales", value: 12},
-    {label: "In-Store Sales",value: 30},
-    {label: "Mail-Order Sales", value: 20}
-]'
-donut-colors='["#31C0BE","#c7254e","#98a0d3"]'
-donut-label-color='"#000000"' 
-donut-background-color='"#ffffff"' 
-donut-formatter='"currency"'>
-</div>
+
+       <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">לקוחות</h4>
+                                <p class="category">Last Campaign Performance</p>
+                            </div>
+                            <div class="body">
+                              <canvas id="doughnut" class="chart chart-doughnut"
+                                    chart-data="data" chart-labels="labels">
+                                    </canvas> 
+                            </div>
+                            <div class="content">
+                                  
+
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> Open
+                                        <i class="fa fa-circle text-danger"></i> Bounce
+                                        <i class="fa fa-circle text-warning"></i> Unsubscribe
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                   <div class="col-md-4">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">הכנסות</h4>
+                                <p class="category">Last Campaign Performance</p>
+                            </div>
+                            <div class="body">
+                              <canvas id="doughnut" class="chart chart-doughnut"
+                                    chart-data="data" chart-labels="labels">
+                                    </canvas> 
+                            </div>
+                            <div class="content">
+                                  
+
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> Open
+                                        <i class="fa fa-circle text-danger"></i> Bounce
+                                        <i class="fa fa-circle text-warning"></i> Unsubscribe
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>

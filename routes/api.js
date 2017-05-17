@@ -6,6 +6,8 @@ var Bride = mongoose.model('Bride');
 var Payment = mongoose.model('Payment');
 var Size = mongoose.model('Size');
 var Dress = mongoose.model('Dress');
+var Stage = mongoose.model('Stage');
+
 //Used for routes that must be authenticated.
 function isAuthenticated (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
@@ -467,36 +469,72 @@ router.route('/dresses/:bride_id/:dress_id')
 		 return	res.json("deleted :(");
 		});
 	});
-	// stage
-	//post-specific commands. likely won't be used
-router.route('/stages/:id')
-	//gets specified post
+	// stagessssssassssssssssssssssssssssssssss
+
+router.route('/stages')
+	//creates a new stage
+	.post(function(req, res){
+		var stage = new Stage();
+		stage.s = req.body.s;
+		stage.last_update = req.body.last_update;
+	
+		stage.save(function(err, stage) {
+			if (err){
+				return res.send(500, err);
+			}
+			return res.json(stage);
+		});
+	});
+
+
+router.route('/stages/:bride_id/:stage_id')
+    .put(function(req , res){
+        Bride.findOneAndUpdate({ _id: req.params.bride_id} , {$push: {stages: req.params.stage_id }}, function(err, updatedBride){
+            if(err) {
+               return	res.send(err);
+            }else{
+                return res.json(updatedBride);
+            }
+        });
+        
+    })
+	.delete(function(req , res){
+        Bride.findOneAndUpdate({ _id: req.params.bride_id} , {$pull: {stages: req.params.stage_id }}, function(err, deldBride){
+            if(err) {
+               return	res.send(err);
+            }else{
+                return res.json("deleted :(");
+            }
+        });
+        
+	});
+
+	router.route('/stages/:id')
+	//gets specified Stage
 	.get(function(req, res){
 		Stage.findById(req.params.id, function(err, stage){
 			if(err)
-				return res.send(err);
-			return res.json(stage);
+				res.send(err);
+			res.json(stage);
 		});
 	}) 
 	//updates specified Stage
 	.put(function(req, res){
 		Stage.findById(req.params.id, function(err, stage){
 			if(err)
-				return res.send(err);
-			stage.s1 =req.body.s1;
-			stage.s2 =req.body.s2;
-			stage.s3 =req.body.s3;
-			stage.s4 =req.body.s4;
+				res.send(err);
 
+			stage.username = req.body.s;
+			stage.text = req.body.last_update;
 
-			stage.save(function(err, stage){
+			Stage.save(function(err, stage){
 				if(err)
-					return res.send(err);
-				return res.json(stage);
+					res.send(err);
+
+				res.json(stage);
 			});
 		});
 	})
-	//deletes the payment
 	.delete(function(req, res) {
 		Stage.remove({
 			_id: req.params.id
@@ -506,70 +544,27 @@ router.route('/stages/:id')
 		 return	res.json("deleted :(");
 		});
 	});
-
-
-	router.route('/stages/update')
-	//updates specified bride
-	.put(function(req, res){
-		Stage.findOneAndUpdate( {_id:req.body.id} , req.body.updatedObj , function(err, doc){
-			if (err) return res.send(500, { error: err });
-			return res.send("succesfully saved");
-		});
-	});
 	
-	// stagggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
-
-
-		// Size ---------------------------------
-router.route('/stages/update')
-	//updates specified bride
-	.put(function(req, res){
-		Stage.findOneAndUpdate( {_id:req.body.id} , req.body.updatedObj , function(err, doc){
-			if (err) return res.send(500, { error: err });
-			return res.send("succesfully saved");
+router.route('/bridestages/:id')
+	//gets specified bride with stage
+	.get(function(req, res){
+		Bride.findById({_id:req.params.id}).populate("stages").exec(function(err,data) {
+			res.json(data);
+			}, function(err) {
+				res.json(data);
+			});
+	})
+		//deletes the Dress	
+	.delete(function(req, res) {
+		Bride.remove({
+			_id: req.params.id
+		}, function(err) {
+			if (err)
+			 return	res.send(err);
+		return res.json("deleted :(");
 		});
 	});
-	router.route('/stages')
-	//creates a new stage
-	.post(function(req, res){
-		var stage = new Stage();
-		//all var in stage
-			stage.s1 = req.body.s1;
-			stage.s2 =req.body.s2;
-			stage.s3 =req.body.s3;
-			stage.s4 = req.body.s4;
-			
 
-		stage.save(function(err,stage) {
-			if (err){
-				return res.send(500,err);
-			}
-			return res.json(stage);
-		});
-
-	});
-	
-	router.route('/stages/:bride_id/:stage_id')
-    .put(function(req , res){
-        Stage.findOneAndUpdate({ _id: req.params.bride_id} , {$push: {stages: req.params.stage_id }}, function(err, updatedStage){
-            if(err) {
-               return	res.send(err);
-            }else{
-                return res.json(updatedStage);
-            }
-        });
-        
-    })
-	.delete(function(req , res){
-        Bride.findOneAndUpdate({ _id: req.params.bride_id} , {$pull: {stages: req.params.stage_id }}, function(err, delStage){
-            if(err) {
-               return	res.send(err);
-            }else{
-                return res.json("deleted :(");
-            }
-        });
-        
-	});
 
 module.exports = router;
 

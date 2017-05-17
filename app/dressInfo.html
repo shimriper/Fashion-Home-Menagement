@@ -6,13 +6,6 @@
                     <h1> לקוחה :{{bride.first_name}} <small> (מצב : {{bride.status}})</small></h1>
                 </div>
             </div>
-                  <div class="form-group" >
-                                                            <label>תעודת זהות </label>
-                                                            <input type="text" class="form-control" ng-model="newBride.b_id" name="b_id" ng-minlength="9" ng-maxlength="9" required>
-                                                            <div ng-messages="brideForm.b_id.$error && brideForm.b_id.$dirty">
-                                                                <div ng-message="required">הכנס תעודת זהות</div>
-                                                            </div>
-                                                        </div>
             <div class="row">
                 <div calss="col-md-12">
                         <div class="col-md-6">               
@@ -179,10 +172,13 @@
                 </div>
             </div>
             <div class="row">
-                      <div class="col-md-12">
-                            <button class="btn btn-primary submit-btn form-control" type="submit" ng-click="finishStage()" value="שלח" >סיים שלב 1</button>
+                    <div ng-show="checkStage()">
+                      <div class="col-md-12" >
+                            <button class="btn btn-primary submit-btn form-control" type="submit" ng-click="finishStage()" value="שלח" ng-model="stage.s" >סיים שלב 1</button>
                             <div class="clearfix"></div>
                       </div>
+                    </div>
+                                  
             </div>
     </div>
  </div>

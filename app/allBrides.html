@@ -1,4 +1,3 @@
-   <navbar></navbar>
             <div class="col-md-offset-2 col-md-8">              
         <div class="row">
             <div class="col-md-12">
@@ -34,9 +33,9 @@
                             <th class="col-text"  style="text-align: center"> סטאטוס</th>
                             <th class="col-text"  style="text-align: center"> שם</th>
                             <th class="col-text"  style="text-align: center"> משפחה</th>
-                            <th class="col-text"  style="text-align: center"> פלאפון</th>
+                            <th class="col-text"  style="text-align: center" ng-show= "user_role == 1 || user_role == 2"> פלאפון</th>
                             <th class="col-text"  style="text-align: center"> תאריך אירוע</th>
-                            <th class="col-text"  style="text-align: center"> יום שירות</th>
+                            <th class="col-text"  style="text-align: center" ng-show= "user_role == 1 || user_role == 2"> יום שירות</th>
                             <th class="col-tools" style="text-align: center"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                             </th>
 
@@ -48,9 +47,9 @@
                                 <td align="center">{{bride.status}}</td>
                                 <td align="center">{{bride.first_name}}</td>
                                 <td align="center">{{bride.last_name}}</td>
-                                <td align="center">{{bride.phone1}}</td>
+                                <td align="center" ng-show= "user_role == 1 || user_role == 2">{{bride.phone1}}</td>
                                 <td align="center">{{bride.date_event | date:"dd/MM/yy"}}</td>
-                                <td align="center">{{bride.day_service}}</td>
+                                <td align="center" ng-show= "user_role == 1 || user_role == 2">{{bride.day_service}}</td>
                      
                                 <td align="center">
                                     <button type="button" class="btn btn-primary" ng-click="stageRoute(bride._id)" ng-show= "user_role == 1 || user_role == 2"><i class="fa fa-sitemap" aria-hidden="true"></i>  </button>
