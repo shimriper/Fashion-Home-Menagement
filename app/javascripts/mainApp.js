@@ -5,9 +5,8 @@ var app = angular.module('mainApp', [
 	'ngMessages',
 	'LocalStorageModule',
 	'ngStorage',
-	'chart.js'
+	'chart.js',
 ]);
-
 
  
 

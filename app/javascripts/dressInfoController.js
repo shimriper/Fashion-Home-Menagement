@@ -1,17 +1,22 @@
   angular.module('mainApp');
    app.controller('dressInfoController', function($scope ,$rootScope, brideService, stageService ,$route , $http , $q , $location ,$window) {
     var stageid;
+    var s1;
      init = function(){
-          $scope.s1 = checkStage();
-          
-
-
+ 
           getOneDress($scope.dressid); 
             $scope.tempid = $route.current.params.brideid;
             $scope.dressid = $route.current.params.dressid;
      };
 
-
+     $scope.s1State = function(){
+            if(s1 == false)
+            {
+              return false;
+            }
+            else
+              return true;
+          }
      
       $scope.finishStage = function(){
           
@@ -51,7 +56,7 @@
                 console.log(err);
             });
            
-
+          //checkStage();
                  //get sizes 
          $http.get('/api/bridesizes/'+ $scope.tempid).then(function(res) {
                             if(res.data.sizes[0] == null)
@@ -67,7 +72,6 @@
                                   }, function(err) {
                                     console.log(err);
                                   });  
-                            
                                  console.log(res);
                                   }, function(err) {
                                     console.log(err);
@@ -76,33 +80,31 @@
                             else
                             {
                                  $scope.brideWithSize = res.data;        
-                            }
-                   
+                            }                   
          }, function(err) {
             console.log(err);
            });
+           checkStage();
      };
      checkStage = function(){
          $scope.tempid = $route.current.params.brideid;
          $http.get('/api/bridestages/'+ $scope.tempid).then(function(res) {
-                   stageid =  res.data.stages[0];
-                  if(stageid._id != null ){
-
-                    console.log('true' + stageid._id);
-                    return true;
+                  stageid =  res.data.stages[0];
+                  if(stageid != undefined){  
+                    console.log('true' + stageid);
+                    s1 = true;
                   }
                   else
-                  if( stageid._id === 'undefined'){
-                   console.log(stageid._id);
-                  return false;
+                  if( stageid === undefined){
+                                        console.log('false' + stageid);
+
+                    s1  = false;
                   }
-                 
          }, function(err) {
             console.log(err);
            });
      };
-
-           //  update dress
+        //  update dress
         $scope.upDress =function (dress, id){
             $scope.upDress = {};
             upDress = {
@@ -118,38 +120,27 @@
                 sleeve : dress.sleeve,
                 another_skirt: dress.another_skirt,
                 remark: dress.remark,
-        
             };
-
-               
-
                 $http.put('/api/dresses/update' , {id:id , updatedObj:upDress}).then(function(res){
-
                   if(res.data.message == 'success'){
                     // check this 
                        getOneDress();
                        $scope.dressModifyField = false;
                        $scope.dressViewField = false;
-
-                       
                   }
                   console.log(res);
                 },function(err){
                   console.log(err);
-                }) ;                    
-                 
+                }) ;                                     
               // $window.location.reload();
       };
-
         $scope.dressModify = function(newDress){
 				$scope.dressModifyField = true;
 				$scope.dressViewField = true;
                 getOneDress();
 		};
     //   end update
-
-
-          $scope.sizeModify = function(newSize){
+        $scope.sizeModify = function(newSize){
 				$scope.sizeModifyField = true;
 				$scope.sizeViewField = true;
 			};
@@ -179,10 +170,8 @@
             };
             
                 $http.put('/api/sizes/update' , {id:id , updatedObj:upSize}).then(function(res){
-                  
                     $scope.sizeModifyField = false;
                     $scope.sizeViewField = false;
-                    // $window.location.reload();
                   console.log(res);
                 },function(err){
                   console.log(err);

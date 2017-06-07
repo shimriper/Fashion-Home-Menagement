@@ -12,45 +12,73 @@
                             <div class="col-md-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        שלב :
                                     </div>
                                     <div class="panel-body" style="text-align: center">
-                                        <div ng-if="checkStage()">
+                                        <div ng-if="s1">
                                                    <div class="panel panel-default" style="border-color: green"  class="col-md-4">
                                                         <div class="panel-heading" style="color: green; text-shadow: 2px">
-                                                        <p>  בוצע שלב 1</p>
+                                                        <p> <i class="fa fa-check"></i> בוצע שלב 1</p>
                                                         </div>
                                                     </div>
                                          </div>
-                                          <div ng-if="!checkStage()">
+                                          <div ng-if="!s1">
                                                       <div class="panel panel-default"  class="col-md-4"  ng-click="forwordStage()">
                                                         <div class="panel-heading">
-                                                            שלב 1
+                                                          <p>  שלב 1</p>
                                                         </div>
                                                     </div>
-                                                </div>
+                                        </div>
+                                         <div ng-if="s2">
+                                                   <div class="panel panel-default" style="border-color: green"  class="col-md-4">
+                                                        <div class="panel-heading" style="color: green; text-shadow: 2px">
+                                                        <p> <i class="fa fa-check"></i> בוצע שלב 2</p>
+                                                        <div class="panel panel-body"class="col-md-4" >{{stage2}}</div>
+                                                        </div>
+                                                    </div>
+                                         </div>
+                                        <div ng-if="!s2 && s1">     
                                          
                                            <div class="panel panel-default" class="col-md-4">
                                                <div class="panel-heading" >
                                                   שלב 2
                                                </div>
                                                <div class="panel panel-body"class="col-md-4" >
-                                                    <form>
-                                                        <input class="ceckbox"> שמלה מחדש
-                                                    </form>
+                                                    <div>
+                                                       <input class="btn   form-control" type="text"   ng-model="newStage.s" placeholder="תיקון שמלה / שמלה חדשה / תיקון חלקים בשמלה">
+                                                      
+                                                       <button class="btn btn-primary submit-btn form-control"  type="submit" ng-click="sendStage(newStage)" > שלח</button>
+                                                    </div>
                                                </div>
                                            </div>
-                                         
-                                           <div class="panel panel-default" class="col-md-4" ng-click="checkStage(stage.s3)"
-                                               <div class="panel-heading">
-                                                  שלב 3
-                                               </div>
-                                           </div>
-                                             <div class="panel panel-default" class="col-md-4" ng-click="checkStage(stage.s4)">
-                                               <div class="panel-heading">
-                                                  שלב 4
-                                               </div>
-                                           </div>
+                                        </div>
+                                        <div ng-if="s3">
+                                                   <div class="panel panel-default" style="border-color: green"  class="col-md-4">
+                                                        <div class="panel-heading" style="color: green; text-shadow: 2px">
+                                                        <p> <i class="fa fa-check "></i> בוצע שלב 3 - שלב המדידות</p>
+                                                        </div>
+                                                    </div>
+                                         </div>
+                                             <div ng-if="!s3 && s1 && s2">
+                                                   <div class="panel panel-default"  class="col-md-4">
+                                                        <div class="panel-heading" ng-click="finishStage()" >
+                                                        <p> סיים שלב מדידות </p>
+                                                        </div>
+                                                    </div>
+                                         </div>
+                                             <div ng-if="s4">
+                                                   <div class="panel panel-default" style="border-color: green"  class="col-md-4">
+                                                        <div class="panel-heading" style="color: green; text-shadow: 2px">
+                                                        <p> <i class="fa fa-check "></i> השמלה מוכנה</p>
+                                                        </div>
+                                                    </div>
+                                         </div>
+                                             <div ng-if="!s4 && s1 && s2 && s3">
+                                                   <div class="panel panel-default"  class="col-md-4">
+                                                        <div class="panel-heading" ng-click="finishStageFinel()" >
+                                                        <p> סיים שמלה </p>
+                                                        </div>
+                                                    </div>
+                                         </div>
                                     </div>
                                 </div>
                             </div>
