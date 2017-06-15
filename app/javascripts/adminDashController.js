@@ -1,14 +1,12 @@
  angular.module('mainApp');
   app.controller('adminDashController', function($rootScope ,$scope , brideService, $http, $location) {
+    
     var countOfBride = 0;
-     var countState = 0;
+    var countState = 0;
     var countOfevening = 0;
     var countStateWait =0;
-    var brides;
+    var brides;// get all brides
     var countDresses=0;
-
- 
-
 
     init = function(){
          getBrideDonat();
@@ -41,17 +39,12 @@
          }
         sumDresses = function(){
                 for(var i=0; i < brides.length; i++){
-                 
-
-                       countDresses += brides[i].dresses.length;
-                      
-                  }
+                    countDresses += brides[i].dresses.length;
+                }
                 alert(countDresses);
-              
         }
-      
     }
-  init();
+    init();
   
 });
 

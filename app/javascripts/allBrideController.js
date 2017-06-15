@@ -19,7 +19,10 @@
       $scope.delOne = function(id){
                    brideService.delete({id:id});
                    getAllBrides();
-                   alert('הכלה נמחקה');
+                   	   swal(
+                        'נמחק!',
+                        'success'
+                      )
     };
      $scope.exportData = function () {
         var blob = new Blob([document.getElementById('exportable').innerHTML], {

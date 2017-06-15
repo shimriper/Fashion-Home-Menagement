@@ -6,7 +6,7 @@ app.controller('mainController', function($rootScope ,$scope , postService){
 
 	
 	$scope.post = function(){
-		$scope.newPost.created_by = $rootScope.current_user;
+		$scope.newPost.created_by = $rootScope.name;
 		$scope.newPost.created_at = Date.now();
 
 		postService.save($scope.newPost, function(){
@@ -15,8 +15,12 @@ app.controller('mainController', function($rootScope ,$scope , postService){
 		});
 	};
 	$scope.delPost = function(id){
-                   postService.delete({id:id});
+                   postService.delete({id:id});	
                    $scope.posts = postService.query();
-				   alert('ההודעה נמחקה');
+				   swal(
+						'ההודעה נמחקה!',
+						'success'
+					)
+
     };
 });
