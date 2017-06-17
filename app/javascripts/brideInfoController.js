@@ -106,8 +106,28 @@
                         $http.get('/api/bridedresses/'+ $scope.tempid ).then(function(res) {
                               updateStatus();       
                               getOneBride();
-                               alert('נוספה שמלה בהצלחה');
+                              swal({
+                                    title: 'נוספה שמלה בהצלחה!',
+                                    text: '',
+                                    timer: 2000
+                                  }).then(
+                                    function () {},
+                                    // handling the promise rejection
+                                    function (dismiss) {
+                                      if (dismiss === 'timer') {
+                                        console.log('I was closed by the timer')
+                                      }
+                                    }
+                                  )
                           }, function(err) {
+                            swal({
+                                  title: 'נכשל',
+                                  html: $('<div>')
+                                    .addClass('some-class')
+                                    .text('הוספת שמלה נכשלה.'),
+                                  animation: false,
+                                  customClass: 'animated tada'
+                                })
                         })
                     }, function(err) {
                       console.log(err);
@@ -138,23 +158,54 @@
                     $scope.modifyField = false;
                     $scope.viewField = false;
                   console.log(res);
+        
                 },function(err){
+                  
                   console.log(err);
-                }) 
-        $http.delete('/api/dresses/'+ $scope.tempid +'/'+ id ).then(function(res) {
-                                
-          $http.delete('/api/dresses/'+id ).then(function(res) {
-                      $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
-                            $scope.brideWithDress = res.data;
-                            getOneBride();
-                          }, function(err) {
-                      });
-                      }, function(err) {
-                        console.log(err);
-                    })
-              }, function(err) {
-                  console.log(err);
-              })
+                })
+                swal({
+                      title: 'האם אתה בטוח?',
+                      text: "לא יהיה אפשר לשחזר את הרשומה!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'כן , מחק!',
+                      cancelButtonText: 'לא , בטל!',
+                      confirmButtonClass: 'btn btn-success',
+                      cancelButtonClass: 'btn btn-danger',
+                      buttonsStyling: false
+                     }).then(function () {
+                     $http.delete('/api/dresses/'+ $scope.tempid +'/'+ id ).then(function(res) { 
+                        $http.delete('/api/dresses/'+id ).then(function(res) {
+                                    $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
+                                          $scope.brideWithDress = res.data;
+                                          getOneBride();
+                                        }, function(err) {
+                                    });
+                                    }, function(err) {
+                                      console.log(err);
+                                  })
+                            }, function(err) {
+                                console.log(err);
+                            })
+                      swal(
+                        'נמחק!',
+                        'הרשומה נמחקה',
+                        'success'
+                      )
+                    }, function (dismiss) {
+                      // dismiss can be 'cancel', 'overlay',
+                      // 'close', and 'timer'
+                      if (dismiss === 'cancel') {
+                        swal(
+                          'בוטל',
+                          'הרשומה לא נמחקה :)',
+                          'error'
+                        )
+                      }
+                    }) 
+
      };
 
      $scope.addPayment = function(Payment){

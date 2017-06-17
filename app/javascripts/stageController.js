@@ -21,7 +21,10 @@ app.controller('stageController' ,function($scope ,$rootScope, brideService ,$ro
                     if($scope.s2 == true){
                         $scope.s3 = s[2];
                         if($scope.s3 == true){
-                           $scope.s4 = s[3]; 
+                           $scope.s4 = s[3];
+                           if($scope.s5 == true){
+                               $scope.s5 = s[4];
+                           } 
                         }
                     }
                 }
@@ -61,6 +64,7 @@ app.controller('stageController' ,function($scope ,$rootScope, brideService ,$ro
         $http.post('/api/stages', stage ).then(function(res) {
                $http.put('/api/stages/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
                         $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
+                            checkStage();
                           console.log(res.data);
                           }, function(err) {
                         })
@@ -83,7 +87,7 @@ app.controller('stageController' ,function($scope ,$rootScope, brideService ,$ro
                $http.put('/api/stages/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
                         $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
                             $scope.brideWithStage = res.data;
-                                      // $scope.bride= $scope.bride;
+                               checkStage();
                            $location.path('stage/' + $scope.tempid );           
                           }, function(err) {
                         })
@@ -106,7 +110,30 @@ app.controller('stageController' ,function($scope ,$rootScope, brideService ,$ro
                $http.put('/api/stages/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
                         $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
                             $scope.brideWithStage = res.data;
-                                      // $scope.bride= $scope.bride;
+                                      checkStage();
+                           $location.path('stage/' + $scope.tempid );           
+                          }, function(err) {
+                        })
+                    }, function(err) {
+                      console.log(err);
+                  })
+            }, function(err) {
+                console.log(err);
+            })
+      };
+      $scope.retDressStage = function(){
+          
+      $scope.tempid = $route.current.params.brideid;
+
+      var stage = {s: '',last_update:'' };
+        stage.s = 'שלב 5';
+        stage.last_update = Date.now();
+
+        $http.post('/api/stages', stage ).then(function(res) {
+               $http.put('/api/stages/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
+                        $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
+                            $scope.brideWithStage = res.data;
+                                      checkStage();
                            $location.path('stage/' + $scope.tempid );           
                           }, function(err) {
                         })

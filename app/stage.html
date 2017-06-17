@@ -72,13 +72,29 @@
                                                         </div>
                                                     </div>
                                          </div>
-                                             <div ng-if="!s4 && s1 && s2 && s3">
+                                             <div ng-if="!s5 && s4 && s1 && s2 && s3">
                                                    <div class="panel panel-default"  class="col-md-4">
                                                         <div class="panel-heading" ng-click="finishStageFinel()" >
                                                         <p> סיים שמלה </p>
                                                         </div>
                                                     </div>
                                          </div>
+                                                  <div ng-if="s5">
+                                                   <div class="panel panel-default" style="border-color: green"  class="col-md-4">
+                                                        <div class="panel-heading" style="color: green; text-shadow: 2px">
+                                                        <p> <i class="fa fa-check "></i> השמלה מוכנה</p>
+                                                        </div>
+                                                    </div>
+                                         </div>
+                                             <div ng-if="!s5 && s4  && s1 && s2 && s3">
+                                                   <div class="panel panel-default"  class="col-md-4">
+                                                        <div class="panel-heading" ng-click="retDressStage()" >
+                                                        <p> השמלה חזרה מהלקוחה </p>
+                                                        </div>
+                                                    </div>
+                                         </div>
+
+                                         
                                     </div>
                                 </div>
                             </div>

@@ -55,3 +55,32 @@ a {
     .navbar>.container-fluid .navbar-brand-centered {
         margin-left: -80px;
     }
+
+/*bride style*/
+
+
+#tStyle{
+  text-align: center;
+}
+#thStyle{
+  width:50%;
+  background-color:hsla(hue, saturation, lightness, alpha);
+   text-align: right;
+}
+
+
+
+.pagination {
+    margin: 0;
+}
+input.ng-invalid.ng-dirty{
+    border:2px solid red;
+}
+
+input.ng-valid.ng-dirty{
+    border:2px solid green;
+}
+
+
+
+

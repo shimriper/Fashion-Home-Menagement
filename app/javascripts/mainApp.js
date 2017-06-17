@@ -21,7 +21,8 @@ app.config(function($routeProvider){
 		//the signup display
 		.when('/register', {
 			templateUrl: 'register.html',
-			controller: 'registerController'
+			controller: 'registerController',
+			secure: true
 
 		})
 		

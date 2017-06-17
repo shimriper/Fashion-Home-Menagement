@@ -21,7 +21,7 @@
                                             </td>
                                             <td ng-hide="viewField">{{bride.first_name || ''}}</td>
                                         </tr>
-                                        <tr>
+                                        <tr style="text-align: center"> 
                                             <th  id="thStyle">שם משפחה:   </th> 
                                             <td ng-hide="viewField">{{bride.last_name || ''}}</td>
                                             <td ng-show="modifyField"><input type="text" ng-model="bride.last_name" name="last_name" required/>
@@ -30,7 +30,7 @@
                                                </div>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th  id="thStyle">תעודת זהות:  </th> 
                                             <td ng-show="modifyField"> <input type="number" ng-model="bride.b_id"  name="b_id" required>
                                               <div ng-messages="brideForm.b_id.$error  && brideForm.b_id.$dirty" >
@@ -39,12 +39,12 @@
                                                </td>
                                             <td ng-hide="viewField">  {{bride.b_id ||''}}</td>
                                         </tr>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th  id="thStyle">דואר אלקטרוני:</th> 
                                             <td  ng-show="modifyField"> <input type="email" ng-model="bride.email"></td>
                                                 <td ng-hide="viewField"> {{bride.email ||''}}</td>
                                         </tr>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th  id="thStyle">פלאפון </th>
                                             <td  ng-show="modifyField"> <input type="tel" ng-model="bride.phone1" name="phone1"  ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required>
                                                 <div ng-messages="brideForm.phone1.$error  && brideForm.phone1.$dirty" >
@@ -52,19 +52,18 @@
                                                </div>
                                             </td>
                                             <td ng-hide="viewField">  {{bride.phone1 ||''}}</td>
-                                        </tr>
-                                        <tr>
+                                        </tr >
+                                        <tr style="text-align: center">
                                             <th  id="thStyle"> 2 פלאפון </th>
                                             <td ng-show="modifyField"> <input type="tel" ng-model="bride.phone2"></td>
                                                 <td ng-hide="viewField">{{bride.phone2 ||''}}</td>
                                         </tr>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th  id="thStyle"> כתובת </th>
                                             <td ng-show="modifyField"><input type="text" ng-model="bride.adress"></td>
                                             <td ng-hide="viewField">{{bride.adress ||''}}</td>
                                         </tr>
-                                        <tr>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th  id="thStyle"> תאריך אירוע : </th> 
                                             <td ng-show="modifyField"> <input type="date" ng-model="bride.date_event" name="date_event"ng-chenge="checkErr" required>
                                                <div ng-messages="brideForm.date_event.$error  && brideForm.date_event.$dirty" >
@@ -72,9 +71,9 @@
                                                 <span>{{errMessage}}</span>
                                                </div>
                                             </td>
-                                        <td ng-hide="viewField"> {{bride.date_event | date:"shortDate"}}</td>
+                                        <td ng-hide="viewField"> {{bride.date_event |date:"dd/MM/yy"}}</td>
                                         </tr>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th  id="thStyle"> יום שירות :</th>
                                                 <td  ng-show="modifyField">
                                                     <div class="radio">
@@ -91,7 +90,7 @@
                                                  </td>
                                             <td ng-hide="viewField">{{bride.day_service ||''}}</td>
                                         </tr>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th  id="thStyle"> הערות  :</th>
                                             <td ng-show="modifyField"> <input type="text" ng-model="bride.remark"></td>
                                             <td ng-hide="viewField">{{bride.remark ||''}}</td>
