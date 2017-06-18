@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8"  ng-show= "user_role == 1 || user_role ==2">
                         <div class="panel panel-info" >
                             <div class="panel-heading">  סה"כ לתשלום: <b style="color: red"><i class="fa fa-ils" aria-hidden="true"> </i> {{bride.price}} </b><i class="fa fa-pencil" style="float: left"></i> </div>
                             <div class="panel-body" >
@@ -164,9 +164,29 @@
                                     <div class="panel-body">
                                         
                                             <table class="table table-bordered table-hover table-condensed" style="width:100%">        
-                                                 <tr>
-                                                    <div>
-                                                        <th>		
+                                                 <tr ng-show= "user_role == 1 || user_role == 2">
+<!--                                                   
+                                                    <div class="form-group">
+                                                        <th>
+                                                        <label>Selects</label>
+
+                                                        <select class="form-control" ng-model="newDress.t_dress" name="t_dress" placeholder=" סוג שמלה " value="סוג שמלה" class="form-control"  required/>
+                                                            <option>כלה</option>
+                                                            <option>ערב</option>
+                                                        </select>
+                                                        </th>
+                                                     </div>-->
+                                                     <!--<div>
+                                                         <th >	
+                                                       <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" ng-model="newDress.t_dress" name="t_dress" >
+                                                            <option selected>בחירה</option>
+                                                            <option value="1">כלה</option>
+                                                            <option value="2">ערב</option>
+                                                        </select>
+                                                         </th>
+                                                     </div>-->
+                                                    <div class="form-group"  >
+                                                        <th>	
                                                         <select  ng-model="newDress.t_dress" name="t_dress" placeholder=" סוג שמלה " value="סוג שמלה" class="form-control"  required/ >
                                                             <option >כלה</option>
                                                             <option>ערב</option>
@@ -184,7 +204,7 @@
                                                     </th>
                                                     </div>
                            
-                                                    <th >
+                                                    <th>
                                                         <button type=" submit" class="btn btn-success btn-sm form-control"   ng-click="addDress(newDress)" ng-disabled="dressForm.$invalid">הוספה <i class="fa fa-plus" aria-hidden="true"></i> </button>
                                                     </th>
                                                     
@@ -198,20 +218,23 @@
                                                         <td ng-show="dressModifyField"><input type="text" ng-model="dress.model"/></td>
                                                         <td ng-hide="dressViewField">{{dress.model}}</td>
 
-                                                        <td ng-show="dressModifyField"><input type="text" ng-model="dress.price_dress"/></td>
-                                                        <td ng-hide="dressViewField">{{dress.price_dress}}</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-primary btn-sm" ng-click="dressModify(dress ,dress._id)" ng-hide="dressViewField">  <i class="fa fa-pencil"></i> </button>
-                                                            <button type="button" class="btn btn-success btn-sm" ng-click="upDress(dress ,dress._id ,bride)"  ng-show="dressModifyField">  <i class="fa fa-save"></i> </button>
+                                                        <td  ng-show="dressModifyField" ><input type="text" ng-model="dress.price_dress"/></td>
+                                                        <td  ng-hide= "user_role == 3" ng-hide="dressViewField">{{dress.price_dress}}</td>
+                                                        <td ng-show= "user_role == 1 || user_role == 2">
+                                                            <button  type="button" class="btn btn-primary btn-sm" ng-click="dressModify(dress ,dress._id)" ng-hide="dressViewField" ng-hide= "user_role == 3">  <i class="fa fa-pencil"></i> </button>
+                                                            <button type="button" class="btn btn-success btn-sm" ng-click="upDress(dress ,dress._id ,bride)"  ng-show="dressModifyField" ng-show= "user_role == 1 || user_role ==2">  <i class="fa fa-save"></i> </button>
                                                             <button type="button" class="btn btn-info btn-sm" ng-click="dressInfoRoute(dress._id)"><i class="fa fa-folder-open" aria-hidden="true"></i></button>
-                                                            <button type="button" class="btn btn-danger btn-sm" ng-click="delDress(dress._id, dress.price_dress)">  <i class="fa fa-trash-o"></i> </button>
+                                                            <button type="button" class="btn btn-danger btn-sm" ng-click="delDress(dress._id, dress.price_dress)" ng-hide= "user_role == 3" data-placement="top" title="מחיקה" >  <i class="fa fa-trash-o"></i> </button>
 
+                                                        </td>
+                                                        <td ng-show= "user_role == 3 ">
+                                                         <button type="button" class="btn btn-info btn-sm" ng-click="dressInfoRoute(dress._id)"><i class="fa fa-folder-open" aria-hidden="true"></i></button>
                                                         </td>
                                                 </tr>
                                             </table>
                                             
                                     </div>
-                                    <div class="panel-footer">
+                                    <div class="panel-footer" ng-hide= "user_role == 3">
                                         סה"כ :{{getTotalPrice()}}
                                     </div>
                                 </div>

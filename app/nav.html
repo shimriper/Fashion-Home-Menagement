@@ -159,10 +159,10 @@
 		    <div class="collapse navbar-collapse" id="navbar-brand-centered" >
 		      <ul class="nav navbar-nav navbar-right"ng-if="isLoggedIn()">
 		        <li class="dropdown">
-                  <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i> שלום: {{name}} <span class="caret"></span></a>
+                  <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle-o"></i> שלום: {{name}} <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu" style="text-align: right">
                    <li><a href="#/main"><i class="fa fa-envelope" aria-hidden="true"></i> הודעות</a></li>
-                    <li><a href="#/register" ng-show= "user_role == 1 || user_role == 2" ><i class="fa fa-pencil" aria-hidden="true"></i>
+                    <li><a href="#/register" ng-show= "user_role == 1" ><i class="fa fa-pencil" aria-hidden="true"></i>
  רישום משתמש חדש</a></li>
                     <li class="divider"></li>
                     <li> <a type="button" class="button" href="#" ng-click="logout()"><i class="fa fa-power-off" aria-hidden="true"></i> יציאה</a> </li>
@@ -174,8 +174,9 @@
 		      </ul>
 		      <ul class="nav navbar-nav " ng-if="isLoggedIn()">
 		        <li><a href="#/adminDash"  ng-show="user_role == 1 ">admin</a> </li>
-                   <li><a href="#bride">לקוחה חדשה</a></li>
-		        <li><a href="#/allBrides">כל הלקוחות</a></li>  
+                   <li><a href="#bride" ng-show= "user_role == 1 || user_role == 2"><i class="fa fa-user-plus"></i>  לקוחה חדשה</a></li>
+		        <li><a href="#/allBrides"><i class="fa fa-users" aria-hidden="true"></i>
+                  כל הלקוחות</a></li>  
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
