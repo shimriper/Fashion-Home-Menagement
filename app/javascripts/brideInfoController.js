@@ -13,7 +13,13 @@
 				$scope.modifyField = true;
 				$scope.viewField = true;
 			};
-		
+    $scope.dpay = function(dpay){
+        if(dpay == true)
+        {
+          return "כן"
+        }
+        return "לא"
+    }
     $scope.update = function(bride){
             $scope.upBride = {};
             console.log(bride);
@@ -48,6 +54,7 @@
          //get payment 
          $http.get('/api/brides/'+ $scope.tempid).then(function(res) {
                             $scope.brideWithPayment = res.data;
+                       
                             // calc all payments
                                   $scope.getTotal = function(){
                                         var total = 0;
@@ -71,7 +78,37 @@
 
          //get dress
           $http.get('/api/bridedresses/'+ $scope.tempid).then(function(res) {
-                $scope.brideWithDress = res.data;   
+                $scope.brideWithDress = res.data;  
+                     if($scope.brideWithDress.dresses[0] == undefined && $scope.brideWithDress.status == "פעיל"  ){
+                     console.log($scope.brideWithDress.dress);
+                     
+                    // update status ממתין
+                                  $scope.upBride = {};
+                                  upBride = {
+                                      status:'ממתין'
+                                  };
+                                  $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
+                                    console.log(res);
+                                     getOneBride(); 
+                                  },function(err){
+                                    console.log(err);
+                                  })
+                   }    
+                  else if($scope.brideWithDress.dresses[0] != undefined && $scope.brideWithDress.status == "ממתין" ){ 
+
+                     // update status פעיל
+                                  $scope.upBride = {};
+                                  upBride = {
+                                      status:'פעיל'
+                                  };
+                                  $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
+                                    console.log(res);
+                                     getOneBride(); 
+                                  },function(err){
+                                    console.log(err);
+                                  })
+                    }
+
                 $scope.getTotalPrice = function(){
                       var total = 0;
                       for(var i=0; i < $scope.brideWithDress.dresses.length; i++){
@@ -157,8 +194,7 @@
                 $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
                     $scope.modifyField = false;
                     $scope.viewField = false;
-                  console.log(res);
-        
+                    console.log(res);      
                 },function(err){
                   
                   console.log(err);
@@ -179,9 +215,22 @@
                      $http.delete('/api/dresses/'+ $scope.tempid +'/'+ id ).then(function(res) { 
                         $http.delete('/api/dresses/'+id ).then(function(res) {
                                     $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
-                                          $scope.brideWithDress = res.data;
+                                          $scope.brideWithDress = res.data; 
+                                          if($scope.brideWithDress == undefined){
+                                                    updateStatus = function(){
+                                                          $scope.upBride = {};
+                                                          upBride = {
+                                                              status:'ממתין'
+                                                          };
+                                                          $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
+                                                            console.log(res);
+                                                          },function(err){
+                                                            console.log(err);
+                                                          }) 
+                                                  };
+                                          }
                                           getOneBride();
-                                        }, function(err) {
+                                        },function(err) {
                                     });
                                     }, function(err) {
                                       console.log(err);
@@ -208,14 +257,14 @@
 
      };
 
-     $scope.addPayment = function(Payment){
+     $scope.addPayment = function(Payment){ 
         $http.post('/api/payments', $scope.newPayment ).then(function(res) {
               //  $scope.allPayments = $scope.newPayment.pay;
+
                $http.put('/api/payments/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
                         $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
                             $scope.brideWithPayment = res.data;
-                              console.log('brideWithPayment');
-                              console.log( $scope.brideWithPayment);
+                           
                           }, function(err) {
                         })
                     }, function(err) {

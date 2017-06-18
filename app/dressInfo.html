@@ -3,7 +3,7 @@
     <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h1> לקוחה :{{bride.first_name}} <small> (מצב : {{bride.status}})</small></h1>
+                    <h2 class="page-header"> לקוחה :{{bride.first_name}} {{bride.last_name}} <small> (מצב : {{bride.status}})  מתחתנת ב: {{bride.date_event | date:"dd/MM/yy"}}</small></h2>
                 </div>
             </div>
             <div class="row">

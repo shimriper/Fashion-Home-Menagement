@@ -6,7 +6,7 @@
      
      
         $(window).unload(function(){
-                $localStorage.$reset();// reset all sessions
+             $localStorage.$reset();// reset all sessions
         });
         
         factory.login = function (user) {

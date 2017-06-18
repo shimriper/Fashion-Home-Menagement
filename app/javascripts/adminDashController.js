@@ -7,6 +7,7 @@
     var countStateWait =0;
     var brides;// get all brides
     var countDresses=0;
+    var countStateClose = 0;
 
     init = function(){
          getBrideDonat();
@@ -17,8 +18,8 @@
                brides = res.data;   
                   console.log( brides);
                   sumState ();
-                         $scope.labels = ["פעיל", "ממתין"];
-                         $scope.data = [countState, countStateWait];
+                         $scope.labels = ["פעיל", "ממתין","סגור"];
+                         $scope.data = [countState, countStateWait,countStateClose];
                   sumDresses();
               } ,  function(err) {
                 console.log(err);
@@ -30,6 +31,9 @@
                 var status = brides[i].status;
                 if( status == "פעיל"){
                    countState += 1;
+                }
+                else if(status == "סגור"){
+                  countStateClose +=1;
                 }
                 else{
                   countStateWait += 1;
