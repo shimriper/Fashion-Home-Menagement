@@ -57,6 +57,9 @@
                                     <div class="huge">סה"כ שמלות! {{cDress}}</div>
                                     <div></div>
                                     <div>מחיר ממוצע לשמלה <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(paysTotalSum,cDress) |number }} </div>
+                                     <div>מחיר ממוצע לערב <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(priceOfEvnDress,countOfEvnDress) |number }} </div>
+                                    <div>מחיר ממוצע לכלה <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(priceOfBrideDress,countOfBrideDress) |number }} </div>
+
                                 </div>
                             </div>
                         </div>
@@ -120,16 +123,20 @@
             <div class="col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4 class="title">לקוחות {{numOfClient}}</h4>
-                        <p class="category">סטטוס לקוחות</p>
+                        <h4 class="title"> שמלות {{cDress}}</h4>
+                        <p class="category"> כלה לעומת ערב</p>
                     </div>
                     <div class=" panel-body">
-                  
+                     <canvas id="base" class="chart-base" chart-type="type"
+                        chart-data="data2" chart-labels="labels2" >
+                        </canvas> 
                     </div>
                     <div class="content">
                         <div class="panel-footer">
                             <div class="legend">
-
+                                <i class="fa fa-circle text-info"></i> כלה {{countOfBrideDress}}
+                                <i class="fa fa-circle text" style="color: gray"></i> ערב {{countOfEvnDress}}
+                                
                             </div>
                         </div>
                     </div>

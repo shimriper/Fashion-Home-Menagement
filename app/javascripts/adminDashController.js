@@ -23,48 +23,53 @@
    
     }
 
-    countOfTypeDress = function(bride){
-      alert("we r in countOfTypeDress" + bride.dresses.length);
-              for(var i=0; i<bride.dresses.length;i++){
-                  $http.get('/api/dresses/'+  bride.dresses[i]._id).then(function(res) {
+    countOfTypeDress = function(brides){
+            // alert(brides.length);
+             console.log(brides[0].dresses[0]);
+              for(var j =0; j< brides.length; j++){
+              
+               for(var i=0; i<brides[j].dresses.length;i++){
+                $http.get('/api/dresses/'+ brides[j].dresses[i]).then(function(res) {
                           var dress = res.data;  
-                          alert(dress); 
+                           console.log("dress"+dress.t_dress); 
                           if(dress.t_dress == "כלה" ){
-                              alert(dress.price_dress);
+                              // alert("כלה" + dress.price_dress);
                                 priceOfBrideDress += dress.price_dress;
                                 countOfBrideDress ++ ;
                             }
                             else if(dress.t_dress == "ערב"){
-                                alert(dress.price_dress);
+                                // alert("ערב" + dress.price_dress);
                                 priceOfEvnDress += dress.price_dress;
                                 countOfEvnDress ++ ;
                             }
-                          console.log($scope.dress);
+                            $scope.labels2 = ["כלה" , "ערב"];
+                            $scope.data2 = [countOfBrideDress, countOfEvnDress];
+                            $scope.countOfBrideDress = countOfBrideDress;
+                            $scope.countOfEvnDress = countOfEvnDress;
+                            $scope.priceOfEvnDress = priceOfEvnDress;
+                            $scope.priceOfBrideDress = priceOfBrideDress;
+
+                          // console.log($scope.dress);
                   }, function(err) {
                       console.log(err);
                   });
               }
+            }
 
-            //    $http.get('/api/bridedresses/'+ bride.dresses[i]._id).then(function(res) {
+          
+            // $scope.labels2 = ["כלה" , "ערב"];
+            // $scope.data2 = [countOfBrideDress, countOfEvnDress];
+            $scope.type = 'polarArea';
+            $scope.toggle = function () {
+              $scope.type = $scope.type === 'polarArea' ?
+                'pie' : 'polarArea';
+            };
+            $scope.priceOfBrideDressAvg = countOfBrideDress /priceOfBrideDress ; 
 
-            //     var brideWithDress1 = res.data;  
-            //     console.log("brideWithDress1" + brideWithDress1.dresses._id);
-            //     for(var i=0; i <brideWithDress1.dresses.length; i++){
-            //          if(brideWithDress1.dresses[i].t_dress == "כלה" ){
-            //            alert(brideWithDress1.dresses[i].price_dress);
-            //             priceOfBrideDress += brideWithDress1.dresses[i].price_dress;
-            //             countOfBrideDress ++ ;
-            //          }
-            //          else if(brideWithDress1.dresses[i].t_dress == "ערב"){
-            //             alert(brideWithDress1.dresses[i].price_dress);
-            //             priceOfEvnDress += brideWithDress1.dresses[i].price_dress;
-            //             countOfEvnDress ++ ;
-            //          }
-            //     }          
-            //   },  function(err) {
-            //     console.log(err);
-            // }); 
     }
+
+
+
 
     getBrideDonat = function(){
          $http.get('/api/brides').then(function(res) {
@@ -76,7 +81,7 @@
                          $scope.data = [countState, countStateWait,countStateClose];
                   sumDresses();
                   getMoney(bridesMony);
-     
+                  countOfTypeDress(bridesMony);
  
               } ,  function(err) {
                 console.log(err);
@@ -95,7 +100,7 @@
                 else{
                   countStateWait += 1;
                 }
-                countOfTypeDress(brides[i]);
+                
               }
               $scope.numOfClient = countState +countStateWait;
               // console.log( countState);
@@ -109,7 +114,7 @@
           }
     }
     getMoney = function(bridesMony){  
-            for(var i=0; i<bridesMony.length; i++){
+            for(var i=0; i< bridesMony.length; i++){
                 var idB = bridesMony[i]._id;
                     $http.get('/api/brides/'+ idB).then(function(res) {
                                   $scope.brideWithPaymentFor = res.data;                       
@@ -141,6 +146,7 @@
                   var payment = brideWithPayment.payments[i];
                   total += payment.pay;
               }
+            
               paysTotalSum +=  total;
               $scope.paysTotalSum = paysTotalSum;
         }
