@@ -404,9 +404,10 @@ router.route('/dresses')
 	//updates specified dresses
 	.put(function(req, res){
 		Dress.findOneAndUpdate( {_id:req.body.id} , req.body.updatedObj , function(err, doc){
-			if (err) return res.send(500, { error: err });
-			return res.send({updated:doc.id , message:'success' });
-			
+			if (err) 
+			{return res.send(500, { error: err });}
+			else
+			return res.send({updated:doc.id , message:'success'});			
 		});
 	});
 	router.route('/bridedresses/:id')

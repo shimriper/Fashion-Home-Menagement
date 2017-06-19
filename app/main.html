@@ -2,7 +2,7 @@
 <div class="col-md-offset-2 col-md-8">
 <div class="clearfix" dir="rtl">
 	<form ng-Submit="post()"  class="row">
-		<h4> {{name}}: </h4>
+		<h4><i class="fa fa-user-circle-o"> </i> {{name}}: </h4>
 		<!--<input required type="text" class="form-control" placeholder="Your name" ng-model="newPost.created_by" /> -->
 		<textarea required class="form-control" maxlength="200" rows="3" placeholder="" ng-model="newPost.text"></textarea>
 		<input class="btn submit-btn pull-right" type="submit" value="שלח"/>
@@ -14,7 +14,7 @@
 			
 			<p>{{post.text}}</p>
 			<small>נכתב ע"י {{post.created_by}}</small>
-			<small class="pull-right">  {{post.created_at | date:" dd/ mm/ y 'בשעה' h:mma"}}</small>
+			<small class="pull-right">  {{post.created_at | date:" dd/MM/yy 'בשעה' HH:mm"}}</small>
 		</div>
 	</div>
 </div>

@@ -1,62 +1,142 @@
 
-
-       <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">לקוחות</h4>
-                                <p class="category">פעילים \ ממתינים</p>
-                            </div>
-                            <div class="body">
-                                
-                              <canvas id="doughnut" class="chart chart-doughnut"
-                                    chart-data="data" chart-labels="labels">
-                              </canvas> 
-                            </div>
-                            <div class="content">
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> פעילים
-                                        <i class="fa fa-circle text-danger"></i> ממתינים
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-clock-o"></i> 
-                                    </div>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-comments fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"></div>
+                                    <div>הודעות !</div>
                                 </div>
                             </div>
                         </div>
+                        <a href="#/main">
+                            <div class="panel-footer">
+                                <span class="pull-left">מעבר להודעות</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
                     </div>
-                                   <div class="col-md-6">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">הכנסות</h4>
-                                <p class="category">Last Campaign Performance</p>
-                            </div>
-                            <div class="body">
-                              <canvas id="doughnut" class="chart chart-doughnut"
-                                    chart-data="data" chart-labels="labels">
-                                    </canvas> 
-                            </div>
-                            <div class="content">
-                                  
-
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Bounce
-                                        <i class="fa fa-circle text-warning"></i> Unsubscribe
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
-                                    </div>
+        </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
                                 </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"> מספר לקוחות! {{numOfClient}}</div>
+                                    <div>מחיר ממוצע ללקוח <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(paysTotalSum,numOfClient) |number }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">סה"כ שמלות! {{cDress}}</div>
+                                    <div></div>
+                                    <div>מחיר ממוצע לשמלה <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(paysTotalSum,cDress) |number }} </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-exchange fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"> סה"כ הכנסות <i class="fa fa-ils" aria-hidden="true"></i> {{paysTotalSum}} </div>
+                                    <div> מתוכם שולמו <i class="fa fa-ils" aria-hidden="true"></i> {{paysDoneSum}} </div>
+                                    <div>סה"כ כסף עתידי <i class="fa fa-ils" aria-hidden="true"></i> {{paysTotalSum - paysDoneSum}} </i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left"></span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="title">לקוחות {{numOfClient}}</h4>
+                        <p class="category">סטטוס לקוחות</p>
+                    </div>
+                    <div class=" panel-body">
+                        <canvas id="doughnut" class="chart chart-doughnut"
+                            chart-data="data" chart-labels="labels">
+                        </canvas> 
+                    </div>
+                    <div class="content">
+                        <div class="panel-footer">
+                            <div class="legend">
+                                <i class="fa fa-circle text-info"></i> פעילים {{}}
+                                <i class="fa fa-circle text" style="color: gray"></i> ממתינים
+                                <i class="fa fa-circle text-danger"></i> סגורים
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-       </div>
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="title">לקוחות {{numOfClient}}</h4>
+                        <p class="category">סטטוס לקוחות</p>
+                    </div>
+                    <div class=" panel-body">
+                  
+                    </div>
+                    <div class="content">
+                        <div class="panel-footer">
+                            <div class="legend">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        </div>
+    </div>
+</div>

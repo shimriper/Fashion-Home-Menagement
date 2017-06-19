@@ -10,7 +10,7 @@
                 <div calss="col-md-12">
                         <div class="col-md-6">               
                             <div class="panel panel-default" ng-repeat="size in brideWithSize.sizes" > 
-                                <div class="panel-heading"> מידות <small>עודכן ב: {{size.last_update | date:"HH:MM , MMM , d,yy"}} </small>
+                                <div class="panel-heading"> מידות <small>עודכן ב: {{size.last_update | date:"HH:MM , dd/MM/yy"}} </small>
                                     <i class="fa fa-save" style="float: left" ng-click="upSize(size, size._id)"  ng-show="sizeModifyField" > שמירה</i>
                                     <i class="fa fa-pencil" style="float: left" ng-click="sizeModify(size, size._id)"ng-hide="sizeViewField"> עריכה</i>
                                 </div>
@@ -108,7 +108,7 @@
                         <div class="col-md-6">
                             
                             <div class="panel panel-default"  >
-                                <div class="panel-heading"> תיאור שמלה <small>עודכן ב: {{dress.last_update | date:"HH:MM , MMM , d,yy"}} </small>
+                                <div class="panel-heading"> תיאור שמלה <small>עודכן ב: {{dress.last_update | date:"HH:MM , dd/MM/yy"}} </small>
                                     <i class="fa fa-save" style="float: left" ng-click="upDress(dress, dress._id)"  ng-show="dressModifyField" > שמירה</i>
                                     <i class="fa fa-pencil" style="float: left" ng-click="dressModify(dress, dress._id)"ng-hide="dressViewField"> עריכה</i>
                                 </div>
