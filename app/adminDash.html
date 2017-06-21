@@ -2,7 +2,54 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-        <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"> מספר לקוחות! {{numOfClient}}</div>
+                                    <div>מחיר ממוצע ללקוח <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(paysTotalSum,numOfClient) |number }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="">
+                            <div class="panel-footer">
+                                <span class="pull-left"></span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <!--<div class="huge">סה"כ שמלות! {{cDress}}</div>-->
+                                     <div>מחיר ממוצע לשמלה <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(paysTotalSum,cDress) |number }} </div>
+                                    <div>מחיר ממוצע לערב <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(priceOfEvnDress,countOfEvnDress) |number }} </div>
+                                    <div>מחיר ממוצע לכלה <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(priceOfBrideDress,countOfBrideDress) |number }} </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <a href="">
+                            <div class="panel-footer">
+                                <span class="pull-left"></span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>        
+                <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
@@ -24,54 +71,7 @@
                         </a>
                     </div>
         </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"> מספר לקוחות! {{numOfClient}}</div>
-                                    <div>מחיר ממוצע ללקוח <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(paysTotalSum,numOfClient) |number }}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">סה"כ שמלות! {{cDress}}</div>
-                                    <div></div>
-                                    <div>מחיר ממוצע לשמלה <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(paysTotalSum,cDress) |number }} </div>
-                                     <div>מחיר ממוצע לערב <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(priceOfEvnDress,countOfEvnDress) |number }} </div>
-                                    <div>מחיר ממוצע לכלה <i class="fa fa-ils" aria-hidden="true"></i> {{avgTotal(priceOfBrideDress,countOfBrideDress) |number }} </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-red">
                         <div class="panel-heading">
@@ -97,7 +97,7 @@
                 </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="title">לקוחות {{numOfClient}}</h4>
@@ -120,7 +120,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="title"> שמלות {{cDress}}</h4>

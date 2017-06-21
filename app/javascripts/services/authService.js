@@ -3,8 +3,6 @@
     var authService = function ($localStorage, $location, $http, $q) {
         factory = {};
         //when browser closed - psedocode
-     
-     
         $(window).unload(function(){
               $localStorage.$reset();// reset all sessions
         });

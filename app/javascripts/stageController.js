@@ -24,7 +24,7 @@ app.controller('stageController' ,function($scope ,$rootScope, brideService ,$ro
                         $scope.s3 = s[2];
                         if($scope.s3 == true){
                            $scope.s4 = s[3];
-                           if($scope.s5 == true){
+                           if($scope.s4 == true){
                                $scope.s5 = s[4];
                            } 
                         }
@@ -44,7 +44,6 @@ app.controller('stageController' ,function($scope ,$rootScope, brideService ,$ro
                       if(i ==1 ){
                         $scope.stage2 = res.data.stages[i].s;
                       }
-                   
                     }
                     else
                     if( stageid === undefined){
@@ -133,10 +132,11 @@ app.controller('stageController' ,function($scope ,$rootScope, brideService ,$ro
 
         $http.post('/api/stages', stage ).then(function(res) {
                $http.put('/api/stages/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
+                        
                         $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
                             $scope.brideWithStage = res.data;
-                                    updateStatus();
                                       checkStage();
+                                      updateStatus();
                         //    $location.path('stage/' + $scope.tempid );           
                           }, function(err) {
                         })
@@ -146,6 +146,7 @@ app.controller('stageController' ,function($scope ,$rootScope, brideService ,$ro
             }, function(err) {
                 console.log(err);
             })
+            
       };
       updateStatus = function(){
             

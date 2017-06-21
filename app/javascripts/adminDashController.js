@@ -22,26 +22,24 @@
             
    
     }
-
     countOfTypeDress = function(brides){
-            // alert(brides.length);
-             console.log(brides[0].dresses[0]);
               for(var j =0; j< brides.length; j++){
-              
-               for(var i=0; i<brides[j].dresses.length;i++){
+                for(var i=0; i<brides[j].dresses.length;i++){
                 $http.get('/api/dresses/'+ brides[j].dresses[i]).then(function(res) {
                           var dress = res.data;  
-                           console.log("dress"+dress.t_dress); 
-                          if(dress.t_dress == "כלה" ){
-                              // alert("כלה" + dress.price_dress);
+                          
+                          if(dress.t_dress == "כלה"){
                                 priceOfBrideDress += dress.price_dress;
+                                
                                 countOfBrideDress ++ ;
+                                
                             }
                             else if(dress.t_dress == "ערב"){
-                                // alert("ערב" + dress.price_dress);
                                 priceOfEvnDress += dress.price_dress;
+                              
                                 countOfEvnDress ++ ;
                             }
+                            // all parm for graf
                             $scope.labels2 = ["כלה" , "ערב"];
                             $scope.data2 = [countOfBrideDress, countOfEvnDress];
                             $scope.countOfBrideDress = countOfBrideDress;
@@ -49,7 +47,7 @@
                             $scope.priceOfEvnDress = priceOfEvnDress;
                             $scope.priceOfBrideDress = priceOfBrideDress;
 
-                          // console.log($scope.dress);
+                           
                   }, function(err) {
                       console.log(err);
                   });
@@ -65,7 +63,6 @@
                 'pie' : 'polarArea';
             };
             $scope.priceOfBrideDressAvg = countOfBrideDress /priceOfBrideDress ; 
-
     }
 
 
@@ -82,6 +79,7 @@
                   sumDresses();
                   getMoney(bridesMony);
                   countOfTypeDress(bridesMony);
+                  // countTypeCastumer(bridesMony);
  
               } ,  function(err) {
                 console.log(err);

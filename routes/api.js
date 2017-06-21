@@ -125,6 +125,16 @@ router.route('/brides')
 			return res.send(200,data);
 		});
 	});
+	router.route('/brideOne/:id')
+	//gets specified bride
+	.get(function(req, res){
+		Bride.findById(req.params.id, function(err, bride){
+			if(err)
+				return res.send(err);
+			return res.json(bride);
+		});
+	}) 
+
 	router.route('/brides/:id')
 	//gets specified bride
 	.get(function(req, res){
@@ -134,6 +144,7 @@ router.route('/brides')
 				res.json(data);
 			});
 	})
+
 		//deletes the bride	
 	.delete(function(req, res) {
 		Bride.remove({
