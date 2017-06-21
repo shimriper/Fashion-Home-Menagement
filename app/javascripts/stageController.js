@@ -135,8 +135,8 @@ app.controller('stageController' ,function($scope ,$rootScope, brideService ,$ro
                         
                         $http.get('/api/brides/'+ $scope.tempid ).then(function(res) {
                             $scope.brideWithStage = res.data;
-                                      checkStage();
                                       updateStatus();
+                                      checkStage();
                         //    $location.path('stage/' + $scope.tempid );           
                           }, function(err) {
                         })

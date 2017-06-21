@@ -339,7 +339,6 @@
                     $scope.paymentViewField = false;
 
                   console.log(res);
-                    $window.location.reload();
                 }
                 ,function(err){
                   console.log(err);
