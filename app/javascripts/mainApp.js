@@ -6,6 +6,8 @@ var app = angular.module('mainApp', [
 	'LocalStorageModule',
 	'ngStorage',
 	'chart.js',
+	'ui.bootstrap',
+	'angularUtils.directives.dirPagination'
 ]);
 
  

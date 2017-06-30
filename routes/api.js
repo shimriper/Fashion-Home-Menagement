@@ -145,7 +145,7 @@ router.route('/brides')
 			});
 	})
 
-		//deletes the bride	
+		//deletes the bride	and all suns
 	.delete(function(req, res) {
 		Bride.remove({
 			_id: req.params.id
@@ -432,6 +432,7 @@ router.route('/dresses')
 	})
 		//deletes the Dress	
 	.delete(function(req, res) {
+		
 		Bride.remove({
 			_id: req.params.id
 		}, function(err) {
@@ -481,6 +482,31 @@ router.route('/dresses/:bride_id/:dress_id')
 		 return	res.json("deleted :(");
 		});
 	});
+
+	router.route('/dressesRemoveAll/:bride_id/:dresses') 
+	.delete(function(req , res){
+		for(var i=0; i< dresses.length; i++)
+        {	
+			dress_id = dresses[i];
+			Bride.findOneAndUpdate({ _id: req.params.bride_id} , {$pull: {dresses: req.params.dress_id }}, function(err, delDress){
+				if(err) {
+				return	res.send(err);
+			}else{
+				Dress.remove({
+					_id: req.params.dress_id
+				}, function(err) {
+					if (err)
+					return	res.send(err);
+				// return	res.json("deleted :(");
+				});
+					return res.json("deleted :(");
+				}
+			});
+		}
+	});
+
+
+
 	// stagessssssassssssssssssssssssssssssssss
 
 router.route('/stages')

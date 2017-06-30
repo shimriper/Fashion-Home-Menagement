@@ -1,19 +1,28 @@
  angular.module('mainApp');
-  app.controller('allBrideController', function($rootScope ,$scope , brideService, $http, $location) {
+  app.controller('allBrideController', function($rootScope ,$scope , brideService, $http, $location, $q) {
+      var brides;
+    
     init = function(){
       getAllBrides();
-                     
-
     }
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-     getAllBrides = function(){ 
-       $scope.brides = brideService.query();
-        
 
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    getAllBrides = function(){ 
+       brides = brideService.query();
+       $scope.brides = brides;
        console.log( $scope.brides);
-     }
+       $scope.pageSize = 5 ;
+       $scope.data = $scope.brides;
+    }
+   
+    $scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
     $scope.brideInfoRoute = function(id){
            // $scope.bride= $scope.bride;
           console.log(id);
@@ -39,9 +48,22 @@ $(function () {
                       cancelButtonClass: 'btn btn-danger',
                       buttonsStyling: false
                     }).then(function () {
-                          getOneBride(id); // get one bride and delete all suns
-                              getAllBrides();
-                    
+                                                        getOneBride(id);
+
+                        //   $http.get('/api/brideOne/' + id).then(function(res){
+                        //   var bride = res.data;
+                        //   while(bride.payments == null && bride.dresses == null && bride.stages == null && bride.sizes == null)
+                        //   {   
+                        //     alert("while")
+                        //       getOneBride(id);
+                        //       brideService.delete({id:id});
+                        //       getAllBrides();
+                        //   }
+                        //   console.log(bride);
+                        // },function(err) {
+                        //   console.log(err);
+                        // });
+
                       swal(
                         'נמחק!',
                         'הרשומה נמחקה',
@@ -74,73 +96,132 @@ $(function () {
   
   init();
 
+  
+
+    
+
 getOneBride = function(id){
       $http.get('/api/brideOne/' + id).then(function(res){
         var bride = res.data;
+     
         delDress(id,bride.dresses);
         delSizes(id,bride.sizes);
         delStages(id,bride.stages);
         delPayments(id,bride.payments);
-        getAllBrides();
-        brideService.delete({id:id});
+     
+
         console.log(bride);
       },function(err) {
          console.log(err);
       });
   }
     delDress = function(bride_id,dresses){
-        for(var i=0; i< dresses.length; i++)
-        {
-          var dresses_id = dresses[i];
-          $http.delete('/api/dresses/'+ bride_id +'/'+ dresses_id ).then(function(res) { 
-                        $http.delete('/api/dresses/'+dresses_id ).then(function(res) {
-                                        console.log("success");
-                                        },function(err) {
-                                    });
-                                    }, function(err) {
-                                      console.log(err);
-                                  });
-        }
+          var bridePromises = [];
+          var dressPromises = [];
 
+          for(var i = 0; i < dresses.length; i++) {
+
+            var dresses_id = dresses[i];
+
+            var brideUpdatePromise = $http.delete('/api/dresses/'+ bride_id +'/'+ dresses_id );
+            var dressRemovePromise = $http.delete('/api/dresses/'+ dresses_id );
+            
+            bridePromises.push(brideUpdatePromise);
+            dressPromises.push(dressRemovePromise);
+            
+          }
+
+          $q.all(bridePromises).then(function(res){
+            console.log("success all brides dresses removed");
+                        brideService.delete({id:id});
+
+            console.log(res);
+          });
+
+           $q.all(dressPromises).then(function(res){
+            console.log("success all dresses feleted");
+            console.log(res);
+          });
   }
     delSizes = function(bride_id,sizes){
+      var bridePromises = [];
+      var sizePromises = [];
+      
       for(var i=0; i< sizes.length; i++) {
           var size_id = sizes[i];
-          $http.delete('/api/sizes/'+ bride_id +'/'+ size_id ).then(function(res) { 
-                        $http.delete('/api/sizes/'+size_id ).then(function(res) {
-                                        console.log("success");
-                                        },function(err) {
-                                    });
-                                    }, function(err) {
-                                      console.log(err);
-                                  });
+
+          var brideUpdatePromise = $http.delete('/api/sizes/'+ bride_id +'/'+ size_id );
+          var sizeRemovePromise = $http.delete('/api/sizes/'+size_id );
+          
+          bridePromises.push(brideUpdatePromise);
+          sizePromises.push(sizeRemovePromise);
       }
+
+      $q.all(bridePromises).then(function(res){
+        console.log("success all brides sizes removed");
+        console.log(res);
+      });
+
+        $q.all(sizePromises).then(function(res){
+        console.log("success all sizes deleted");
+        console.log(res);
+      });
     }
+
     delStages = function(bride_id,stages){
+      var bridePromises = [];
+      var stagePromises = [];
+      
       for(var i=0; i< stages.length; i++) {
-        var stage_id = stages[i];
-       $http.delete('/api/stages/'+ bride_id +'/'+ stage_id ).then(function(res) { 
-                        $http.delete('/api/stages/'+stage_id ).then(function(res) {
-                                        console.log("success del stages");
-                                        },function(err) {
-                                    });
-                            }, function(err) {
-                                console.log(err);
-                            });     
+          var stage_id = stages[i];
+
+          var brideUpdatePromise = $http.delete('/api/stages/'+ bride_id +'/'+ stage_id );
+          var stageRemovePromise = $http.delete('/api/stages/'+stage_id );
+          
+          bridePromises.push(brideUpdatePromise);
+          stagePromises.push(stageRemovePromise);
       }
+      
+      $q.all(bridePromises).then(function(res){
+        console.log("success all brides stages removed");
+        console.log(res);
+      });
+
+      $q.all(stagePromises).then(function(res){
+        console.log("success all stages deleted");
+        console.log(res);
+      });
     }
-    delPayments = function(bride_id,payments){   
-           for(var i=0; i< payments.length; i++) {
-             var payment_id = payments[i];
-              $http.delete('/api/payments/'+ bride_id +'/'+ payment_id ).then(function(res) { 
-              $http.delete('/api/payments/'+payment_id ).then(function(res) {
-                              console.log("success");
-                              },function(err) {
-                          });
-                  }, function(err) {
-                      console.log(err);
-                  });
-           }    
-     };
+
+
+    delPayments = function(bride_id,payments){  
+
+      var bridePromises = [];
+      var paymentPromises = [];
+
+      for(var i=0; i< payments.length; i++) {
+          var payments_id = payments[i];
+
+          var brideUpdatePromise = $http.delete('/api/payments/'+ bride_id +'/'+ payments_id );
+          var paymentRemovePromise = $http.delete('/api/payments/'+ payments_id );
+          
+          bridePromises.push(brideUpdatePromise);
+          paymentPromises.push(paymentRemovePromise);
+      }
+      
+      $q.all(bridePromises).then(function(res){
+        console.log("success all brides payments removed");
+        console.log(res);
+      });
+
+      $q.all(paymentPromises).then(function(res){
+        console.log("success all payments deleted");
+        console.log(res);
+      });
+    };
+    
+    // $(document).ready(function() {
+    //     $('#mytable').DataTable();
+    // } );
 
   });
