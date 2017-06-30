@@ -134,6 +134,19 @@ router.route('/brides')
 			return res.json(bride);
 		});
 	}) 
+	router.route('/brideByDate/:startDate/:endDate')
+	//gets all bride by date
+	.get(function(req,res){
+		Bride.find({"date_event":{"$gte" :new Date(req.params.startDate) ,"$lte" :new Date(req.params.endDate)}	},
+		 function(err, docs){
+			if(err){
+			  res.send(500,err);
+			}
+			console.log(docs);
+			 res.send(200,docs);
+		});
+	});
+
 
 	router.route('/brides/:id')
 	//gets specified bride
@@ -141,7 +154,7 @@ router.route('/brides')
 		Bride.findById({_id:req.params.id}).populate("payments").exec(function(err,data) {
 			res.json(data);
 			}, function(err) {
-				res.json(data);
+				res.json(err);
 			});
 	})
 

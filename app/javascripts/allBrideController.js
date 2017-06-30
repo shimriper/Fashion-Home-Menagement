@@ -1,8 +1,9 @@
  angular.module('mainApp');
-  app.controller('allBrideController', function($rootScope ,$scope , brideService, $http, $location, $q) {
+  app.controller('allBrideController', function($rootScope ,$scope , brideService, $http, $location, $q ,$filter) {
       var brides;
-    
+     $scope.filterDate = false;
     init = function(){
+      
       getAllBrides();
     }
 
@@ -17,6 +18,8 @@
        console.log( $scope.brides);
        $scope.pageSize = 5 ;
        $scope.data = $scope.brides;
+       $scope.brideByDate;
+    
     }
    
     $scope.sort = function(keyname){
@@ -48,22 +51,7 @@
                       cancelButtonClass: 'btn btn-danger',
                       buttonsStyling: false
                     }).then(function () {
-                                                        getOneBride(id);
-
-                        //   $http.get('/api/brideOne/' + id).then(function(res){
-                        //   var bride = res.data;
-                        //   while(bride.payments == null && bride.dresses == null && bride.stages == null && bride.sizes == null)
-                        //   {   
-                        //     alert("while")
-                        //       getOneBride(id);
-                        //       brideService.delete({id:id});
-                        //       getAllBrides();
-                        //   }
-                        //   console.log(bride);
-                        // },function(err) {
-                        //   console.log(err);
-                        // });
-
+                        getOneBride(id);
                       swal(
                         'נמחק!',
                         'הרשומה נמחקה',
@@ -90,20 +78,26 @@
                         'המסמך ירד בהצלחה!',
                         'Report.xls'
                       )
-
     };
-
-  
   init();
 
-  
-
-    
+$scope.getBrdideByDate = function(startDate,endDate ){
+  startDate =  $filter('date')(new Date(startDate),'yyyy-MM-dd');
+  endDate =  $filter('date')(new Date(endDate),'yyyy-MM-dd')
+  $http.get('api/brideByDate/' +startDate+'/'+ endDate)
+          .then(function(res){
+            $scope.filterDate = true;
+            var brideByDate = res.data;
+            $scope.brideByDate = brideByDate;       
+          }), function(err){
+           console.log(err); 
+          };
+}
 
 getOneBride = function(id){
       $http.get('/api/brideOne/' + id).then(function(res){
         var bride = res.data;
-     
+
         delDress(id,bride.dresses);
         delSizes(id,bride.sizes);
         delStages(id,bride.stages);

@@ -126,7 +126,7 @@
                                   console.log(err);
                               })
             }
-}
+    }
         getTotal = function(brideWithPayment){
           var total = 0;
           for(var i=0; i < brideWithPayment.payments.length; i++){
@@ -151,9 +151,10 @@
         $scope.avgTotal = function(TotalSum,count){
           return (TotalSum/count);
         }
-    init();
-    
 
+    init();
+        
+        
   
 });
 
