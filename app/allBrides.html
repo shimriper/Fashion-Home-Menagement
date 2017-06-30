@@ -16,8 +16,10 @@
                     <input type="date" ng-model="startDate" required>
                   עד תאריך 
                     <input type="date"  ng-model="endDate" required>
-                
-                    <button ng-click="getBrdideByDate(startDate,endDate)"  > חפש</button>
+                </div>
+                <div class="panel-footer">
+                     <button type="button" ng-show="!filterDate" class="btn btn-primary" ng-click="getBrdideByDate(startDate,endDate)"> סינון <i class="fa fa-filter" aria-hidden="true"></i>  </button>
+                    <button type="button" ng-show="filterDate" class="btn btn-primary" ng-click=" unFilter()"  > ביטול מסנן <i class="fa fa-remove" aria-hidden="true"></i></button>
                 </div>
             </div>
         </div>

@@ -80,18 +80,27 @@
                       )
     };
   init();
-
+    $scope.unFilter = function(){
+        $scope.filterDate = false;
+        getAllBrides();
+    }
 $scope.getBrdideByDate = function(startDate,endDate ){
-  startDate =  $filter('date')(new Date(startDate),'yyyy-MM-dd');
-  endDate =  $filter('date')(new Date(endDate),'yyyy-MM-dd')
-  $http.get('api/brideByDate/' +startDate+'/'+ endDate)
-          .then(function(res){
-            $scope.filterDate = true;
-            var brideByDate = res.data;
-            $scope.brideByDate = brideByDate;       
-          }), function(err){
-           console.log(err); 
-          };
+  if(startDate == null ||endDate == null ){
+    $scope.filterDate = false;
+  }
+  else{
+      startDate =  $filter('date')(new Date(startDate),'yyyy-MM-dd');
+      endDate =  $filter('date')(new Date(endDate),'yyyy-MM-dd')
+      $http.get('api/brideByDate/' +startDate+'/'+ endDate)
+              .then(function(res){
+                $scope.filterDate = true;
+                var brideByDate = res.data;
+                $scope.brideByDate = brideByDate;       
+              }), function(err){
+              console.log(err); 
+              };
+  }
+
 }
 
 getOneBride = function(id){
