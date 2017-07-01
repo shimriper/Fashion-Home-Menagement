@@ -261,7 +261,8 @@
      };
 
      $scope.addPayment = function(Payment){ 
-        $http.post('/api/payments', $scope.newPayment ).then(function(res) {
+       
+        $http.post('/api/payments', Payment ).then(function(res) {
               //  $scope.allPayments = $scope.newPayment.pay;
 
                $http.put('/api/payments/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {

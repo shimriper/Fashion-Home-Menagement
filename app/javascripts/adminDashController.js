@@ -17,6 +17,8 @@
     var countOfBrideDress = 0;
     var countOfEvnDress = 0;
 
+  
+
     init = function(){
          getBrideDonat();
             
@@ -79,16 +81,27 @@
                   sumDresses();
                   getMoney(bridesMony);
                   countOfTypeDress(bridesMony);
+                //   sumPrices(bridesMony);
                   // countTypeCastumer(bridesMony);
  
               } ,  function(err) {
                 console.log(err);
             });             
-         
+        // sumPrices = function(bridesMony){
+        //     // alert(bridesMony.length);
+        //     for(var i=0; i < bridesMony.length; i++){
+        //         cPrice += bridesMony[i].price;
+        //         console.log(cPrice);
+        //     }
+        // }
           // console.log( $scope.brides.bride.length + 'brides');
           sumState =function(){
+              var cPrice = 0;
               for(var i=0; i < brides.length; i++){
                 var status = brides[i].status;
+                if(brides[i].price != undefined){
+                    cPrice += brides[i].price;
+                }
                 if( status == "פעיל"){
                    countState += 1;
                 }
@@ -98,10 +111,9 @@
                 else{
                   countStateWait += 1;
                 }
-                
               }
+              $scope.tPrice = cPrice;
               $scope.numOfClient = countState +countStateWait;
-              // console.log( countState);
          }
           sumDresses = function(){
                   for(var i=0; i < brides.length; i++){
@@ -110,10 +122,12 @@
                   $scope.cDress = countDresses;
                   
           }
+
     }
     getMoney = function(bridesMony){  
             for(var i=0; i< bridesMony.length; i++){
                 var idB = bridesMony[i]._id;
+
                     $http.get('/api/brides/'+ idB).then(function(res) {
                                   $scope.brideWithPaymentFor = res.data;                       
                                   // calc all payments
@@ -151,6 +165,7 @@
         $scope.avgTotal = function(TotalSum,count){
           return (TotalSum/count);
         }
+  
 
     init();
         

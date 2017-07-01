@@ -186,7 +186,7 @@ app.controller('stageController' ,function($scope ,$rootScope, brideService ,$ro
                                             $scope.brideWithStage = res.data;
 
                                                     updateStatus();
-                                                    checkStage();
+                                                    
                                         //    $location.path('stage/' + $scope.tempid );           
                                         }, function(err) {
                                         })
@@ -209,6 +209,7 @@ app.controller('stageController' ,function($scope ,$rootScope, brideService ,$ro
             };
             $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
               console.log(res);
+              checkStage();
             },function(err){
               console.log(err);
             }) 

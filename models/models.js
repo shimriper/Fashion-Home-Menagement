@@ -122,7 +122,7 @@ var brideSchema = new mongoose.Schema({
 var paymentSchema = new mongoose.Schema({
 	bride:{type: Schema.Types.ObjectId, ref: 'Bride'},
 	pay:Number,
-	date_pay: {type:Date},
+	date_pay: {type:Date , default: Date.now},
 	done:Boolean
 })
 

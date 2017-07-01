@@ -180,7 +180,7 @@
                                                 <button type="button" class="btn btn-success btn-sm"  ng-click="addPayment(newPayment)" class="form-control" >הוספה <i class="fa fa-plus" aria-hidden="true"></i></button>
                                             </th>
                                         </tr>
-                                        <tr class="brides" ng-repeat="payment in brideWithPayment.payments track by $index"  style="text-align: center">
+                                        <tr class="brides" ng-repeat="payment in brideWithPayment.payments"  style="text-align: center">
                                             
                                                 <td ng-show="paymentModifyField"><input type="number" ng-model="payment.pay"/></td>
                                                 <td ng-hide="paymentViewField">{{payment.pay}}</td>
