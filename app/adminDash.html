@@ -2,7 +2,7 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-5">
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             <div class="row">
@@ -24,7 +24,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-5">
                     <div class="panel panel-yellow">
                         <div class="panel-heading">
                             <div class="row">
@@ -49,7 +49,7 @@
                         </a>
                     </div>
                 </div>        
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-5">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
@@ -72,7 +72,7 @@
                     </div>
         </div>
                 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-5">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
@@ -97,7 +97,7 @@
                 </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="title">לקוחות {{numOfClient}}</h4>
@@ -120,7 +120,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="title"> שמלות {{cDress}}</h4>
@@ -142,8 +142,75 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="title"> הכנסות לפי חודש</h4>
+                        <p class="category"> </p>
+                    </div>
+                    <div class=" panel-body">
+                        <!--<canvas id="base" class="chart-base" chart-type="type"
+                        chart-data="dataDate" chart-labels="labelsDate" >
+                        </canvas> -->
+                        <!--<canvas id="bar" class="chart chart-bar"
+                        chart-data="dataDate" chart-labels="labelsDate" chart-series="series">
+                        </canvas>-->
+                        <canvas class="chart chart-bar ng-isolate-scope" chart-data="dataDate"
+                            chart-labels="labelsDate" chart-colors="colors"
+                            chart-dataset-override="datasetOverride" style="text-align: right">
+                        </canvas>
+                        
+                    </div>
+                    <div class="content">
+                        <div class="panel-footer">
+                            <div class="legend">
+                                <!--<i class="fa fa-circle text-info"></i> כלה {{countOfBrideDress}}
+                                <i class="fa fa-circle text" style="color: gray"></i> ערב {{countOfEvnDress}}-->
+                                    <span class="pull-left"></span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      
+        <div class="row">
+                    <!--<div class="col-lg-6 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="title"> שמלות {{cDress}}</h4>
+                        <p class="category"> כלה לעומת ערב</p>
+                    </div>
+                    <div class=" panel-body">
+                   
+                        <canvas class="chart chart-bar ng-isolate-scope" chart-data="dataDate"
+                            chart-labels="labelsDate" chart-colors="colors"
+                            chart-dataset-override="datasetOverride">
+                        </canvas>
+                        
+                    </div>
+                    <div class="content">
+                        <div class="panel-footer">
+                            <div class="legend">
+                                <i class="fa fa-circle text-info"></i> כלה {{countOfBrideDress}}
+                                <i class="fa fa-circle text" style="color: gray"></i> ערב {{countOfEvnDress}}
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <!--<div class="col-lg-3 col-md-5">
+          <div class="panel panel-default">
+            <div class="panel-heading">Bar line Chart</div>
+            <div class="panel-body"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
+              <canvas class="chart chart-bar ng-isolate-scope" chart-data="dataDate" chart-labels="labelsDate" chart-colors="colors" chart-dataset-override="datasetOverride" height="474" width="949" style="display: block; width: 633px; height: 316px;"></canvas>
+            </div>
+          </div>
+        </div>-->
+        </div>
         </div>
     </div>
 </div>
+

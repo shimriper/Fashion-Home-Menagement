@@ -109,7 +109,14 @@ getOneBride = function(id){
         var bride = res.data;
   
         if(bride.dresses.length == 0 && bride.sizes.length ==0 && bride.stages.length ==0 && bride.payments.length == 0 ){
-           brideService.delete({id:id});
+             brideService.delete({id:id}).then(function(res,err){
+                        if(err){
+                          console.log("err");
+                        }else{
+                         
+                          getAllBrides();
+                        }
+                      });
           
         }
         else{
@@ -117,10 +124,16 @@ getOneBride = function(id){
                 delSizes(id,bride.sizes);
                 delStages(id,bride.stages);
                 delPayments(id,bride.payments);
-                    if(bride.dresses.length == 0 && bride.sizes.length ==0 && bride.stages.length ==0 && bride.payments.length == 0 ){
-                         brideService.delete({id:id});
-                        
-                    }
+                if(bride.dresses.length == 0 && bride.sizes.length ==0 && bride.stages.length ==0 && bride.payments.length == 0 ){
+                      brideService.delete({id:id}).then(function(res,err){
+                        if(err){
+                          console.log("err");
+                        }else{
+                         
+                          getAllBrides();
+                        }
+                      });
+                }
         }
          getAllBrides();
 
