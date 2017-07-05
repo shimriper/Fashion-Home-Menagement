@@ -2,9 +2,9 @@
     var injectParams = ['$localStorage','$location', '$http', '$q',];
     var authService = function ($localStorage, $location, $http, $q) {
         factory = {};
-        //when browser closed - psedocode
+        //when browser closed
         $(window).unload(function(){
-            //  $localStorage.$reset();// reset all sessions
+             $localStorage.$reset();// reset all sessions
         });
         
         factory.login = function (user) {
