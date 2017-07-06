@@ -42,41 +42,42 @@
     }
     countOfTypeDress = function(brides){
               for(var j =0; j< brides.length; j++){
-                for(var i=0; i<brides[j].dresses.length;i++){
-                $http.get('/api/dresses/'+ brides[j].dresses[i]).then(function(res) {
-                          var dress = res.data;  
-                          
-                          if(dress.t_dress == "כלה"){
-                                priceOfBrideDress += dress.price_dress;
-                                
-                                countOfBrideDress ++ ;
-                                
-                            }
-                            else if(dress.t_dress == "ערב"){
-                                priceOfEvnDress += dress.price_dress;
-                              
-                                countOfEvnDress ++ ;
-                            }
-                            // all parm for graf
-                            $scope.labels2 = ["כלה" , "ערב"];
-                            $scope.data2 = [countOfBrideDress, countOfEvnDress];
-                            $scope.countOfBrideDress = countOfBrideDress;
-                            $scope.countOfEvnDress = countOfEvnDress;
-                            $scope.priceOfEvnDress = priceOfEvnDress;
-                            $scope.priceOfBrideDress = priceOfBrideDress;
+                  if(brides[j].status =="פעיל"){
+                        for(var i=0; i<brides[j].dresses.length;i++){
+                        $http.get('/api/dresses/'+ brides[j].dresses[i]).then(function(res) {
+                                var dress = res.data;  
+                                if(dress.t_dress == "כלה"){
+                                        priceOfBrideDress += dress.price_dress;
+                                        
+                                        countOfBrideDress ++ ;
+                                        
+                                    }
+                                    else if(dress.t_dress == "ערב"){
+                                        priceOfEvnDress += dress.price_dress;
+                                    
+                                        countOfEvnDress ++ ;
+                                    }
+                                    // all parm for graf
+                                    $scope.labels2 = ["כלה" , "ערב"];
+                                    $scope.data2 = [countOfBrideDress, countOfEvnDress];
+                                    $scope.countOfBrideDress = countOfBrideDress;
+                                    $scope.countOfEvnDress = countOfEvnDress;
+                                    $scope.priceOfEvnDress = priceOfEvnDress;
+                                    $scope.priceOfBrideDress = priceOfBrideDress;
 
-                           
-                  }, function(err) {
-                      console.log(err);
-                  });
+                                
+                        }, function(err) {
+                            console.log(err);
+                        });
+                    }
+                    }
+                    $scope.type = 'polarArea';
+                    $scope.toggle = function () {
+                    $scope.type = $scope.type === 'polarArea' ?
+                        'pie' : 'polarArea';
+                    };
+                    $scope.priceOfBrideDressAvg = countOfBrideDress /priceOfBrideDress ; 
               }
-            }
-            $scope.type = 'polarArea';
-            $scope.toggle = function () {
-              $scope.type = $scope.type === 'polarArea' ?
-                'pie' : 'polarArea';
-            };
-            $scope.priceOfBrideDressAvg = countOfBrideDress /priceOfBrideDress ; 
     }
 
     getBrideWeek = function(brides){
@@ -229,7 +230,10 @@
          }
           sumDresses = function(){
                   for(var i=0; i < brides.length; i++){
-                      countDresses += brides[i].dresses.length;
+                      if(brides[i].status == "פעיל"){
+                            countDresses += brides[i].dresses.length;
+                      }
+                      
                   }
                   $scope.cDress = countDresses;
                   
