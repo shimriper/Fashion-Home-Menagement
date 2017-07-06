@@ -78,7 +78,24 @@ input.ng-invalid.ng-dirty{
 }
 
 input.ng-valid.ng-dirty{
-    border:2px solid green;
+    border:2px solid 00B7FF;
+}
+.panel-bLigth {
+    border-color: #00B7FF;
+}
+
+.panel-bLigth .panel-heading {
+    border-color: #00B7FF;
+    color: #fff;
+    background-color: #00B7FF;
+}
+
+.panel-green a {
+    color: #5cb85c;
+}
+
+.panel-green a:hover {
+    color: #3d8b3d;
 }
 
 .panel-green {

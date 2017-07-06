@@ -21,10 +21,16 @@
      var monthCont = [13];
      monthCountDress = [13];
      //init array to 0;
-     for(var i =0; i<=12;i++){
+      for(var i =0; i<=12;i++){
          monthCont[i] =0;
          monthCountPrice[i] = 0;
          monthCountDress[i] = 0;
+      }
+     initArr = function(arr){
+            for(var i =0; i<=12;i++){
+                arr[i] =0;
+            }
+       return arr;
      } 
 
   
@@ -65,10 +71,6 @@
                   });
               }
             }
-
-          
-            // $scope.labels2 = ["כלה" , "ערב"];
-            // $scope.data2 = [countOfBrideDress, countOfEvnDress];
             $scope.type = 'polarArea';
             $scope.toggle = function () {
               $scope.type = $scope.type === 'polarArea' ?
@@ -77,20 +79,42 @@
             $scope.priceOfBrideDressAvg = countOfBrideDress /priceOfBrideDress ; 
     }
 
+    getBrideWeek = function(brides){
+   
 
+            var curr = new Date; // get current date
+            var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+            var last = first + 6; // last day is the first day + 6
+
+            var firstday = new Date(curr.setDate(first)).toUTCString();
+            var lastday = new Date(curr.setDate(last)).toUTCString();
+                   
+            firstday =  $filter('date')(new Date(firstday),'yyyy-MM-dd');
+            lastday =  $filter('date')(new Date(lastday),'yyyy-MM-dd');
+
+
+               $http.get('api/brideByDate/' +firstday+'/'+ lastday)
+                                .then(function(res){
+                                    $scope.bridesWeek = res.data;  
+                                     console.log('$scope.bridesWeek')    ; 
+                                    console.log($scope.bridesWeek)    ;                                       
+                                }), function(err){
+                                console.log(err); 
+                                };
+    }
 
 
     getBrideDonat = function(){
          $http.get('/api/brides').then(function(res) {
                brides = res.data;  
                bridesMony = brides; 
-                  console.log( brides);
                   sumState ();
                          $scope.labels = ["פעיל", "ממתין","סגור"];
                          $scope.data = [countState, countStateWait,countStateClose];
                   sumDresses();
                   getMoney(bridesMony);
                   countOfTypeDress(bridesMony);
+                  getBrideWeek(brides);
                   getBridesForGraph(brides);
                 //   sumPrices(bridesMony);
                   // countTypeCastumer(bridesMony);
@@ -98,10 +122,36 @@
               } ,  function(err) {
                 console.log(err);
             });  
+            $scope.getBrdideByDate = function(startDate,endDate ){
+                    if(startDate == null ||endDate == null ){
+                        $scope.filterDate = false;
+                    }
+                    else{
+                    
+
+                        startDate =  $filter('date')(new Date(startDate),'yyyy-MM-dd');
+                        endDate =  $filter('date')(new Date(endDate),'yyyy-MM-dd')
+                        $http.get('api/brideByDate/' +startDate+'/'+ endDate)
+                                .then(function(res){
+                                    $scope.filterDate = true;
+                                    var brideByDate = res.data;
+                                    $scope.brideByDate = brideByDate;  
+                                        //init arr to 0;
+                                    monthCont = initArr(monthCont);
+                                    monthCountPrice = initArr(monthCountPrice);
+                                    monthCountDress = initArr(monthCountDress);
+                                    getBridesForGraph(brideByDate) ;   
+                                }), function(err){
+                                console.log(err); 
+                                };
+                    }
+                 }
+                $scope.unFilter = function(){
+                    $scope.filterDate = false;
+                    getBridesForGraph(brides);
+                }
 
              getBridesForGraph = function(brides){
-                   console.log("brides************************************************");
-                  console.log(brides);
                 for(var i=0; i < brides.length; i++){
                     var bride_dateEvent = brides[i].date_event;
                     
@@ -122,7 +172,6 @@
                              if(brides[i].dresses.length != undefined)
                             monthCountDress[j] = monthCountDress[j] + brides[i].dresses.length;
                           }
-                          console.log(j + " =MM" + "monthCont" + monthCont[j]);
                     }
                 }
                      $scope.colors = ['#45b7cd', '#ff6384', '#ff8e72'];
@@ -157,47 +206,7 @@
                                           
                                         },
                                         ];
-                // dataG={
-                //     labels: ['ינואר', 'פבואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'],
-                //     dataset:[
-                //         {
-                //              label: "מונה לקוחות",
-                //             fillColor:"rgba(153,0,76,0.2)",
-                //             strokeColor:"rgba(153,0,76,1)",
-                //             pointColor:"rgba(153,0,76,1)",
-                //             pointStrokeColor:"#fff",
-                //             pointHighlightFill:"#fff",
-                //             pointHighlightStroke:"rgba(153,0,76,1)",
-                //             data:[monthCont[0], monthCont[1], monthCont[2], monthCont[3],monthCont[4], monthCont[5], monthCont[6],
-                //                                                         monthCont[7],monthCont[8],monthCont[9],monthCont[10],monthCont[11]]
-
-                //         },
-                //                          {
-                //             label: " סה''כ כל ההכנסות לחודש זה ",
-                //             fillColor:"rgba(153,0,76,0.2)",
-                //             strokeColor:"rgba(153,0,76,1)",
-                //             pointColor:"rgba(153,0,76,1)",
-                //             pointStrokeColor:"#fff",
-                //             pointHighlightFill:"#fff",
-                //             pointHighlightStroke:"rgba(153,0,76,1)",
-                //             data : [monthCountPrice[0], monthCountPrice[1], monthCountPrice[2], monthCountPrice[3],monthCountPrice[4], monthCountPrice[5], monthCountPrice[6],
-                //                                                         monthCountPrice[7],monthCountPrice[8],monthCountPrice[9],monthCountPrice[10],monthCountPrice[11]]
-                //         }
-                //     ]       
-
-                // };
-           
-         
-            }
-                  
-        // sumPrices = function(bridesMony){
-        //     // alert(bridesMony.length);
-        //     for(var i=0; i < bridesMony.length; i++){
-        //         cPrice += bridesMony[i].price;
-        //         console.log(cPrice);
-        //     }
-        // }
-          // console.log( $scope.brides.bride.length + 'brides');
+               }
           sumState =function(){
               var cPrice = 0;
               for(var i=0; i < brides.length; i++){
