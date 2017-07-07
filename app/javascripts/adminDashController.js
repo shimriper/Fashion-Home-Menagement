@@ -182,10 +182,10 @@
                      $scope.dataDate = [
                                         [monthCont[1], monthCont[2], monthCont[3], monthCont[4],monthCont[5], monthCont[6], monthCont[7],
                                                                         monthCont[8],monthCont[9],monthCont[10],monthCont[11],monthCont[12]],
-                                        [ monthCountPrice[1], monthCountPrice[2], monthCountPrice[3],monthCountPrice[4], monthCountPrice[5], monthCountPrice[6],
-                                                                        monthCountPrice[7],monthCountPrice[8],monthCountPrice[9],monthCountPrice[10],monthCountPrice[11],monthCountPrice[12]],
                                         [ monthCountDress[1], monthCountDress[2], monthCountDress[3],monthCountDress[4], monthCountDress[5], monthCountDress[6],
                                                                         monthCountDress[7],monthCountDress[8],monthCountDress[9],monthCountDress[10],monthCountDress[11] ,monthCountDress[12]],
+                                                                         [ (monthCountPrice[1]/ 10000), (monthCountPrice[2]/ 10000), (monthCountPrice[3]/ 10000),(monthCountPrice[4]/ 10000),(monthCountPrice[5]/ 10000), (monthCountPrice[6]/ 10000),
+                                                                        (monthCountPrice[7]/ 10000),(monthCountPrice[8]/ 10000),(monthCountPrice[9]/ 10000),(monthCountPrice[10]/ 10000),(monthCountPrice[11]/ 10000),(monthCountPrice[12]/ 10000)]
                                     ];
                                     $scope.datasetOverride = [
                                         {
@@ -193,19 +193,20 @@
                                             borderWidth: 1,
                                             
                                         },
+                                            {
+                                            label: "מונה שמלות",
+                                            borderWidth: 1,
+                                          
+                                          
+                                        },
                                         {
                                             label: " סה''כ כל ההכנסות לחודש זה ",
+                                              type:'line',
                                             borderWidth: 3,
                                             hoverBackgroundColor: "rgba(255,99,132,0.4)",
                                             hoverBorderColor: "rgba(255,99,132,1)", 
                                             
-                                        },
-                                            {
-                                            label: "מונה שמלות",
-                                            borderWidth: 1,
-                                            type:'line'
-                                          
-                                        },
+                                        }
                                         ];
                }
           sumState =function(){
