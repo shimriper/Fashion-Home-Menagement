@@ -2,7 +2,7 @@
 angular.module('mainApp');
 app.controller('mainController', function($rootScope ,$scope , postService,  $http, $location ,$filter){
 	 	getBrideWeek = function(){
-        alert('rrrrrrrrr');
+        
 
             var curr = new Date; // get current date
             var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
@@ -19,8 +19,8 @@ app.controller('mainController', function($rootScope ,$scope , postService,  $ht
                $http.get('api/brideByDate/' +firstday+'/'+ lastday)
                                 .then(function(res){
                                     $scope.bridesWeek = res.data;  
-                                     console.log('$scope.bridesWeek')    ; 
-                                    console.log($scope.bridesWeek)    ;                                       
+                                    //  console.log('$scope.bridesWeek')    ; 
+                                    // console.log($scope.bridesWeek)    ;                                       
                                 }), function(err){
                                 console.log(err); 
                                 };

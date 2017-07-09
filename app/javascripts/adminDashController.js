@@ -109,8 +109,8 @@
                $http.get('api/brideByDate/' +firstday+'/'+ lastday)
                                 .then(function(res){
                                     $scope.bridesWeek = res.data;  
-                                     console.log('$scope.bridesWeek')    ; 
-                                    console.log($scope.bridesWeek)    ;                                       
+                                    //  console.log('$scope.bridesWeek')    ; 
+                                    // console.log($scope.bridesWeek)    ;                                       
                                 }), function(err){
                                 console.log(err); 
                                 };
