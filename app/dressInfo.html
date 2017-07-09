@@ -100,7 +100,16 @@
                                                 <td ng-show="sizeModifyField"> <input type="text" ng-model="size.top_lenght" required></td>
                                                 <td ng-hide="sizeViewField">{{size.top_lenght||''}}</td>
                                             </tr>
-                                                        
+                                            <tr>
+                                                <th id="thStyle" > מכנס  :</th>
+                                                <td ng-show="sizeModifyField"> <input type="text" ng-model="size.pents" required></td>
+                                                <td ng-hide="sizeViewField">{{size.pents||''}}</td>
+                                            </tr>
+                                             <tr>
+                                                <th id="thStyle" > CAP  :</th>
+                                                <td ng-show="sizeModifyField"> <input type="text" ng-model="size.cap" required></td>
+                                                <td ng-hide="sizeViewField">{{size.cap||''}}</td>
+                                            </tr>       
                                     </table>
                                 </div>
                             </div>

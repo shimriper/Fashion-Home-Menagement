@@ -281,6 +281,8 @@ router.route('/sizes')
 			 	size.sleeve_length = req.body.sleeve_length;
 				size.dress_lenght = req.body.dress_lenght;
 				size.top_lenght = req.body.top_lenght;
+				size.pents = req.body.pents;
+				size.cap = req.body.cap;
 
 		size.save(function(err,size) {
 			if (err){

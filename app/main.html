@@ -1,4 +1,78 @@
+<div class="col-md-offset-2 col-md-8">
+	            <div class="panel panel-default panel-table" >
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-xs-6 text-left">
+                            מס' רשומות    <select ng-model="pageSize" >
+                                    <option>5</option>
+                                     <option>10</option>
+                                      <option>20</option>
+                                       <option>25</option>
+                                </select>
+                              &nbsp&nbsp
+   
+                        </div>
+                 
+                        <div class="col col-xs-6 text-right">
+                            <div class="pull-right">
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label> &nbsp&nbsp מתחתנות השבוע  &nbsp&nbsp {{sun | date:"dd/MM/yy"}} &nbsp&nbsp עד &nbsp&nbsp {{sat | date:"dd/MM/yy"}}
+                                    </label>
+                     
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="panel-body"  id="exportable">
+                    <table id="mytable" class="table table-striped table-bordered table-list"  >
+                        <thead>
+                        <tr>
+                            <!--<th class="col-check"><input type="checkbox" id="checkall" onclick="test()"/></th>-->
+                            <!--<th class="col-text"  style="text-align: center" ng-click="sort('$index')">מס<span class="glyphicon sort-icon" ng-show="sortKey=='$index'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>-->
+                            <th class="col-text"  style="text-align: center" ng-click="sort('status')"> סטאטוס  <span class="glyphicon sort-icon" ng-show="sortKey=='status'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                            <th class="col-text"  style="text-align: center" ng-click="sort('first_name')"> שם <span class="glyphicon sort-icon" ng-show="sortKey=='first_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                            <th class="col-text"  style="text-align: center" ng-click="sort('last_name')"> משפחה <span class="glyphicon sort-icon" ng-show="sortKey=='last_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                            <th class="col-text"  style="text-align: center" ng-show= "user_role == 1 || user_role == 2"  ng-click="sort('phone1')"> פלאפון <span class="glyphicon sort-icon" ng-show="sortKey=='phone1'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                            <th class="col-text"  style="text-align: center" ng-click="sort('date_event')"> תאריך אירוע <span class="glyphicon sort-icon" ng-show="sortKey=='date_event'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> </th>
+                            <th class="col-text"  style="text-align: center" ng-show= "user_role == 1 || user_role == 2" ng-click="sort('day_service')"> יום שירות <span class="glyphicon sort-icon" ng-show="sortKey=='day_service'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> </th>
+                            <th class="col-tools" style="text-align: center"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                            </th>
 
+                        </tr>
+                        </thead>
+                        <p>{{bridesWeek.length}} כמות הלקוחות</p>
+                        <tbody > 
+                            <tr  class="bride" dir-paginate="bride in bridesWeek |orderBy:sortKey:reverse|filter:serchText | itemsPerPage:pageSize">
+                                <td align="center">{{bride.status}}</td>
+                                <td align="center">{{bride.first_name}}</td>
+                                <td align="center">{{bride.last_name}}</td>
+                                <td align="center" ng-show= "user_role == 1 || user_role == 2">{{"0" +bride.phone1}}</td>
+                                <td align="center">{{bride.date_event | date:"dd/MM/yy"}}</td>
+                                <td align="center" ng-show= "user_role == 1 || user_role == 2">{{bride.day_service}}</td>
+                     
+                                <td align="center">
+                                    <button type="button" class="btn btn-primary" ng-click="stageRoute(bride._id)" ng-show= "user_role == 1 || user_role == 2"  data-toggle="tooltip" data-placement="top" title="שלבי שמלה "><i class="fa fa-sitemap" aria-hidden="true" ></i>  </button>
+                                    <button  type="button" class=" btn btn-info" ng-click="brideInfoRoute(bride._id)"   data-toggle="tooltip" data-placement="top" title="מעבר לכרטיס לקוח"><i class="fa fa-address-card-o" ></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="row" >
+                            <div align="center">
+                                <dir-pagination-controls
+                                    max-size="5"
+                                    direction-links="true"
+                                    boundary-links="true" >
+                                </dir-pagination-controls>
+                            </div>   
+                    </div>
+                </div>
+            </div>
+</div>
 <div class="col-md-offset-2 col-md-8">
 <div class="clearfix" dir="rtl">
 	<form ng-Submit="post()"  class="row">

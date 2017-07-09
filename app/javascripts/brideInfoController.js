@@ -20,6 +20,11 @@
         }
         return "לא"
     }
+    $scope.stageRoute = function(id){
+           // $scope.bride= $scope.bride;
+          console.log(id);
+          $location.path('stage/' + id);
+    };
     $scope.update = function(bride){
             $scope.upBride = {};
             console.log(bride);

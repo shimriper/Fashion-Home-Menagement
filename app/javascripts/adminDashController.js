@@ -18,14 +18,26 @@
     var countOfEvnDress = 0;
 
     var monthCountPrice = [13]
-     var monthCont = [13];
-     monthCountDress = [13];
+    var monthCont = [13];
+    var monthCountDress = [13];
+    var monthCountFacebook = [13];
+     var monthCountMetchatnim = [13];
+    var monthCountWebsite = [13];
+    var monthCountfrindes = [13];
+
      //init array to 0;
       for(var i =0; i<=12;i++){
          monthCont[i] =0;
+
          monthCountPrice[i] = 0;
          monthCountDress[i] = 0;
-      }
+
+         monthCountFacebook[i] = 0;
+         monthCountMetchatnim[i] =0;
+         monthCountWebsite[i] = 0;
+         monthCountfrindes[i] = 0;
+ 
+       }
      initArr = function(arr){
             for(var i =0; i<=12;i++){
                 arr[i] =0;
@@ -157,10 +169,25 @@
                     var bride_dateEvent = brides[i].date_event;
                     
                     var bride_dateEventM =  $filter('date')(new Date(bride_dateEvent),'MM');
-                 
+
                     for (var j =1; j<=12; j ++){
                         if(bride_dateEventM == '0' + j && j<10){
                             monthCont[j] ++;
+                            if(brides[i].advertising != undefined){
+                                if(brides[i].advertising == "facebook" ){
+                                    monthCountFacebook[j] ++;
+                                }
+                                else if (brides[i].advertising == "מתחתנים"){
+                                    monthCountMetchatnim[j] ++;
+                                }
+                                else if (brides[i].advertising == "אתר הבית"){
+                                    monthCountWebsite[j] ++;
+                                }
+                                else if (brides[i].advertising == "חבר מביא חבר"){
+                                    monthCountfrindes[j] ++;
+                                }
+                             }
+                        
                             if(brides[i].price != undefined)
                              monthCountPrice[j] = monthCountPrice[j] + brides[i].price;
                             if(brides[i].dresses.length != undefined)
@@ -168,6 +195,20 @@
                         }
                        else if(bride_dateEventM == j && j > 9){
                             monthCont[j] ++;
+                            if(brides[i].advertising != undefined){
+                                if(brides[i].advertising == "facebook" ){
+                                    monthCountFacebook[j] ++;
+                                }
+                                else if (brides[i].advertising == "מתחתנים"){
+                                    monthCountMetchatnim[j] ++;
+                                }
+                                else if (brides[i].advertising == "אתר הבית"){
+                                    monthCountWebsite[j] ++;
+                                }
+                                else if (brides[i].advertising == "חבר מביא חבר"){
+                                    monthCountfrindes[j] ++;
+                                }
+                            }
                              if(brides[i].price != undefined)
                             monthCountPrice[j] = monthCountPrice[j] + brides[i].price;
                              if(brides[i].dresses.length != undefined)
@@ -206,6 +247,48 @@
                                             hoverBackgroundColor: "rgba(255,99,132,0.4)",
                                             hoverBorderColor: "rgba(255,99,132,1)", 
                                             
+                                        }
+                                        ];
+
+
+                    
+                     $scope.labelsDate = [ 'ינואר', 'פבואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];           
+
+                       $scope.colorsAdvertising = ['#45b7cd', '#ff6384', '#ff8e72','#322e72'];
+                     $scope.labelsAdvertising = [ 'facebook', 'מתחתנים', 'אתר האינטרנט', 'חבר מביא חבר'];           
+                    
+                     $scope.dataAdvertising = [
+                                        [monthCountFacebook[1], monthCountFacebook[2], monthCountFacebook[3], monthCountFacebook[4],monthCountFacebook[5], monthCountFacebook[6], monthCountFacebook[7],
+                                                                        monthCountFacebook[8],monthCountFacebook[9],monthCountFacebook[10],monthCountFacebook[11],monthCountFacebook[12]],
+                                        [ monthCountMetchatnim[1], monthCountMetchatnim[2], monthCountMetchatnim[3],monthCountMetchatnim[4], monthCountMetchatnim[5], monthCountMetchatnim[6],
+                                                                        monthCountMetchatnim[7],monthCountMetchatnim[8],monthCountMetchatnim[9],monthCountMetchatnim[10],monthCountMetchatnim[11] ,monthCountDress[12]],
+                                         [ (monthCountWebsite[1]), (monthCountWebsite[2]), (monthCountWebsite[3]),(monthCountWebsite[4]),(monthCountWebsite[5]), (monthCountWebsite[6]),
+                                                                        (monthCountWebsite[7]),(monthCountWebsite[8]),(monthCountWebsite[9]),(monthCountWebsite[10]),(monthCountWebsite[11]),(monthCountWebsite[12])],
+                                         [ monthCountfrindes[1], monthCountfrindes[2], monthCountfrindes[3],monthCountfrindes[4], monthCountfrindes[5], monthCountfrindes[6],
+                                                                        monthCountfrindes[7],monthCountfrindes[8],monthCountfrindes[9],monthCountfrindes[10],monthCountfrindes[11] ,monthCountfrindes[12]]
+                                    ];
+                                    $scope.datasetOverrideAdvertising = [
+                                        {
+                                            label: "facebook",
+                                            borderWidth: 1
+                                            
+                                        },
+                                            {
+                                            label: "מתחתנים",
+                                            borderWidth: 1
+                                          
+                                          
+                                        },
+                                         {
+                                            label: " אתר הבית",
+                                            borderWidth: 1
+                                          
+                                          
+                                        },
+                                        {
+                                            label: "חבר מביא חבר",
+                                            
+                                            borderWidth: 1  
                                         }
                                         ];
                }
