@@ -39,7 +39,8 @@
                 day_service : bride.day_service,
                 price: bride.price,
                 remark:bride.remark,
-                status:bride.status
+                status:bride.status,
+                advertising:bride.advertising
             };
             $http.put('/api/bride/update' , {id:$scope.tempid , updatedObj:upBride}).then(function(res){
               	$scope.modifyField = false;

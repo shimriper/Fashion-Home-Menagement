@@ -53,7 +53,8 @@ var brideSchema = new mongoose.Schema({
 	allPayments: Number,
 	sizes:[{type:Schema.Types.ObjectId,ref:'Size'}],
 	stages:[{type:Schema.Types.ObjectId,ref: 'Stage'}],
-	status:String
+	status:String,
+	advertising: String
 })
 
 

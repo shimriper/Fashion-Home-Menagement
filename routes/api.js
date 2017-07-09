@@ -108,6 +108,7 @@ router.route('/brides')
 			 	bride.price = req.body.price;
 				bride.remark = req.body.remark;
 				bride.status = req.body.status;
+				bride.advertising = req.body.advertising;
 		bride.save(function(err,bride) {
 			if (err){
 				return res.send(500,err);

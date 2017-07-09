@@ -91,6 +91,32 @@
                                                  </td>
                                             <td ng-hide="viewField">{{bride.day_service ||''}}</td>
                                         </tr>
+                                        <tr style="text-align:center">
+                                            <th id="thStyle">איך הגעתי </th>
+                                            <td ng-show="modifyField">     
+                                                <div class="radio">   
+                                                    <label>
+                                                        <input type="radio" value="facebook" ng-model="bride.advertising" name="advertising" placeholder="faceboo" />  &nbsp &nbsp &nbsp &nbsp facebook
+                                                    </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                    <label> 
+                                                        <input type="radio" value="מתחתנים" ng-model="bride.advertising" name="advertising" > &nbsp &nbsp &nbsp &nbsp מתחתנים
+                                                    </label>
+                                                    </div>
+                                                <div class="radio">
+                                                    <label> 
+                                                        <input type="radio" value="אתר הבית" ng-model="bride.advertising" name="advertising" > &nbsp &nbsp &nbsp &nbsp אתר הבית
+                                                    </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                    <label> 
+                                                        <input type="radio" value="חבר מביא חבר" ng-model="bride.advertising" name="advertising" > &nbsp &nbsp &nbsp &nbsp חבר מביא חבר
+                                                    </label>
+                                                   </div>
+                                            </td>
+                                            <td ng-hide="viewField">{{bride.advertising ||''}}</td>
+                                        </tr>
                                         <tr style="text-align: center">
                                             <th  id="thStyle"> הערות  :</th>
                                             <td ng-show="modifyField"> <input type="text" ng-model="bride.remark"></td>
