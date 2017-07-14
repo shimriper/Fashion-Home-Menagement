@@ -135,16 +135,33 @@ router.route('/brides')
 			return res.json(bride);
 		});
 	}) 
-	router.route('/brideByDate/:startDate/:endDate')
+	router.route('/brideByDateStatus/:startDate/:endDate/:status')
 	//gets all bride by date
 	.get(function(req,res){
-		Bride.find({"date_event":{"$gte" :new Date(req.params.startDate) ,"$lte" :new Date(req.params.endDate)}	},
-		 function(err, docs){
+		console.log(req.params.startDate);
+		Bride.find({
+			"status" : req.params.status,
+			"date_event":{"$gte" :new Date(req.params.startDate) ,"$lte" :new Date(req.params.endDate)}},
+		 function(err, brides){
 			if(err){
 			  res.send(500,err);
 			}
-			console.log(docs);
-			 res.send(200,docs);
+			else{
+				res.send(200,brides);
+			}
+		});
+	});
+	router.route('/brideByDate/:startDate/:endDate')
+	.get(function(req,res){
+		Bride.find({
+			"date_event":{"$gte" :new Date(req.params.startDate) ,"$lte" :new Date(req.params.endDate)}},
+		 function(err, brides){
+			if(err){
+			  res.send(500,err);
+			}
+			else{
+				res.send(200,brides);
+			}
 		});
 	});
 

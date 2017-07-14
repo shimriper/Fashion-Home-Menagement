@@ -1,10 +1,15 @@
  angular.module('mainApp');
   app.controller('allBrideController', function($rootScope ,$scope , brideService, $http, $location, $q ,$filter) {
-      var brides;
+      var brides = [];
+      var brideOn= [];
+      var brideClose = [];
+      var brideWait= [];
+     
      $scope.filterDate = false;
     init = function(){
       
       getAllBrides();
+      // getBridesByStatus(status);
     }
 
 
@@ -12,10 +17,30 @@
       $('[data-toggle="tooltip"]').tooltip()
     })
 
-    getAllBrides = function(){ 
-       brides = brideService.query();
-       $scope.brides = brides;
-       console.log( $scope.brides);
+    getAllBrides = function(){    
+            var date = new Date();
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0); 
+              
+             firstDay =  $filter('date')(new Date(firstDay),'yyyy-MM-dd');
+            lastDay =  $filter('date')(new Date(lastDay),'yyyy-MM-dd');
+
+            var status = "פעיל";
+
+            $http.get('api/brideByDateStatus/' +firstDay+'/'+ lastDay + '/' + status)
+                    .then(function(res){
+                         brides = res.data;
+                         $scope.brides = brides;
+                       
+                         if(brides.length == 0){
+                           swal('אין נתונים');
+                         }
+                    }), function(err){
+                    console.log(err); 
+                    };
+      //  brides = brideService.query();
+        $scope.brides = brides;
+      //  console.log( $scope.brides);
        $scope.pageSize = 5 ;
        $scope.data = $scope.brides;
        $scope.brideByDate;
@@ -28,12 +53,12 @@
     }
     $scope.brideInfoRoute = function(id){
            // $scope.bride= $scope.bride;
-          console.log(id);
+          // console.log(id);
           $location.path('brideInfo/' + id );
     };
     $scope.stageRoute = function(id){
            // $scope.bride= $scope.bride;
-          console.log(id);
+          // console.log(id);
           $location.path('stage/' + id);
     };
       $scope.delOne = function(id){
@@ -84,23 +109,39 @@
         $scope.filterDate = false;
         getAllBrides();
     }
-$scope.getBrdideByDate = function(startDate,endDate ){
-  if(startDate == null ||endDate == null ){
+$scope.getBrdideByDate = function(startDate,endDate ,status){
+  if(startDate == null ||endDate == null || status == null ){
     $scope.filterDate = false;
+    swal('בבקשה מלא מסנן');
   }
-  else{
-      startDate =  $filter('date')(new Date(startDate),'yyyy-MM-dd');
-      endDate =  $filter('date')(new Date(endDate),'yyyy-MM-dd')
-      $http.get('api/brideByDate/' +startDate+'/'+ endDate)
+  else if(status == "הכל" && startDate !=null && endDate != null){
+     $http.get('api/brideByDate/' +startDate+'/'+ endDate)
               .then(function(res){
                 $scope.filterDate = true;
                 var brideByDate = res.data;
+                brides = brideByDate;
+                // console.log(brideByDate); 
                 $scope.brideByDate = brideByDate;       
               }), function(err){
               console.log(err); 
               };
   }
+  else{
 
+      startDate =  $filter('date')(new Date(startDate),'yyyy-MM-dd');
+      endDate =  $filter('date')(new Date(endDate),'yyyy-MM-dd')
+      
+      $http.get('api/brideByDateStatus/' +startDate+'/'+ endDate + '/' + status)
+              .then(function(res){
+                $scope.filterDate = true;
+                var brideByDate = res.data;
+                brides = brideByDate;
+                // console.log(brideByDate); 
+                $scope.brideByDate = brideByDate;       
+              }), function(err){
+              console.log(err); 
+              };
+  }
 }
 
 getOneBride = function(id){
@@ -137,9 +178,9 @@ getOneBride = function(id){
         }
          getAllBrides();
 
-        console.log(bride);
+        // console.log(bride);
       },function(err) {
-         console.log(err);
+          console.log(err);
       });
   }
     delDress = function(bride_id,dresses){
@@ -192,13 +233,13 @@ getOneBride = function(id){
         }
 
         $q.all(bridePromises).then(function(res){
-          console.log("success all brides sizes removed");
-          console.log(res);
+          // console.log("success all brides sizes removed");
+          // console.log(res);
         });
 
           $q.all(sizePromises).then(function(res){
-          console.log("success all sizes deleted");
-          console.log(res);
+          // console.log("success all sizes deleted");
+          // console.log(res);
         });
       }
     }
@@ -221,13 +262,13 @@ getOneBride = function(id){
           }
           
           $q.all(bridePromises).then(function(res){
-            console.log("success all brides stages removed");
-            console.log(res);
+            // console.log("success all brides stages removed");
+            // console.log(res);
           });
 
           $q.all(stagePromises).then(function(res){
-            console.log("success all stages deleted");
-            console.log(res);
+            // console.log("success all stages deleted");
+            // console.log(res);
           });
       }
     }
@@ -251,13 +292,13 @@ getOneBride = function(id){
             }
             
             $q.all(bridePromises).then(function(res){
-              console.log("success all brides payments removed");
-              console.log(res);
+              // console.log("success all brides payments removed");
+              // console.log(res);
             });
 
             $q.all(paymentPromises).then(function(res){
-              console.log("success all payments deleted");
-              console.log(res);
+              // console.log("success all payments deleted");
+              // console.log(res);
             });
           };
     }

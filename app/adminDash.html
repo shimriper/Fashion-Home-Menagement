@@ -164,7 +164,70 @@
                     </div>
                 </div>
             </div>
-                          <div class="col-lg-4 col-md-6" >
+            <div class="col-lg-4 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="title">אחוז לקוחות שסגרו לפי חודש</h4>
+                        <p class="category"> 
+                            על פי זמן
+                        </p>
+                    </div>
+                    <div class=" panel-body">
+                        <canvas class="chart chart-bar ng-isolate-scope" chart-data="dataCastumer"
+                            chart-labels="labelsDate" chart-colors="colorsCastumer"
+                            chart-dataset-override="datasetOverrideCastumer" style="text-align: right">
+                        </canvas>
+                        
+                    </div>
+                    <div class="content">
+                        <div class="panel-footer">
+                            <div class="legend">
+                                 <div class="row">
+                                מתאריך 
+                                <input type="date" ng-model="startDate" required>
+                                עד תאריך 
+                                <input type="date"  ng-model="endDate" required>
+                           
+                                <button type="button" ng-show="!filterDate" class="btn btn-primary" ng-click="getBrdideByDate(startDate,endDate)"> סינון <i class="fa fa-filter" aria-hidden="true"></i>  </button>
+                                <button type="button" ng-show="filterDate" class="btn btn-primary" ng-click=" unFilter()"  > ביטול מסנן <i class="fa fa-remove" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                  
+      
+
+         
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-5">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="title">לקוחות {{numOfClient}}</h4>
+                        <p class="category">סטטוס לקוחות</p>
+                    </div>
+                    <div class=" panel-body">
+                        <canvas id="doughnut" class="chart chart-doughnut"
+                            chart-data="data" chart-labels="labels">
+                        </canvas> 
+                    </div>
+                    <div class="content">
+                        <div class="panel-footer">
+                            <div class="legend">
+                                <i class="fa fa-circle text-info"></i> פעילים {{}}
+                                <i class="fa fa-circle text" style="color: gray"></i> ממתינים
+                                <i class="fa fa-circle text-danger"></i> סגורים
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <div class="col-lg-3 col-md-5" >
                     <div class="panel panel-bLigth"  >
                         <div class="panel-heading">
                             <div class="row">
@@ -187,34 +250,6 @@
                             </div>
                         </a>
                     </div>
-            </div>
-      
-
-         
-        </div>
-        <div class="row">
-                        <div class="col-lg-3 col-md-5">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4 class="title">לקוחות {{numOfClient}}</h4>
-                        <p class="category">סטטוס לקוחות</p>
-                    </div>
-                    <div class=" panel-body">
-                        <canvas id="doughnut" class="chart chart-doughnut"
-                            chart-data="data" chart-labels="labels">
-                        </canvas> 
-                    </div>
-                    <div class="content">
-                        <div class="panel-footer">
-                            <div class="legend">
-                                <i class="fa fa-circle text-info"></i> פעילים {{}}
-                                <i class="fa fa-circle text" style="color: gray"></i> ממתינים
-                                <i class="fa fa-circle text-danger"></i> סגורים
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
                   <div class="col-lg-3 col-md-5">
                 <div class="panel panel-primary">
@@ -239,7 +274,9 @@
                 </div>
             </div>
         </div>
-
+        <div class="row">
+             
+        </div>
         </div>
     </div>
 </div>

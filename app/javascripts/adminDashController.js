@@ -25,6 +25,10 @@
     var monthCountWebsite = [13];
     var monthCountfrindes = [13];
 
+    var waitCastumer = [13];
+    var castumer = [13];
+    var cPercent = [13];
+
      //init array to 0;
       for(var i =0; i<=12;i++){
          monthCont[i] =0;
@@ -37,6 +41,9 @@
          monthCountWebsite[i] = 0;
          monthCountfrindes[i] = 0;
  
+         castumer[i] =0;
+         waitCastumer[i] =0;
+         cPercent[i] = 0;
        }
      initArr = function(arr){
             for(var i =0; i<=12;i++){
@@ -173,6 +180,13 @@
                     for (var j =1; j<=12; j ++){
                         if(bride_dateEventM == '0' + j && j<10){
                             monthCont[j] ++;
+                            if( (brides[i].status == "פעיל" || brides[i].status == "סגור") ){
+                                castumer[j] ++;
+                            }
+                            else if (  brides[i].status == "ממתין"){
+                                waitCastumer[j] ++;
+                            }
+                    
                             if(brides[i].advertising != undefined){
                                 if(brides[i].advertising == "facebook" ){
                                     monthCountFacebook[j] ++;
@@ -195,6 +209,12 @@
                         }
                        else if(bride_dateEventM == j && j > 9){
                             monthCont[j] ++;
+                            if(brides[i].status == "פעיל" ||brides[i].status =="סגור"){
+                                castumer[j] ++;
+                            }
+                            else if (brides[i].status == "ממתין" ){
+                                waitCastumer[j] ++;
+                            }
                             if(brides[i].advertising != undefined){
                                 if(brides[i].advertising == "facebook" ){
                                     monthCountFacebook[j] ++;
@@ -219,7 +239,7 @@
                      $scope.colors = ['#45b7cd', '#ff6384', '#ff8e72'];
                      $scope.labelsDate = [ 'ינואר', 'פבואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];           
                      $scope.series = ['מונה לקוחות ', ' סה"ב הכנסה בחודש זה','סה"כ שמלות בחודש זה'];
-                    
+                     
                      $scope.dataDate = [
                                         [monthCont[1], monthCont[2], monthCont[3], monthCont[4],monthCont[5], monthCont[6], monthCont[7],
                                                                         monthCont[8],monthCont[9],monthCont[10],monthCont[11],monthCont[12]],
@@ -291,7 +311,48 @@
                                             borderWidth: 1  
                                         }
                                         ];
+                                        
+                                    for(var i = 1; i < 13; i++){
+                                            if(castumer[i] == 0 && waitCastumer[i]==0){
+                                                cPercent[i] = 0 ;
+                                            }
+                                            cPercent[i] = (castumer[i]/(castumer[i] + waitCastumer[i]))*100; 
+                                            cPercent[i] = cPercent[i];
+                                    }
+
+
+                        $scope.labelsDate = [ 'ינואר', 'פבואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];           
+
+                       $scope.colorsCastumer = ['#45b7cd', '#ff6384', '#ff8e72','#322e72'];
+                    //  $scope.labelsAdvertising = [ 'facebook', 'מתחתנים', 'אתר האינטרנט', 'חבר מביא חבר'];           
+                    
+                     $scope.dataCastumer = [
+                                        [castumer[1], castumer[2], castumer[3], castumer[4],castumer[5], castumer[6], castumer[7],
+                                                                        castumer[8],castumer[9],castumer[10],castumer[11],castumer[12]],
+                                        [ waitCastumer[1], waitCastumer[2], waitCastumer[3],waitCastumer[4], waitCastumer[5], waitCastumer[6],
+                                                                       waitCastumer[7],waitCastumer[8],waitCastumer[9],waitCastumer[10],waitCastumer[11] ,waitCastumer[12]],
+                                        [cPercent[1], cPercent[2], cPercent[3],cPercent[4], cPercent[5], cPercent[6],
+                                                                       cPercent[7],cPercent[8],cPercent[9],cPercent[10],cPercent[11] ,cPercent[12]]
+                                     ];
+                                    $scope.datasetOverrideCastumer = [
+                                        {
+                                            label: "פעיל / סגור",
+                                            borderWidth: 1
+                                            
+                                        },
+                                            {
+                                            label: "ממתינים",
+                                            borderWidth: 1                                         
+                                        },
+                                        {
+                                            label: "אחוז סגירות",
+                                            type:'line',
+                                            borderWidth: 3,
+                                        }       
+                                        ];
                }
+        
+
           sumState =function(){
               var cPrice = 0;
               for(var i=0; i < brides.length; i++){

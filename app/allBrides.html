@@ -6,24 +6,65 @@
         </div>
 </div>
 <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
+    <div class="col-md-10 col-md-offset-1">
+         <div class="col-md-12">
+             <div class="panel panel-default">
                 <div class="panel-heading">
-                    סינון לפי זמן
+                    סינון 
                 </div>
                 <div class="panel-body">
-                   מתאריך 
-                    <input type="date" ng-model="startDate" required>
-                  עד תאריך 
-                    <input type="date"  ng-model="endDate" required>
+                    <div class="row">
+                     <div class="col-md-6">
+                          <p style="float: rigth"> בחר תאריך </p>
+                            <div>
+                        מתאריך 
+                            <input type="date" ng-model="startDate" required>
+                        עד תאריך 
+                            <input type="date"  ng-model="endDate" required>
+                            </div>
+                    </div>
+                    <div class="col-md-6">
+                       <p style="float: rigth"> בחר סטאטוס</p>
+                        <div class="col-md-3" style="float: right">
+                       
+                            <div class="radio">   
+                                <label>
+                                    <input  type="radio" value="פעיל" ng-model="status"  checked="checked">  &nbsp &nbsp &nbsp &nbsp פעיל
+                                </label>
+                                </div>
+                                <div class="radio">
+                                <label> 
+                                    <input type="radio" value="ממתין" ng-model="status" > &nbsp &nbsp &nbsp &nbsp ממתין
+                                </label>
+                                </div>
+                        </div>
+                        <div class="col-md-3" style="float: right">
+                            <div class="radio">
+                                <label> 
+                                    <input type="radio" value="סגור" ng-model="status" > &nbsp &nbsp &nbsp &nbsp סגור
+                                </label>
+                                </div>
+                                       <div class="radio">
+                                <label> 
+                                    <input type="radio" value="הכל" ng-model="status" > &nbsp &nbsp &nbsp &nbsp הכל
+                                </label>
+                                </div>
+                        </div>
+      
                 </div>
-                <div class="panel-footer">
-                     <button type="button" ng-show="!filterDate" class="btn btn-primary" ng-click="getBrdideByDate(startDate,endDate)"> סינון <i class="fa fa-filter" aria-hidden="true"></i>  </button>
+                </div>
+                <div class="row">
+               <div class="panel-footer">
+                    <button type="button" ng-show="!filterDate" class="btn btn-primary" ng-click="getBrdideByDate(startDate,endDate , status)"> סינון <i class="fa fa-filter" aria-hidden="true"></i>  </button>
                     <button type="button" ng-show="filterDate" class="btn btn-primary" ng-click=" unFilter()"  > ביטול מסנן <i class="fa fa-remove" aria-hidden="true"></i></button>
+               </div>
                 </div>
-            </div>
+                </div>
         </div>
+    </div>
 </div>
+
+
 
 
 <div class="row" >
@@ -75,7 +116,7 @@
 
                         </tr>
                         </thead>
-                        <p>{{data.length}} כמות הלקוחות</p>
+                        <p>{{brides.length}} כמות הלקוחות</p>
                         <tbody >
                             
                             <tr  class="bride" dir-paginate="bride in brides |orderBy:sortKey:reverse|filter:serchText | itemsPerPage:pageSize">

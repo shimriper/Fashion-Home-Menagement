@@ -2,8 +2,6 @@
 angular.module('mainApp');
 app.controller('mainController', function($rootScope ,$scope , postService,  $http, $location ,$filter){
 	 	getBrideWeek = function(){
-        
-
             var curr = new Date; // get current date
             var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
             var last = first + 6; // last day is the first day + 6
@@ -18,13 +16,15 @@ app.controller('mainController', function($rootScope ,$scope , postService,  $ht
             $scope.sat = lastday;
                $http.get('api/brideByDate/' +firstday+'/'+ lastday)
                                 .then(function(res){
-                                    $scope.bridesWeek = res.data;  
+                                    var bridesWeek = res.data;  
+                                    $scope.bridesWeek = bridesWeek;
                                     //  console.log('$scope.bridesWeek')    ; 
                                     // console.log($scope.bridesWeek)    ;                                       
                                 }), function(err){
                                 console.log(err); 
                                 };
     }
+    $scope.bridesWeek;
 	$scope.posts = postService.query();
 	$scope.newPost = {created_by: '', text: '', created_at: ''};
      init = function(){
@@ -53,12 +53,12 @@ app.controller('mainController', function($rootScope ,$scope , postService,  $ht
     };
      $scope.brideInfoRoute = function(id){
            // $scope.bride= $scope.bride;
-          console.log(id);
+        //   console.log(id);
           $location.path('brideInfo/' + id );
     };
     $scope.stageRoute = function(id){
            // $scope.bride= $scope.bride;
-          console.log(id);
+        //   console.log(id);
           $location.path('stage/' + id);
     };
      
