@@ -9,6 +9,8 @@
           getOneBride(); 
 
      };
+
+
      	$scope.modify = function(bride){
 				$scope.modifyField = true;
 				$scope.viewField = true;
@@ -148,7 +150,7 @@
                                           },function(err){
                                             console.log(err);
                                           }) 
-               $http.put('/api/dresses/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
+              $http.put('/api/dresses/'+ $scope.tempid +'/'+ res.data._id ).then(function(res) {
                         $http.get('/api/bridedresses/'+ $scope.tempid ).then(function(res) {
                               updateStatus();       
                               getOneBride();

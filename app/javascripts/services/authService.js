@@ -6,6 +6,7 @@
         $(window).unload(function(){
              $localStorage.$reset();// reset all sessions
         });
+ 
         
         factory.login = function (user) {
             return $http.post('/auth/login', user ).success(function(data){

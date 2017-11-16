@@ -8,7 +8,7 @@
      $scope.filterDate = false;
     init = function(){
       
-      getAllBrides();
+      getAllB();
       // getBridesByStatus(status);
     }
 
@@ -17,6 +17,23 @@
       $('[data-toggle="tooltip"]').tooltip()
     })
 
+    getAllB = function(){
+          $http.get('api/brides')
+          .then(function(res){
+              brides = res.data;
+              $scope.brides = brides;
+              if(brides.length == 0){
+                swal('אין נתונים');
+              }
+          }), function(err){
+          console.log(err); 
+          };
+          $scope.brides = brides;
+          //  console.log( $scope.brides);
+           $scope.pageSize = 5 ;
+           $scope.data = $scope.brides;
+           $scope.brideByDate;
+    }
     getAllBrides = function(){    
             var date = new Date();
             var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);

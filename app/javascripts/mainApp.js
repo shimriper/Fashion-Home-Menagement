@@ -7,13 +7,12 @@ var app = angular.module('mainApp', [
 	'ngStorage',
 	'chart.js',
 	'ui.bootstrap',
-	'angularUtils.directives.dirPagination'
+	'angularUtils.directives.dirPagination',
 ]);
 
- 
-
-app.config(function($routeProvider){
-
+app.config(function($routeProvider,$provide){
+	
+	
 	$routeProvider
 		//the login display
 		.when('/login', {
@@ -76,10 +75,7 @@ app.config(function($routeProvider){
 			controller: 'stageController',
 			secure: true
 		})
-		
 		.otherwise({ redirectTo: '/login' });
-
-
 
 });
 
